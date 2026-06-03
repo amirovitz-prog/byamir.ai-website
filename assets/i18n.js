@@ -238,15 +238,32 @@
     document.querySelectorAll('[data-lang]').forEach((b) =>
       b.classList.toggle('active', b.getAttribute('data-lang') === lang)
     );
-    try { localStorage.setItem(KEY, lang); } catch (e) {}
+  }
+
+  /* Language is driven by the URL: /en/... → English, everything else → Dutch.
+     This makes each language a real, shareable link. */
+  function isENPath() {
+    return /(^|\/)en(\/|$)/.test(location.pathname);
+  }
+  function equivalentPath(target) {
+    let p = location.pathname.replace(/(^|\/)en(\/|$)/, function (m, pre, post) {
+      return pre + (post === '/' ? '/' : '');
+    });
+    if (p === '') p = '/';
+    if (target === 'en') p = (p === '/' ? '/en/' : '/en' + p);
+    return p;
   }
 
   function init() {
-    let saved = 'nl';
-    try { saved = localStorage.getItem(KEY) || 'nl'; } catch (e) {}
-    applyLang(saved);
+    applyLang(isENPath() ? 'en' : 'nl');
     document.querySelectorAll('[data-lang]').forEach((b) => {
-      b.addEventListener('click', () => applyLang(b.getAttribute('data-lang')));
+      b.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = b.getAttribute('data-lang');
+        const current = isENPath() ? 'en' : 'nl';
+        if (target === current) return;
+        window.location.href = equivalentPath(target) + location.hash;
+      });
     });
   }
 
