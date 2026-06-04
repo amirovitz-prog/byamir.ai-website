@@ -243,12 +243,10 @@
   /* Language is driven by the URL: /en/... → English, everything else → Dutch.
      This makes each language a real, shareable link. */
   function isENPath() {
-    return /(^|\/)en(\/|$)/.test(location.pathname);
+    return /^\/en(\/|$)/.test(location.pathname);
   }
   function equivalentPath(target) {
-    let p = location.pathname.replace(/(^|\/)en(\/|$)/, function (m, pre, post) {
-      return pre + (post === '/' ? '/' : '');
-    });
+    let p = location.pathname.replace(/^\/en(?=\/|$)/, '');
     if (p === '') p = '/';
     if (target === 'en') p = (p === '/' ? '/en/' : '/en' + p);
     return p;
