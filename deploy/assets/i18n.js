@@ -18,7 +18,7 @@
     hero: {
       eyebrow: `AI-driven commercial leadership`,
       title1: `Growth, led by people.`,
-      title2: `Augmented by AI.`,
+      title2: `Amplified by AI.`,
       lead: `20+ years of commercial leadership, deployed as a growth lever for ambitious organisations in the Netherlands. AI as the instrument — human judgment as the foundation.`,
       cta1: `Book a free conversation`,
       cta2: `Explore the services`,
@@ -58,8 +58,8 @@
       lead: `Each pillar starts with a low-threshold assessment (★) — sharp insight within a few weeks that grows into a focused engagement.`,
       p1t: `AI Consultancy`,
       p1d: `From AI strategy and readiness to sales acceleration and adoption. AI that actually lands in your commercial operation.`,
-      p2t: `Bid Strategy & Win Intelligence`,
-      p2d: `Higher win rate through better strategy — go/no-go decisions, win themes, competitive positioning and bid coaching.`,
+      p2t: `Bids & Tenders`,
+      p2d: `Win more tenders. From strategy and win themes to fully writing, reviewing and learning from bids.`,
       p3t: `Growth Leadership`,
       p3d: `Senior commercial leadership at VP level — sales strategy, team effectiveness and interim leadership, with AI embedded.`,
       entry: `★ Entry point`,
@@ -119,8 +119,8 @@
       pricing: `Rates on request — every engagement is tailored. The first conversation is always free.`,
       p1name: `AI Consultancy`,
       p1desc: `Turning AI from pilot into commercial value — strategy, readiness, acceleration and adoption.`,
-      p2name: `Bid Strategy & Win Intelligence`,
-      p2desc: `Higher win rate through better strategy — go/no-go decisions, win themes, competitive positioning and bid coaching.`,
+      p2name: `Bids & Tenders`,
+      p2desc: `Winning more, better tenders — strategy, writing, coaching and structured learning.`,
       p3name: `Growth Leadership`,
       p3desc: `Senior commercial firepower on demand — sales strategy, team effectiveness and interim leadership.`,
       entry: `★ Entry point`,
@@ -157,7 +157,7 @@
       training: `Continuing education`,
       trainingText: `Strategic Selling · Consultative Sales · CRM & Pipeline · Intercultural Management`,
       st1: `20+ years of proven commercial leadership at VP/C-suite level`,
-      st2: `A broad approach: AI Consultancy, Bid Strategy & Win Intelligence and Growth Leadership`,
+      st2: `A broad approach: AI Consultancy, Bids & Tenders and Sales Leadership`,
       st3: `Hands-on experience with large CRM & AI implementations in complex environments`,
       st4: `A strong international senior network to mobilise the right expertise fast`,
       st5: `Intercultural experience: EMEA, Americas & APAC`,
@@ -194,21 +194,15 @@
       s14: `AI strategy & governance, vendor selection, board reporting. Minimum 3 months.`,
       s15: `Two monthly strategic sessions, on-demand input, board AI agenda preparation.`,
       s21: `Bid effectiveness report · win/loss analysis · improvement plan · AI opportunities · live debrief.`,
-      s22: `Go/no-go decision, competitive positioning, win theme development and bid strategy document.`,
-      s24: `Strategic coaching during the writing process, review feedback on persuasion and positioning, live debrief.`,
+      s22: `Go/no-go analysis, client strategy, win themes, bid strategy document, compliance matrix.`,
+      s23: `Fully written proposal, executive summary, win themes, submission guided.`,
+      s24: `Section-by-section review feedback, persuasion coaching, final quality check, debrief.`,
       s25: `Post-bid report, win/loss diagnosis, competitor analysis, concrete improvement points.`,
       s31: `Sales ROI report · funnel analysis · team effectiveness diagnostics · client portfolio · quick wins.`,
       s32: `Full sales plan, market analysis, ICP definition, GTM strategy, KPI framework, board presentation.`,
       s33: `Baseline per team member, personalised coaching plan, pipeline training, 30/60/90-day measurement.`,
       s34: `Sales playbook, pitch & proposition training, objection handling, CRM discipline, adoption tracking.`,
       s35: `Full VP-level leadership coverage: team, pipeline, board. AI integration embedded.`,
-    },
-    svcn: {
-      s13: `Sales Enablement with AI`,
-      s22: `Go/no-go & Win Theme Strategy`,
-      s32: `Strategic Sales Plan`,
-      s33: `Sales Effectiveness Programme`,
-      s35: `Interim Commercial Leadership`,
     },
     model: {
       fixedD: `The assessments — sharp insight within a few weeks, at a price agreed up front.`,
@@ -247,23 +241,15 @@
   }
 
   /* Language is driven by the URL: /en/... → English, everything else → Dutch.
-     This makes each language a real, shareable link.
-     Uses RELATIVE paths so it works on any host/preview environment. */
+     This makes each language a real, shareable link. */
   function isENPath() {
-    // Works regardless of base URL / hosting subfolder
-    return /\/en\//.test(location.pathname) || /\/en$/.test(location.pathname);
+    return /^\/en(\/|$)/.test(location.pathname);
   }
   function equivalentPath(target) {
-    // Get just the filename (e.g. "diensten.html"), fallback to "index.html"
-    let filename = location.pathname.split('/').pop();
-    if (!filename || filename === '') filename = 'index.html';
-    if (target === 'en') {
-      // NL → EN: step INTO the en/ subfolder (relative)
-      return 'en/' + filename;
-    } else {
-      // EN → NL: step UP one level (relative)
-      return '../' + filename;
-    }
+    let p = location.pathname.replace(/^\/en(?=\/|$)/, '');
+    if (p === '') p = '/';
+    if (target === 'en') p = (p === '/' ? '/en/' : '/en' + p);
+    return p;
   }
 
   function init() {

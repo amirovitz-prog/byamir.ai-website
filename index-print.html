@@ -3,12 +3,48 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>by AMIR — Groei, geleid door mensen. Versterkt door AI.</title>
-<meta name="description" content="Senior commercieel leiderschap dat AI inzet als groeihefboom voor ambitieuze organisaties in Nederland. AI Consultancy, Bids & Tenders en Growth Leadership." />
+<title>by AMIR — Groei, aangedreven door AI. Geleid door mensen.</title>
+<meta name="description" content="Senior commercieel leiderschap dat AI inzet als groeihefboom voor de Nederlandse mid-market. AI Consultancy, Bids & Tenders en Growth Leadership." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/site.css" />
+<style>
+  /* ============ PRINT ============ */
+  @media print {
+    @page { size: A4 portrait; margin: 14mm; }
+    html, body { background: #16273D !important; }
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      animation-delay: -99s !important; animation-duration: .001s !important;
+      animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+      animation-play-state: running !important; transition-duration: 0s !important;
+    }
+    /* reveal-on-scroll content must be visible in print */
+    .js-anim .reveal, .reveal { opacity: 1 !important; transform: none !important; }
+
+    /* hide interactive chrome */
+    .site-header, .mobile-menu, .nav-toggle { display: none !important; }
+
+    /* let the hero breathe without 100vh / fixed-header offset */
+    .hero { min-height: 0 !important; padding-top: 0 !important; }
+    .hero-grid { break-inside: avoid; }
+    .hero-portrait { min-height: 460px !important; }
+
+    /* tighten vertical rhythm for paper */
+    .section { padding: 26px 0 !important; }
+    .section.tight { padding: 20px 0 !important; }
+
+    /* page breaks: keep each major block whole, start key sections fresh */
+    section, .stat-band, footer { break-inside: avoid; }
+    #kloof, #diensten, #werkwijze, #over, .cta-band { break-before: page; }
+    .pillar, .step, .value, .gap-fig, .about-grid, .isnot-grid, .bigquote { break-inside: avoid; }
+
+    /* images shouldn't overflow a page */
+    img { max-height: 92vh; }
+  }
+</style>
 </head>
 <body>
 
@@ -57,18 +93,18 @@
       <div class="container-inner">
         <span class="eyebrow" data-i18n="hero.eyebrow">AI-gedreven commercieel leiderschap</span>
         <h1 class="display d-xl">
-          <span class="line" data-i18n="hero.title1">Groei, geleid door mensen.</span>
-          <span class="line italic-gold" data-i18n="hero.title2">Versterkt door AI.</span>
+          <span class="line" data-i18n="hero.title1">Groei, aangedreven door AI.</span>
+          <span class="line italic-gold" data-i18n="hero.title2">Geleid door mensen.</span>
         </h1>
-        <p class="lead" data-i18n="hero.lead">20+ jaar commercieel leiderschap, ingezet als groeihefboom voor ambitieuze organisaties in Nederland. AI als instrument — menselijk oordeel als fundament.</p>
+        <p class="lead" data-i18n="hero.lead">20+ jaar commercieel leiderschap, ingezet als groeihefboom voor de Nederlandse mid-market. AI als instrument — menselijk oordeel als fundament.</p>
         <div class="hero-actions">
           <a class="btn btn-gold" href="contact.html" data-i18n="hero.cta1">Plan een vrijblijvend gesprek</a>
           <a class="btn btn-ghost" href="diensten.html"><span data-i18n="hero.cta2">Bekijk de diensten</span> <span class="arrow">→</span></a>
         </div>
         <div class="hero-pillars">
           <div><div class="num">01</div><div class="lbl">AI Consultancy</div></div>
-          <div><div class="num">02</div><div class="lbl">Growth Leadership</div></div>
-          <div><div class="num">03</div><div class="lbl">Bid Strategy &amp; Win Intelligence</div></div>
+          <div><div class="num">02</div><div class="lbl">Bids &amp; Tenders</div></div>
+          <div><div class="num">03</div><div class="lbl">Growth Leadership</div></div>
         </div>
       </div>
     </div>
@@ -79,6 +115,13 @@
   </div>
 </section>
 
+<!-- stat band -->
+<div class="stat-band">
+  <div class="stat"><div class="n">87%</div><div class="l" data-i18n="stats.s1">NL-bedrijven test AI</div></div>
+  <div class="stat"><div class="n">&lt;30%</div><div class="l" data-i18n="stats.s2">behaalt meetbare waarde</div></div>
+  <div class="stat"><div class="n">€2,4B</div><div class="l" data-i18n="stats.s3">omzetportfolio onder leiding</div></div>
+  <div class="stat"><div class="n">+50%</div><div class="l" data-i18n="stats.s4">dealconversie verbeterd</div></div>
+</div>
 
 <!-- ============ DE KLOOF ============ -->
 <section class="section" id="kloof">
@@ -87,7 +130,7 @@
       <div class="section-head reveal">
         <span class="eyebrow" data-i18n="gap.eyebrow">De kans</span>
         <h2 class="display d-lg" data-i18n="gap.title">Hoog AI-bewustzijn. Lage AI-implementatie. Daar zit het gat.</h2>
-        <p class="lead" data-i18n="gap.lead">Nederlandse organisaties testen volop AI — maar weinig organisaties vertalen dat naar meetbare commerciële waarde. Niet omdat de technologie faalt, maar omdat de brug naar de praktijk ontbreekt.</p>
+        <p class="lead" data-i18n="gap.lead">De Nederlandse mid-market test volop AI — maar weinig organisaties vertalen dat naar meetbare commerciële waarde. Niet omdat de technologie faalt, maar omdat de brug naar de praktijk ontbreekt.</p>
       </div>
       <div class="gap-figures reveal">
         <div class="gap-fig"><div class="n">87%</div><div class="t" data-i18n="gap.f1">van de Nederlandse bedrijven test AI-pilots.<span class="src">CBS, 2025</span></div></div>
@@ -143,26 +186,26 @@
         <h3 data-i18n="pillars.p1t">AI Consultancy</h3>
         <p data-i18n="pillars.p1d">Van AI-strategie en readiness tot sales-acceleratie en adoptie. AI die daadwerkelijk landt in je commerciële operatie.</p>
         <div class="entry">
-          <span class="star" data-i18n="pillars.entry">★ Startpunt</span>
+          <span class="star" data-i18n="pillars.entry">★ Binnenkomer</span>
           <span class="ename">AI Readiness Scan</span>
         </div>
       </div>
       <div class="pillar">
         <div class="num">02</div>
-        <h3 data-i18n="pillars.p3t">Growth Leadership</h3>
-        <p data-i18n="pillars.p3d">Senior commercieel leiderschap op VP-niveau — salesstrategie, teameffectiviteit en interim leiderschap, met AI ingebed.</p>
+        <h3 data-i18n="pillars.p2t">Bids &amp; Tenders</h3>
+        <p data-i18n="pillars.p2d">Win meer aanbestedingen. Van strategie en win-thema's tot het volledig schrijven, reviewen en leren van bids.</p>
         <div class="entry">
-          <span class="star" data-i18n="pillars.entry">★ Startpunt</span>
-          <span class="ename">Sales ROI Assessment</span>
+          <span class="star" data-i18n="pillars.entry">★ Binnenkomer</span>
+          <span class="ename">Bid Effectiveness Assessment</span>
         </div>
       </div>
       <div class="pillar">
         <div class="num">03</div>
-        <h3 data-i18n="pillars.p2t">Bid Strategy &amp; Win Intelligence</h3>
-        <p data-i18n="pillars.p2d">Hogere winkans door betere strategie — go/no-go beslissingen, win-thema's, concurrentiepositie en bid-coaching.</p>
+        <h3 data-i18n="pillars.p3t">Growth Leadership</h3>
+        <p data-i18n="pillars.p3d">Senior commercieel leiderschap op VP-niveau — salesstrategie, teameffectiviteit en interim leiderschap, met AI ingebed.</p>
         <div class="entry">
-          <span class="star" data-i18n="pillars.entry">★ Startpunt</span>
-          <span class="ename">Bid Effectiveness Assessment</span>
+          <span class="star" data-i18n="pillars.entry">★ Binnenkomer</span>
+          <span class="ename">Sales ROI Assessment</span>
         </div>
       </div>
     </div>
@@ -184,7 +227,7 @@
       <div class="step"><div class="num">01</div><h4 data-i18n="method.s1t">Kennismaking</h4><p data-i18n="method.s1d">Een vrijblijvend gesprek over je situatie, ambitie en knelpunten. Altijd kosteloos.</p></div>
       <div class="step"><div class="num">02</div><h4 data-i18n="method.s2t">Assessment</h4><p data-i18n="method.s2d">Scherp inzicht binnen enkele weken — gap-analyse, quick wins en een concreet actieplan.</p></div>
       <div class="step"><div class="num">03</div><h4 data-i18n="method.s3t">Live debrief</h4><p data-i18n="method.s3d">We bespreken de bevindingen samen. Helder, eerlijk en direct toepasbaar.</p></div>
-      <div class="step"><div class="num">04</div><h4 data-i18n="method.s4t">Traject</h4><p data-i18n="method.s4d">Waar het waarde toevoegt: een gericht vervolgtraject, project of doorlopende begeleiding.</p></div>
+      <div class="step"><div class="num">04</div><h4 data-i18n="method.s4t">Traject</h4><p data-i18n="method.s4d">Waar het waarde toevoegt: een gericht vervolgtraject, project of retainer.</p></div>
     </div>
   </div>
 </section>
@@ -200,10 +243,10 @@
       <div class="reveal">
         <span class="eyebrow" data-i18n="about.eyebrow">Over Amir</span>
         <h2 class="display d-md" style="margin:20px 0 22px" data-i18n="about.title">20+ jaar commercieel leiderschap, internationaal geschaald.</h2>
-        <p class="lead" data-i18n="about.lead">Als VP Global Sales bij Sodexo en in senior rollen bij Facilicom en ISS stuurde Amir commerciële groei aan op internationale schaal. by AMIR brengt die ervaring naar ambitieuze organisaties in Nederland — onafhankelijk, resultaatgericht en met AI als hefboom.</p>
+        <p class="lead" data-i18n="about.lead">Als VP Global Sales bij Sodexo en in senior rollen bij Facilicom en ISS stuurde Amir commerciële groei aan op internationale schaal. by AMIR brengt die ervaring naar de Nederlandse mid-market — onafhankelijk, resultaatgericht en met AI als hefboom.</p>
         <div class="about-stats">
           <div class="about-stat"><div class="n">20+</div><div class="l" data-i18n="about.st1">jaar internationaal sales-leiderschap</div></div>
-          <div class="about-stat"><div class="n">+50%</div><div class="l" data-i18n="about.st2">gemiddelde verbetering in dealconversie</div></div>
+          <div class="about-stat"><div class="n">€2,4B</div><div class="l" data-i18n="about.st2">omzetportfolio met 12% groei per jaar</div></div>
         </div>
         <div style="margin-top:36px">
           <a class="btn btn-ghost" href="over-amir.html"><span data-i18n="about.cta">Lees het volledige verhaal</span> <span class="arrow">→</span></a>
@@ -248,7 +291,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <img src="assets/logo/byAMIR-tagline-dark-trim.png" alt="by AMIR — By Amir. By AI." />
-        <p data-i18n="footer.about">Senior commercieel leiderschap dat AI inzet als groeihefboom voor ambitieuze organisaties in Nederland.</p>
+        <p data-i18n="footer.about">Senior commercieel leiderschap dat AI inzet als groeihefboom voor de Nederlandse mid-market.</p>
       </div>
       <div class="footer-col">
         <h5 data-i18n="footer.nav">Navigatie</h5>
@@ -262,10 +305,10 @@
       <div class="footer-col">
         <h5 data-i18n="footer.contact">Contact</h5>
         <ul>
-          <li><a href="mailto:amir@byamir.ai">amir@byamir.ai</a></li>
+          <li><a href="mailto:amir.bercovitz@outlook.com">amir.bercovitz@outlook.com</a></li>
           <li><a href="tel:+31655112228">+31 6 5511 2228</a></li>
           <li data-i18n="footer.loc">Nieuw-Beijerland, Nederland</li>
-          <li><a href="https://www.linkedin.com/in/amir-bercovitz/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></li>
         </ul>
       </div>
     </div>
@@ -278,15 +321,16 @@
 
 <script src="assets/i18n.js"></script>
 <script src="assets/site.js"></script>
-
-<template id="__bundler_thumbnail" data-bg-color="#16273D">
-  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
-    <rect width="1200" height="800" fill="#16273D"/>
-    <text x="600" y="410" text-anchor="middle" font-family="Georgia, 'Cormorant Garamond', serif" font-size="150" font-style="italic" fill="#C9A96E">by</text>
-    <text x="600" y="410" text-anchor="middle" font-family="Georgia, serif" font-size="150" fill="#16273D" opacity="0"> </text>
-    <text x="600" y="560" text-anchor="middle" font-family="'Hanken Grotesk', sans-serif" font-size="120" font-weight="700" letter-spacing="14" fill="#F2EDE3">AMIR</text>
-    <rect x="500" y="620" width="200" height="2" fill="#C9A96E"/>
-  </svg>
-</template>
+<script>
+  /* Auto-print once fonts + layout are ready */
+  (function () {
+    function go() { setTimeout(function () { window.print(); }, 500); }
+    if (document.fonts && document.fonts.ready) {
+      Promise.race([document.fonts.ready, new Promise(function (r) { setTimeout(r, 3000); })]).then(go);
+    } else {
+      window.addEventListener('load', go);
+    }
+  })();
+</script>
 </body>
 </html>
