@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Winnen Begint Vóór de Tender — Whitepaper by AMIR</title>
+<meta name="description" content="De strategische fundamenten van een hogere bid win rate. Een whitepaper door Amir Bercovitz." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/site.css" />
+<style>
+@media print {
+  .site-header, .mobile-menu, .wp-toolbar, .site-footer { display: none !important; }
+  body { background: #1C2340; }
+  .wp-reader { padding-top: 0 !important; }
+}
+.wp-reader { padding-top: calc(92px + 48px); padding-bottom: 80px; }
+.wp-toolbar { position: sticky; top: 92px; z-index: 50; background: rgba(15,27,45,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201,169,110,0.15); padding: 14px 0; }
+.wp-toolbar .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.wp-toolbar .wp-title { font-size: 13px; color: var(--slate); letter-spacing: 0.04em; }
+.wp-toolbar .wp-title em { color: var(--gold-light); font-style: italic; font-family: var(--serif); }
+.wp-reader-inner { max-width: 680px; margin: 0 auto; padding: 0 28px; }
+
+.wp * { box-sizing: border-box; }
+.wp { font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #EDE8DC; width: 100%; }
+.wp .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+.wp .page { max-width: 640px; margin: 0 auto; padding: 48px 0; border-bottom: 1px solid rgba(201,169,110,0.15); }
+.wp .page:last-child { border-bottom: none; }
+.wp .label { font-size: 10px; letter-spacing: 0.18em; color: #C9A96E; text-transform: uppercase; margin-bottom: 20px; }
+.wp .gold { color: #C9A96E; }
+.wp .muted { color: rgba(237,232,220,0.55); }
+.wp .rule { border: none; border-top: 1px solid rgba(201,169,110,0.25); margin: 28px 0; }
+.wp .pull-quote { border-left: 2px solid #C9A96E; padding: 16px 24px; margin: 32px 0; background: rgba(201,169,110,0.06); }
+.wp .body-text { font-size: 15px; line-height: 1.85; color: rgba(237,232,220,0.85); }
+.wp .chapter-num { font-family: 'Cormorant Garamond', serif; font-size: 64px; font-weight: 300; color: rgba(201,169,110,0.2); line-height: 1; margin-bottom: -8px; }
+.wp .chapter-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; color: #EDE8DC; line-height: 1.3; margin-bottom: 24px; }
+.wp .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
+@media (max-width: 560px) { .wp .two-col { grid-template-columns: 1fr; } }
+.wp .col-card { border: 1px solid rgba(201,169,110,0.2); padding: 20px; }
+.wp .col-card .col-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px; }
+.wp .col-card .col-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; margin-bottom: 12px; }
+.wp .col-card ul { list-style: none; padding: 0; }
+.wp .col-card ul li { font-size: 13px; color: rgba(237,232,220,0.7); line-height: 1.7; padding: 5px 0; border-bottom: 1px solid rgba(201,169,110,0.1); }
+.wp .col-card ul li:last-child { border-bottom: none; }
+.wp .scenario-box { background: rgba(255,255,255,0.03); border-left: 2px solid rgba(201,169,110,0.4); padding: 20px 24px; margin: 28px 0; }
+.wp .scenario-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(201,169,110,0.7); margin-bottom: 10px; }
+.wp .stat-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 28px 0; }
+@media (max-width: 540px) { .wp .stat-row { grid-template-columns: 1fr; } }
+.wp .stat-box { border: 1px solid rgba(201,169,110,0.2); padding: 20px 16px; text-align: center; }
+.wp .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: #C9A96E; display: block; margin-bottom: 6px; }
+.wp .stat-label { font-size: 12px; color: rgba(237,232,220,0.5); line-height: 1.5; }
+.wp .phase-row { display: flex; gap: 16px; align-items: flex-start; padding: 18px 0; border-bottom: 1px solid rgba(201,169,110,0.12); }
+.wp .phase-row:last-child { border-bottom: none; }
+.wp .phase-num { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: rgba(201,169,110,0.4); line-height: 1; flex-shrink: 0; width: 36px; }
+.wp .phase-title { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #C9A96E; margin-bottom: 6px; }
+.wp .phase-body { font-size: 14px; color: rgba(237,232,220,0.8); line-height: 1.75; }
+.wp .ai-box { background: rgba(201,169,110,0.04); border: 1px solid rgba(201,169,110,0.18); padding: 24px; margin: 32px 0; }
+.wp .ai-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #C9A96E; margin-bottom: 12px; }
+.wp .cta-block { background: rgba(201,169,110,0.08); border: 1px solid rgba(201,169,110,0.3); padding: 32px; text-align: center; margin-top: 32px; }
+.wp .cta-btn { display: inline-block; background: #C9A96E; color: #1C2340; font-family: 'Hanken Grotesk', sans-serif; font-size: 14px; font-weight: 500; padding: 14px 32px; text-decoration: none; cursor: pointer; border: none; margin-top: 20px; letter-spacing: 0.03em; }
+.wp .cta-btn:hover { background: #D9BE8A; }
+</style>
+</head>
+<body>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="by AMIR — home">
+      <img src="assets/logo/byAMIR-dark-trim.png" alt="by AMIR" />
+    </a>
+    <nav class="nav-main">
+      <ul class="nav-links">
+        <li><a href="diensten.html">Diensten</a></li>
+        <li><a href="index.html#werkwijze">Werkwijze</a></li>
+        <li><a href="inzichten.html" aria-current="page">Inzichten</a></li>
+        <li><a href="over-amir.html">Over Amir</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-toggle desktop">
+        <button data-lang="nl" class="active">NL</button><span class="sep">·</span><button data-lang="en" onclick="window.location='en/whitepaper-bid.html'">EN</button>
+      </div>
+      <a class="btn btn-gold" href="contact.html">Plan een gesprek</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="diensten.html">Diensten</a>
+  <a href="index.html#werkwijze">Werkwijze</a>
+  <a href="inzichten.html">Inzichten</a>
+  <a href="over-amir.html">Over Amir</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="italic-gold">Plan een gesprek</a>
+  <div class="m-lang"><button data-lang="nl" class="active">NL</button><span>·</span><button data-lang="en" onclick="window.location='en/whitepaper-bid.html'">EN</button></div>
+</div>
+
+<div class="wp-toolbar">
+  <div class="container">
+    <span class="wp-title">Whitepaper — <em>Winnen Begint Vóór de Tender</em></span>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button onclick="window.print()" class="btn btn-outline" style="font-size:13px;padding:10px 20px;">Opslaan als PDF ↓</button>
+      <a href="bid-quickscan.html" class="btn btn-gold" style="font-size:13px;padding:10px 20px;">Doe de quickscan →</a>
+    </div>
+  </div>
+</div>
+
+<main class="wp-reader">
+  <div class="wp-reader-inner">
+    <div class="wp">
+
+      <div class="page" style="text-align:center;padding-top:64px;padding-bottom:64px;">
+        <div class="label" style="margin-bottom:40px;">by AMIR · Bid Strategie</div>
+        <div class="serif" style="font-size:11px;letter-spacing:0.2em;color:#C9A96E;text-transform:uppercase;margin-bottom:16px;">Whitepaper</div>
+        <h1 class="serif" style="font-size:46px;font-weight:300;line-height:1.15;color:#EDE8DC;margin-bottom:8px;">Winnen Begint<br />Vóór de Tender</h1>
+        <p class="serif" style="font-size:20px;font-weight:300;font-style:italic;color:rgba(237,232,220,0.6);margin-bottom:48px;">De strategische fundamenten van een hogere bid win rate</p>
+        <hr class="rule" style="max-width:80px;margin:0 auto 40px;" />
+        <p style="font-size:12px;color:rgba(237,232,220,0.4);letter-spacing:0.08em;">Amir Bercovitz &nbsp;·&nbsp; byamir.ai</p>
+      </div>
+
+      <div class="page">
+        <div class="label">Voorwoord</div>
+        <h2 class="serif chapter-title" style="font-size:24px;">U wist al dat u zou verliezen.</h2>
+        <p class="body-text" style="margin-bottom:20px;">Misschien niet bewust. Maar achteraf, als u de debriefing leest — als de klant uitlegt waarom een concurrent gewonnen heeft — herkent u de signalen die er al waren. De klant die u nauwelijks kende. De winstrategie die er nooit echt was. Het voorstel dat de klant beschreef als "technisch sterk maar generiek".</p>
+        <p class="body-text" style="margin-bottom:20px;">Ik heb tenders van honderden miljoenen euro begeleid. Teams aangestuurd die inschreven op complexe, internationale aanbestedingen — van mijnbouw in Noord- en Zuid-Amerika tot facilitaire dienstverlening voor grote klanten wereldwijd. Het patroon is overal hetzelfde.</p>
+        <div class="scenario-box">
+          <div class="scenario-label">Uit de praktijk</div>
+          <p class="body-text" style="font-size:14px;">In een aanbesteding van €12 miljoen die ik begeleidde, verloor mijn klant niet op prijs en niet op kwaliteit. Ze verloren omdat de concurrent drie maanden eerder al een werkrelatie had opgebouwd met de nieuwe operationeel directeur — de echte beslisser achter de formele aankoopcommissie. Mijn klant kende de specificaties perfect. Ze kenden de mens achter de handtekening niet. De concurrent had capture gedaan. Mijn klant had een voorstel geschreven.</p>
+        </div>
+        <div class="pull-quote">
+          <p class="serif" style="font-size:19px;font-style:italic;line-height:1.7;color:#EDE8DC;">Een tender is geen schrijfoefening. Het is de culminatie van een relatie, een strategie en een team dat weet wat het wil bereiken — en hoe.</p>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="chapter-num">01</div>
+        <h2 class="chapter-title">De verborgen prijs van verloren tenders</h2>
+        <p class="body-text" style="margin-bottom:20px;">Elke verloren tender heeft een prijs die verder gaat dan de gemiste omzet. Er zijn de directe uren van het bidteam — gemiddeld 200 tot 400 uur per serieuze inschrijving. De tijd van de accountmanager. De kosten van externe expertise.</p>
+        <p class="body-text" style="margin-bottom:28px;">Bij een organisatie die acht keer per jaar inschrijft met een gemiddelde bidkostprijs van €80.000, is de jaarlijkse investering €640.000. Bij een winratio van dertig procent wint u voor €192.000 aan bid-inspanning — en schrijft u €448.000 af. Dat zijn de zichtbare kosten. De onzichtbare zijn groter: de klant die u nu vier jaar niet terugziet, de concurrentiepositie die uw concurrent inneemt, de organisatiemoeheid die ontstaat als teams structureel verliezen zonder te begrijpen waarom.</p>
+        <div class="stat-row">
+          <div class="stat-box"><span class="stat-num">&lt;40%</span><span class="stat-label">gemiddelde winratio zonder systematische capture-aanpak</span></div>
+          <div class="stat-box"><span class="stat-num">60%</span><span class="stat-label">van tenderverlies terug te voeren op gebrekkige positionering vóór inschrijving</span></div>
+          <div class="stat-box"><span class="stat-num">3×</span><span class="stat-label">hogere winratio bij teams met een expliciete klantspecifieke winstrategie</span></div>
+        </div>
+        <div class="pull-quote">
+          <p class="serif" style="font-size:18px;font-style:italic;line-height:1.7;color:#EDE8DC;">De winratio is een uitkomst. De oorzaak zit in de zes maanden vóór de deadline — in elke beslissing die wel of niet genomen werd.</p>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="chapter-num">02</div>
+        <h2 class="chapter-title">Capture: winnen vóór de pen op papier gaat</h2>
+        <p class="body-text" style="margin-bottom:28px;">De meeste biedteams beginnen hun werk op het moment dat de aanbesteding verschijnt. De beste biedteams zijn op dat moment al maanden bezig. Capture planning is het systematische werk van klantkennis opbouwen, specificaties beïnvloeden en uw organisatie positioneren als de meest logische keuze — lang voordat de formele procedure begint.</p>
+        <div class="phase-row">
+          <div class="phase-num">1</div>
+          <div style="flex:1;">
+            <div class="phase-title">Klantkennis opbouwen</div>
+            <div class="phase-body">Wie zijn de beslissers? Wat zijn hun persoonlijke succescriteria — los van de formele evaluatiecriteria? Welke pijn willen ze oplossen? Zonder antwoord schrijft u een generiek voorstel voor een klant die u niet kent.</div>
+          </div>
+        </div>
+        <div class="phase-row">
+          <div class="phase-num">2</div>
+          <div style="flex:1;">
+            <div class="phase-title">Specificaties beïnvloeden</div>
+            <div class="phase-body">Aanbestedingsdocumenten worden geschreven door mensen die informatie ontvangen van leveranciers en adviseurs. Organisaties die actief deelnemen aan marktconsultaties beïnvloeden de spelregels in hun voordeel. Dat is professioneel.</div>
+          </div>
+        </div>
+        <div class="phase-row">
+          <div class="phase-num">3</div>
+          <div style="flex:1;">
+            <div class="phase-title">Go/no-go als strategisch besluit</div>
+            <div class="phase-body">De beste biedorganisaties zeggen vaker nee. Ze hanteren scherpe kwalificatiecriteria: is de klant bekend, is de kans realistisch, is er een onderscheidende propositie? Selectiviteit verhoogt de winratio en verlaagt de cost of bidding.</div>
+          </div>
+        </div>
+        <div class="phase-row">
+          <div class="phase-num">4</div>
+          <div style="flex:1;">
+            <div class="phase-title">Concurrentiepositie kennen</div>
+            <div class="phase-body">Wie schrijft er waarschijnlijk mee in? Wat zijn hun sterke punten? Een winstrategie zonder concurrentieanalyse is een strategie die de helft van het speelveld negeert.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="chapter-num">03</div>
+        <h2 class="chapter-title">Van procesvolgend naar strategisch winnend</h2>
+        <p class="body-text" style="margin-bottom:28px;">De meeste biedteams leveren een compliant voorstel. Ze beantwoorden alle vragen, voldoen aan alle eisen — en presenteren een aanbieding die de klant technisch niet kan afwijzen, maar die hem ook niet overtuigt. Compliance is de drempel. Geen onderscheidend vermogen.</p>
+        <div class="two-col">
+          <div class="col-card">
+            <div class="col-label muted">Procesvolgend</div>
+            <div class="col-title gold">Compliance-aanpak</div>
+            <ul>
+              <li>Beantwoordt de vragen zoals gesteld</li>
+              <li>Beschrijft wat de organisatie doet</li>
+              <li>Generieke thema's, herhaalbaar</li>
+              <li>Sterk op technische volledigheid</li>
+              <li>Zwak op klantspecifieke relevantie</li>
+            </ul>
+          </div>
+          <div class="col-card" style="border-color:rgba(201,169,110,0.45);">
+            <div class="col-label" style="color:#C9A96E;">Strategisch winnend</div>
+            <div class="col-title" style="color:#EDE8DC;">Winstrategie-aanpak</div>
+            <ul>
+              <li>Stuurt het hele document op thema</li>
+              <li>Spreekt de taal van de klant</li>
+              <li>Klantspecifieke win-thema's</li>
+              <li>Sterk op onderscheidend vermogen</li>
+              <li>De klant herkent zijn eigen situatie</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pull-quote">
+          <p class="serif" style="font-size:18px;font-style:italic;line-height:1.7;color:#EDE8DC;">Een voorstel zonder winstrategie is een catalogus. De klant bladert erdoorheen, vindt het netjes, en kiest iemand anders.</p>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="chapter-num">04</div>
+        <h2 class="chapter-title">De bidfabriek: één team, één doel</h2>
+        <p class="body-text" style="margin-bottom:28px;">De meest voorkomende oorzaak van zwakke bids is geen schrijfprobleem — het is een samenwerkingsprobleem. Sales brengt de tender binnen en draagt hem over. Bid support schrijft het voorstel. De klantkennis die de doorslag had kunnen geven, blijft in de hoofden van de accountmanagers.</p>
+        <div class="phase-row">
+          <div class="phase-num" style="font-size:22px;">↗</div>
+          <div style="flex:1;">
+            <div class="phase-title">Content planning &amp; delivery</div>
+            <div class="phase-body">Een sterk voorstel wordt niet geschreven — het wordt gepland. Wie schrijft welke sectie? Wanneer vindt de strategische review plaats? Bids die onder tijdsdruk worden afgerond zijn zichtbaar zwakker. Planning is kwaliteitsborging.</div>
+          </div>
+        </div>
+        <div class="phase-row">
+          <div class="phase-num" style="font-size:22px;">↗</div>
+          <div style="flex:1;">
+            <div class="phase-title">Bid leadership als strategische rol</div>
+            <div class="phase-body">Elke winnende tender heeft een eigenaar die meer is dan een projectmanager — iemand die de winstrategie bewaakt, die de klant kent en de concurrentie scherp houdt. Bid leadership is een strategische rol.</div>
+          </div>
+        </div>
+        <div class="phase-row">
+          <div class="phase-num" style="font-size:22px;">↗</div>
+          <div style="flex:1;">
+            <div class="phase-title">Onderhandeling als verlengde van de bid</div>
+            <div class="phase-body">De inschrijving is het begin van het gesprek. De organisaties die de onderhandelingsfase binnenstappen zonder strategie, fallback-posities en mandaatstructuur verliezen op de valreep wat ze in het voorstel hadden opgebouwd.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="chapter-num">05</div>
+        <h2 class="chapter-title">Het leerproces dat de meeste organisaties overslaan</h2>
+        <p class="body-text" style="margin-bottom:20px;">Na een verloren tender is de meest voorkomende reactie: doorgaan naar de volgende. De evaluatie schuift op — en verdwijnt. Dat is de duurste beslissing die een biedorganisatie kan nemen.</p>
+        <div class="phase-row">
+          <div class="phase-num">1</div>
+          <div style="flex:1;">
+            <div class="phase-title">Debrief bij verlies — altijd</div>
+            <div class="phase-body">Vraag altijd om een debrief. Wat sloeg aan? Wat miste? Wie nam de beslissing? Dat gesprek is de beste marktintelligentie die u krijgen kunt.</div>
+          </div>
+        </div>
+        <div class="phase-row">
+          <div class="phase-num">2</div>
+          <div style="flex:1;">
+            <div class="phase-title">Debrief bij winst — ook</div>
+            <div class="phase-body">Gewonnen tenders bevatten even waardevolle informatie. Welk win-thema maakte het verschil? Welke sectie scoorde boven verwachting? Die inzichten zijn de bouwstenen van uw volgende winnende voorstel.</div>
+          </div>
+        </div>
+        <div class="phase-row">
+          <div class="phase-num">3</div>
+          <div style="flex:1;">
+            <div class="phase-title">Institutionaliseer de leerlijnen</div>
+            <div class="phase-body">Een bidbibliotheek met sterke secties, een kennisdocument per sector, een vast retro-format na elke tender. Leren is geen automatisme — het is een keuze die georganiseerd moet worden.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="chapter-num">06</div>
+        <h2 class="chapter-title">Wat AI verandert in het biedproces</h2>
+        <div class="ai-box">
+          <div class="ai-label">AI in bid management</div>
+          <p class="body-text" style="margin-bottom:16px;"><strong style="color:#EDE8DC;">Wat verandert: contentproductie.</strong> AI genereert standaardsecties, CV-paragrafen en compliance-antwoorden in een fractie van de tijd. Dat is een echte productiviteitswinst — maar alleen als de winstrategie al staat. Wie AI inzet om sneller het verkeerde te schrijven, verliest sneller.</p>
+          <p class="body-text" style="margin-bottom:16px;"><strong style="color:#EDE8DC;">Wat ook verandert: klantanalyse.</strong> AI kan openbare informatie over een klant — jaarverslagen, persberichten, aanbestedingshistorie — samenvatten en patronen identificeren die capture-teams missen. Directe winst in de positioneringsfase.</p>
+          <p class="body-text"><strong style="color:#EDE8DC;">Wat niet verandert: de winstrategie zelf.</strong> AI kan geen menselijk inzicht vervangen over wat een specifieke beslisser werkelijk nodig heeft en waarom hij u zou moeten vertrouwen. Dat inzicht is het product van relaties en aanwezigheid — precies het inzicht dat de winnende bid onderscheidt van een sterke verliezer.</p>
+        </div>
+      </div>
+
+      <div class="page" style="padding-bottom:64px;">
+        <div class="chapter-num">07</div>
+        <h2 class="chapter-title">De keuze om structureel te winnen</h2>
+        <p class="body-text" style="margin-bottom:20px;">Een hogere winratio is geen kwestie van harder werken. Het is een kwestie van slimmer positioneren, scherper strategiseren en consequenter leren.</p>
+        <p class="body-text" style="margin-bottom:28px;">De organisaties die structureel winnen doen dit omdat ze eerder beginnen, de klant beter kennen, een expliciete winstrategie voeren, sales en bid support als één team laten werken, en hun ervaringen omzetten in structureel betere prestaties.</p>
+        <div class="pull-quote">
+          <p class="serif" style="font-size:19px;font-weight:400;font-style:italic;line-height:1.7;color:#EDE8DC;">"Tenders worden niet gewonnen in de laatste week vóór de deadline. Ze worden gewonnen in de maanden daarvoor — door de organisatie die beter gepositioneerd, beter voorbereid en beter geleerd heeft."</p>
+          <p style="font-size:11px;color:#C9A96E;letter-spacing:0.1em;text-transform:uppercase;margin-top:12px;">— Amir Bercovitz</p>
+        </div>
+        <hr class="rule" />
+        <p class="body-text" style="font-size:14px;color:rgba(237,232,220,0.6);font-style:italic;line-height:1.8;">Drie vragen voor elke biedorganisatie:<br />
+        1. Kennen wij de klant goed genoeg om zijn eigen taal te spreken in ons voorstel?<br />
+        2. Heeft elk voorstel een expliciete winstrategie die het hele document aanstuurt?<br />
+        3. Leren wij structureel van elke tender — gewonnen én verloren?</p>
+        <div class="cta-block">
+          <p style="font-size:10px;letter-spacing:0.18em;color:#C9A96E;text-transform:uppercase;margin-bottom:16px;">Volgende stap</p>
+          <p class="serif" style="font-size:22px;font-weight:400;color:#EDE8DC;line-height:1.4;margin-bottom:12px;">Waar staat uw biedorganisatie?</p>
+          <p style="font-size:14px;color:rgba(237,232,220,0.6);line-height:1.7;max-width:420px;margin:0 auto 4px;">Doe de gratis Bid Win Rate Quickscan — 10 vragen, 3 minuten, direct een persoonlijk rapport met dimensiescores en concrete aanbevelingen.</p>
+          <a class="cta-btn" href="bid-quickscan.html">Doe de Bid Win Rate Quickscan →</a>
+          <p style="margin-top:20px;font-size:13px;color:rgba(237,232,220,0.4);">Of plan direct een gesprek — <a href="contact.html" style="color:#C9A96E;">byamir.ai/contact</a></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p>© 2025 by AMIR — Amir Bercovitz</p>
+      <span class="tag">byamir.ai</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+<script>
+if (new URLSearchParams(window.location.search).get('print') === '1') {
+  window.addEventListener('load', function() { setTimeout(function(){ window.print(); }, 700); });
+}
+</script>
+</body>
+</html>

@@ -11,6 +11,7 @@
     nav: {
       services: `Services`,
       method: `Approach`,
+      insights: `Insights`,
       about: `About`,
       contact: `Contact`,
       cta: `Book a conversation`,

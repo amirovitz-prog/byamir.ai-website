@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Readiness Assessment — by AMIR</title>
+<meta name="description" content="Is your organisation ready for AI? 10 questions on strategy, data, people, processes and culture. Receive a personalised report instantly." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/site.css" />
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+<style>
+.qs-wrap { min-height: calc(100vh - 92px); padding-top: 92px; display: flex; align-items: center; justify-content: center; padding-bottom: 80px; }
+.qs-stage { width: 100%; max-width: 700px; margin: 0 auto; padding: 0 28px; }
+.qs-progress { position: fixed; top: 92px; left: 0; right: 0; height: 3px; background: rgba(201,169,110,0.15); z-index: 99; }
+.qs-progress-fill { height: 100%; background: var(--gold); transition: width 0.5s var(--ease); }
+.qs-step { animation: fadeUp 0.4s var(--ease) forwards; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.qs-kicker { font-size: 11.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 26px; display: flex; align-items: center; gap: 14px; }
+.qs-kicker::before { content: ''; width: 32px; height: 1px; background: var(--gold); flex-shrink: 0; }
+.qs-intro h1 { font-family: var(--serif); font-size: clamp(34px, 5vw, 56px); font-weight: 400; line-height: 1.12; color: var(--cream); margin-bottom: 22px; }
+.qs-intro .sub { font-size: 17px; color: var(--cream-dim); line-height: 1.65; max-width: 520px; margin-bottom: 38px; }
+.qs-meta { display: flex; gap: 28px; margin-bottom: 42px; flex-wrap: wrap; }
+.qs-meta-item { display: flex; align-items: center; gap: 9px; font-size: 13.5px; color: var(--slate); }
+.qs-meta-item .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+.qs-dim-label { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 8px; }
+.qs-qnum { font-size: 13px; color: var(--slate); margin-bottom: 20px; }
+.qs-q { font-family: var(--serif); font-size: clamp(22px, 3.2vw, 34px); font-weight: 400; color: var(--cream); line-height: 1.28; margin-bottom: 34px; }
+.qs-options { display: flex; flex-direction: column; gap: 10px; }
+.qs-opt { display: flex; align-items: flex-start; gap: 15px; padding: 18px 22px; border: 1px solid var(--line-cool); background: var(--surface); cursor: pointer; transition: border-color .25s var(--ease), background .25s var(--ease), transform .25s var(--ease); text-align: left; width: 100%; font-family: var(--sans); }
+.qs-opt:hover { border-color: rgba(201,169,110,0.5); background: var(--surface-2); transform: translateX(4px); }
+.qs-opt.selected { border-color: var(--gold); background: rgba(201,169,110,0.1); }
+.qs-opt-letter { width: 26px; height: 26px; border: 1px solid var(--line-cool); display: flex; align-items: center; justify-content: center; font-size: 11.5px; font-weight: 600; color: var(--slate); flex-shrink: 0; transition: all .25s; }
+.qs-opt.selected .qs-opt-letter { border-color: var(--gold); background: var(--gold); color: var(--midnight); }
+.qs-opt-text { font-size: 15.5px; color: var(--cream-dim); line-height: 1.5; padding-top: 2px; }
+.qs-back { margin-top: 28px; font-size: 13px; color: var(--slate); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: color .3s; background: none; border: none; font-family: var(--sans); padding: 0; }
+.qs-back:hover { color: var(--cream); }
+.qs-contact h2 { font-family: var(--serif); font-size: clamp(28px, 4vw, 44px); font-weight: 400; color: var(--cream); margin-bottom: 12px; }
+.qs-contact .sub { font-size: 16px; color: var(--cream-dim); margin-bottom: 34px; max-width: 460px; line-height: 1.6; }
+.qs-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 540px) { .qs-form-row { grid-template-columns: 1fr; } }
+.qs-field { margin-bottom: 16px; }
+.qs-field label { display: block; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 9px; font-weight: 600; }
+.qs-field input { width: 100%; background: var(--surface); border: 1px solid var(--line-cool); color: var(--cream); font-family: var(--sans); font-size: 16px; padding: 13px 17px; transition: border-color .3s; border-radius: 2px; }
+.qs-field input::placeholder { color: var(--slate-dim); }
+.qs-field input:focus { outline: none; border-color: var(--gold); }
+.qs-err { font-size: 13px; color: oklch(0.65 0.18 25); margin-top: 10px; display: none; }
+.qs-err.show { display: block; }
+.qs-wp-block { background: var(--surface); border: 1px solid rgba(201,169,110,0.45); padding: 36px 40px; display: flex; gap: 28px; align-items: center; flex-wrap: wrap; margin-top: 0; }
+.qs-wp-block-text { flex: 1; min-width: 220px; }
+.qs-cta-block { background: var(--surface); border: 1px solid var(--line); padding: 40px; text-align: center; margin-top: 20px; }
+.qs-cta-block h3 { font-family: var(--serif); font-size: 28px; font-weight: 400; color: var(--cream); margin-bottom: 12px; }
+.qs-cta-block p { font-size: 15px; color: var(--cream-dim); max-width: 400px; margin: 0 auto 26px; line-height: 1.65; }
+.qs-cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="by AMIR — home">
+      <img src="../assets/logo/byAMIR-dark-trim.png" alt="by AMIR" />
+    </a>
+    <nav class="nav-main">
+      <ul class="nav-links">
+        <li><a href="diensten.html">Services</a></li>
+        <li><a href="index.html#approach">Approach</a></li>
+        <li><a href="inzichten.html" aria-current="page">Insights</a></li>
+        <li><a href="over-amir.html">About Amir</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-toggle desktop">
+        <button data-lang="nl" onclick="window.location='../ai-quickscan.html'">NL</button><span class="sep">·</span><button data-lang="en" class="active">EN</button>
+      </div>
+      <a class="btn btn-gold" href="contact.html">Book a conversation</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="diensten.html">Services</a>
+  <a href="index.html#approach">Approach</a>
+  <a href="inzichten.html">Insights</a>
+  <a href="over-amir.html">About Amir</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="italic-gold">Book a conversation</a>
+  <div class="m-lang"><button data-lang="nl" onclick="window.location='../ai-quickscan.html'">NL</button><span>·</span><button data-lang="en" class="active">EN</button></div>
+</div>
+
+<div class="qs-progress"><div class="qs-progress-fill" id="progressFill"></div></div>
+
+<main class="qs-wrap">
+  <div class="qs-stage" id="qsStage"></div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p>© 2025 by AMIR — Amir Bercovitz</p>
+      <span class="tag">byamir.ai</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<script src="../assets/site.js"></script>
+<script>
+const DIMS = ['Strategy','Data','People','Processes','Culture'];
+
+const DIM_Q = [
+  [0,1], // Strategy
+  [2,3], // Data
+  [4,5], // People
+  [6,7], // Processes
+  [8,9]  // Culture
+];
+
+const QUESTIONS = [
+  { dim:'Strategy', dn:1,
+    q:'How did AI come onto your organisation\'s agenda?',
+    opts:['Because competitors are doing it and we don\'t want to fall behind','Because the board or shareholders are asking for it','Because we want to solve a specific internal problem','Because it aligns with an existing, concrete growth ambition'] },
+  { dim:'Strategy', dn:1,
+    q:'How clear is your AI strategy at this moment?',
+    opts:['We have no strategy — we\'re experimenting','We follow what the market does and adapt','We have guidelines, but no unified goal','AI is deliberately embedded in our multi-year strategy'] },
+  { dim:'Data', dn:2,
+    q:'How would you describe the state of your data?',
+    opts:['Fragmented, unmanaged and difficult to access','Available but not unlocked or structured','Structured but only occasionally utilised','Consciously managed and strategically deployed'] },
+  { dim:'Data', dn:2,
+    q:'Who has visibility on what data is available and what is possible with it?',
+    opts:['Nobody really has an overview','Only IT knows what\'s there','Management has a rough picture','There is clear ownership with an active policy'] },
+  { dim:'People', dn:3,
+    q:'How does your team experience AI in general?',
+    opts:['As a threat — they fear for their position','As something being imposed without a clear purpose','As an interesting development, but not a personal priority','As an enhancement of their work — they embrace it'] },
+  { dim:'People', dn:3,
+    q:'How are you preparing your people to work with AI?',
+    opts:['We are not actively doing that yet','There have been occasional, one-off training sessions','We are working on a plan but not implementing it structurally','There is a structured development programme with measurable progress'] },
+  { dim:'Processes', dn:4,
+    q:'How do you decide which processes to tackle with AI?',
+    opts:['Unclear — we don\'t know where to start','Based on what others in the market are doing','On processes we know well and want to improve','On processes with a clear problem and a predetermined result'] },
+  { dim:'Processes', dn:4,
+    q:'How do you measure the effect of AI on your business processes?',
+    opts:['We don\'t — we have no measurement method','We ask if people are satisfied, nothing more','We monitor usage, but don\'t yet measure impact','With predetermined KPIs and a regular evaluation cycle'] },
+  { dim:'Culture', dn:5,
+    q:'How does your leadership position itself towards AI?',
+    opts:['Passive or sceptical — no active involvement','Enthusiastic, but without direction or ownership','Supportive, but not actively participating','Actively engaged — leading by example and with mandate'] },
+  { dim:'Culture', dn:5,
+    q:'How would you describe the AI culture in your organisation today?',
+    opts:['Resistance or uncertainty dominates','Curiosity, but that rarely leads to action','A drive to experiment with occasional successes','Shared ownership, structural learning and continuous improvement'] }
+];
+
+const PROFILES = [
+  { min:10, max:17,
+    label:'Explorer',
+    sub:'Fear as the primary driver',
+    desc:'Your organisation is reacting to external AI pressure. That\'s understandable — but it increases the risk of rushed implementations and missed opportunities. The shift starts with one clear question: what do you actually want to achieve?',
+    insights:[
+      'AI is on the agenda, but the driver is external: competitive pressure, board demand or hype. This leads to tools without owners and projects without results.',
+      'There is little strategy behind the AI approach. Initiatives start and stall without sustainable output — costing time and trust.',
+      'The moment to make the shift is now. Organisations that choose deliberately consistently outperform early adopters who move without direction.'
+    ]
+  },
+  { min:18, max:25,
+    label:'In Transition',
+    sub:'Awareness is growing — direction not yet sharp',
+    desc:'Your organisation is in an interesting phase: the awareness is growing that AI needs a strategic approach, but the translation into concrete choices is not yet fully there.',
+    insights:[
+      'There is momentum — use it. The transition phase is the moment to sharpen strategy before the energy disperses into loose experiments.',
+      'Some dimensions are ahead of others. Focused attention on the weakest link accelerates the entire chain disproportionately.',
+      'The gap between intention and execution is currently the greatest risk. One concrete first step gives direction to everything that follows.'
+    ]
+  },
+  { min:26, max:33,
+    label:'On Track',
+    sub:'Purpose-driven AI adoption is gaining ground',
+    desc:'Your organisation has a solid foundation. There is awareness, there are initiatives and there is direction. The difference between good and excellent lies in consistency — across all dimensions simultaneously.',
+    insights:[
+      'Your strongest dimensions are a foundation. Share that approach internally: successful behaviour spreads when it is made visible.',
+      'The dimensions with lower scores are not weaknesses — they are breakthrough opportunities. Small improvements here deliver the most.',
+      'The next level requires integration: AI no longer as a project, but as the way your organisation routinely operates.'
+    ]
+  },
+  { min:34, max:40,
+    label:'Intentional Leader',
+    sub:'Purpose as the foundation for AI adoption',
+    desc:'Your organisation approaches AI from a position of strength: a clear strategy, engaged people and a culture that learns. That is rare — and it is a competitive advantage that grows as the market falls behind.',
+    insights:[
+      'You are not early — you are intentional. That distinction determines the difference between durable value and short-term efficiency gains.',
+      'The question is no longer whether AI works in your organisation, but how to unlock the next layer of impact.',
+      'Your approach is exemplary. Consider how you leverage this capital internally and externally — it strengthens your position as preferred partner and employer.'
+    ]
+  }
+];
+
+const SERVICES = [
+  { name:'AI Quickscan & Strategy', tag:'FIXED PRICE', desc:'Full AI readiness analysis, strategic prioritisation, quick wins and a concrete first step.', dim:'Strategy' },
+  { name:'AI Roadmap & Implementation', tag:'PROJECT', desc:'Data architecture, process automation, tool selection and phased custom implementation.', dim:'Data' },
+  { name:'AI Team Training & Adoption', tag:'PROJECT', desc:'Awareness, skill-building, change management and adoption tracking per department.', dim:'People' },
+  { name:'AI Process Optimisation', tag:'PROJECT', desc:'Process analysis, automation opportunities, pilot implementation and ROI measurement.', dim:'Processes' },
+  { name:'Interim AI Leadership', tag:'DAY RATE', desc:'Strategic AI leadership at board level: roadmap, board communication and commercial AI integration.', dim:'Culture' },
+];
+
+const DIM_ADVICE = [
+  { // Strategy
+    sterk: 'Your AI strategy is clearly embedded. The next step is integration with your broader commercial agenda and periodic adjustment based on results.',
+    mid:   'You have direction but not yet a sharp goal. Define one concrete AI use case that directly contributes to an existing growth ambition.',
+    zwak:  'Start with the basics: what concrete problem do you want to solve? AI strategy doesn\'t start with technology — it starts with the question behind the question.'
+  },
+  { // Data
+    sterk: 'Your data is a strategic asset. Make this ownership visible across the organisation — it builds trust in AI initiatives.',
+    mid:   'The data is there, but access is the bottleneck. A two-day data audit delivers more than months of experimenting without a solid foundation.',
+    zwak:  'Invest in data hygiene before deploying AI. Automating chaos produces chaos at scale.'
+  },
+  { // People
+    sterk: 'Your team embraces AI — that is exceptionally valuable. Make them ambassadors: internal adoption of good practice is the fastest growth lever you have.',
+    mid:   'There is buy-in, but it is still fragile. Invest in the \'why\': people who understand what AI means for their own work will move forward voluntarily.',
+    zwak:  'Resistance starts with uncertainty. Begin with one safe experiment per team — small visible result, shared success. Fear disappears through experience.'
+  },
+  { // Processes
+    sterk: 'You select AI applications based on evidence, not hype. That delivers sustainable ROI. Share your approach internally so other teams follow the same discipline.',
+    mid:   'You are working on the right processes, but the measurement method is still missing. Without KPIs, you only know months later whether it worked. Define success before you start.',
+    zwak:  'Choose one process you know well, that is measurable, and that directly affects the customer experience. That is your proof of concept — and your story for the rest of the organisation.'
+  },
+  { // Culture
+    sterk: 'Leadership is out front and has mandate. That is the decisive factor in successful AI adoption. Guard this actively — culture is also fragile.',
+    mid:   'There is goodwill at the top, but AI does not yet have an owner. Appoint an internal AI lead with budget, mandate and visibility at board level.',
+    zwak:  'Culture change starts with leadership that does it, not just says it. One director who uses AI daily is worth more than ten training sessions.'
+  }
+];
+
+let step = 0;
+let answers = new Array(10).fill(null);
+let contact = {};
+let aiAdvice = null;
+const stage = document.getElementById('qsStage');
+const pFill = document.getElementById('progressFill');
+
+function totalScore() { return answers.reduce((a,b) => a+(b||0), 0); }
+
+function dimScores() {
+  return DIM_Q.map(idxs => {
+    const sum = idxs.reduce((a,i) => a+(answers[i]||0), 0);
+    return Math.round(sum/8*100);
+  });
+}
+
+function getProfile() {
+  const t = totalScore();
+  return PROFILES.find(p => t>=p.min&&t<=p.max)||PROFILES[0];
+}
+
+function getPct() { return Math.round(((totalScore()-10)/30)*100); }
+
+function getDimAdvice(i, pct) {
+  const a = DIM_ADVICE[i];
+  return pct>=70 ? a.sterk : pct>=40 ? a.mid : a.zwak;
+}
+
+function updateProgress() {
+  if (step===0) { pFill.style.width='0%'; return; }
+  if (step>=12) { pFill.style.width='100%'; return; }
+  pFill.style.width = Math.round((step/12)*100)+'%';
+}
+
+function goTo(n) {
+  step=n; updateProgress(); stage.innerHTML='';
+  if (step===0) renderIntro();
+  else if (step>=1&&step<=10) renderQuestion(step-1);
+  else if (step===11) renderContact();
+  else renderResults();
+  window.scrollTo({top:0});
+}
+
+function renderIntro() {
+  stage.innerHTML = `<div class="qs-step qs-intro">
+    <div class="qs-kicker">AI Readiness Assessment</div>
+    <h1>Does your organisation approach AI<br><em class="italic-gold">from purpose or from fear?</em></h1>
+    <p class="sub">10 questions on strategy, data, people, processes and culture. No technical knowledge required — only honesty. You will receive a personalised report instantly.</p>
+    <div class="qs-meta">
+      <div class="qs-meta-item"><span class="dot"></span>10 questions</div>
+      <div class="qs-meta-item"><span class="dot"></span>± 3 minutes</div>
+      <div class="qs-meta-item"><span class="dot"></span>Instant results</div>
+      <div class="qs-meta-item"><span class="dot"></span>Free</div>
+    </div>
+    <button class="btn btn-gold" onclick="goTo(1)">Start the assessment <span class="arrow">→</span></button>
+    <p style="margin-top:20px;font-size:13px;color:var(--slate);">Accompanying whitepaper: <em>Love or Fear?</em> — <a href="whitepaper-ai.html" style="color:var(--gold-light);">read it here →</a></p>
+  </div>`;
+}
+
+function renderQuestion(idx) {
+  const q = QUESTIONS[idx];
+  const L = ['A','B','C','D'];
+  const opts = q.opts.map((o,i) => `
+    <button class="qs-opt${answers[idx]===i+1?' selected':''}" onclick="selectAnswer(${idx},${i+1})">
+      <span class="qs-opt-letter">${L[i]}</span>
+      <span class="qs-opt-text">${o}</span>
+    </button>`).join('');
+  stage.innerHTML = `<div class="qs-step">
+    <div class="qs-dim-label">Dimension ${q.dn} of 5 — ${q.dim}</div>
+    <div class="qs-qnum">Question ${idx+1} of 10</div>
+    <div class="qs-q">${q.q}</div>
+    <div class="qs-options">${opts}</div>
+    ${step>1?`<button class="qs-back" onclick="goTo(${step-1})">← Previous question</button>`:''}
+  </div>`;
+}
+
+function selectAnswer(idx, score) {
+  answers[idx] = score;
+  document.querySelectorAll('.qs-opt').forEach((el,i) => {
+    const sel = i+1===score;
+    el.classList.toggle('selected', sel);
+    const ltr = el.querySelector('.qs-opt-letter');
+    ltr.style.background = sel?'var(--gold)':'';
+    ltr.style.color = sel?'var(--midnight)':'';
+    ltr.style.borderColor = sel?'var(--gold)':'';
+  });
+  setTimeout(() => goTo(step+1), 380);
+}
+
+function renderContact() {
+  stage.innerHTML = `<div class="qs-step qs-contact">
+    <div class="qs-kicker">Almost there</div>
+    <h2>Where shall we send your report?</h2>
+    <p class="sub">Enter your details to receive your personalised report — including the free whitepaper <em>Love or Fear?</em></p>
+    <form id="cForm" onsubmit="submitContact(event)" novalidate>
+      <div class="qs-form-row">
+        <div class="qs-field"><label>First name *</label><input type="text" id="f_name" placeholder="John" required /></div>
+        <div class="qs-field"><label>Last name *</label><input type="text" id="f_last" placeholder="Smith" required /></div>
+      </div>
+      <div class="qs-field"><label>Business email *</label><input type="email" id="f_email" placeholder="john@company.com" required /></div>
+      <div class="qs-form-row">
+        <div class="qs-field"><label>Organisation *</label><input type="text" id="f_org" placeholder="Company name" required /></div>
+        <div class="qs-field"><label>Job title</label><input type="text" id="f_role" placeholder="e.g. CEO, Director" /></div>
+      </div>
+      <div class="qs-err" id="fErr">Please fill in all required fields.</div>
+      <div style="margin-top:28px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
+        <button type="submit" class="btn btn-gold">View my report + whitepaper <span class="arrow">→</span></button>
+        <button type="button" class="qs-back" onclick="goTo(10)">← Back</button>
+      </div>
+      <p style="margin-top:16px;font-size:12.5px;color:var(--slate);">Your details are used only to follow up. You can unsubscribe at any time.</p>
+    </form>
+  </div>`;
+}
+
+async function submitContact(e) {
+  e.preventDefault();
+  const name = document.getElementById('f_name').value.trim();
+  const last = document.getElementById('f_last').value.trim();
+  const email = document.getElementById('f_email').value.trim();
+  const org   = document.getElementById('f_org').value.trim();
+  const role  = document.getElementById('f_role').value.trim();
+  const err   = document.getElementById('fErr');
+  if (!name||!last||!email||!org) { err.classList.add('show'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent='Please enter a valid email address.'; err.classList.add('show'); return; }
+  err.classList.remove('show');
+  contact = {name, last, email, org, role};
+
+  aiAdvice = null;
+  goTo(12);
+
+  const _tot = totalScore();
+  const _ds3 = DIM_Q.map(idxs => idxs.reduce((a,i)=>a+(answers[i]||0),0));
+  const _pct3 = getPct();
+  const _prof3 = getProfile();
+  const _sum3 = DIMS.map((d,i)=>d+': '+Math.round(_ds3[i]/8*100)+'%').join(', ');
+
+  generateAdvice(name+' '+last, org, _pct3, _prof3.label, _sum3).then(adv => {
+    aiAdvice = adv;
+    const sp3 = document.getElementById('amir-loading');
+    const ad3 = document.getElementById('amir-advice');
+    if (sp3) sp3.style.display='none';
+    if (ad3) { ad3.style.display='block'; ad3.textContent=adv; }
+    fetch('https://formsubmit.co/ajax/amir@byamir.ai',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'AI Assessment (EN) — '+name+' '+last+' ('+org+') · '+_prof3.label+' · '+_pct3+'%',_template:'table',name:name+' '+last,email,organisation:org,job_title:role||'—',total_score:_pct3+'/100',level:_prof3.label,dimensions:_sum3,advice:adv.slice(0,600)})}).catch(()=>{});
+  });
+}
+
+function generateAdvice(name, company, score, level, dimSummary) {
+  const prompt = "You are an AI strategy advisor at by AMIR with 20+ years of commercial leadership experience. Write a warm, direct and inspiring personalised AI Readiness assessment in English for " + name + (company ? " at " + company : "") + ".\n\nScore: " + score + "/100 — Level: " + level + "\nDimensions: " + dimSummary + "\n\nUse the Master & Servant philosophy: AI as servant of human ambition. Write 3 concise paragraphs. Name the strongest and weakest dimension specifically. Give practical advice without filler. Close with an invitation for a conversation with Amir.";
+  if (window.claude && window.claude.complete) {
+    return window.claude.complete(prompt).catch(() => getProfile().desc);
+  }
+  return Promise.resolve(getProfile().desc);
+}
+
+function buildRadar(scores) {
+  const cx=120,cy=115,r=85,n=scores.length;
+  const angle=i=>(Math.PI*2*i/n)-Math.PI/2;
+  const pt=(i,pct)=>{const a=angle(i),d=r*(pct/100);return[cx+d*Math.cos(a),cy+d*Math.sin(a)];};
+  const grid=[25,50,75,100].map(p=>scores.map((_,i)=>pt(i,p)).map(([x,y],j)=>(j===0?'M'+x+','+y:'L'+x+','+y)).join(' ')+' Z');
+  const dataPath=scores.map((_,i)=>pt(i,scores[i]||0)).map(([x,y],j)=>(j===0?'M'+x+','+y:'L'+x+','+y)).join(' ')+' Z';
+  const gp=grid.map(d=>'<path d="'+d+'" fill="none" stroke="rgba(201,169,110,0.2)" stroke-width="0.8"/>').join('');
+  const ax=scores.map((_,i)=>{const[x,y]=pt(i,100);return '<line x1="'+cx+'" y1="'+cy+'" x2="'+x+'" y2="'+y+'" stroke="rgba(201,169,110,0.2)" stroke-width="0.8"/>';}).join('');
+  const sh='<path d="'+dataPath+'" fill="rgba(201,169,110,0.14)" stroke="#C9A96E" stroke-width="1.5"/>';
+  const lb=scores.map((_,i)=>{const[x,y]=pt(i,122);return '<text x="'+x+'" y="'+y+'" text-anchor="middle" dominant-baseline="middle" font-size="8.5" fill="#EDE8DC" font-family="Georgia,serif" opacity="0.75">'+DIMS[i]+'</text>';}).join('');
+  return '<svg viewBox="0 0 240 235" width="220" height="215">'+gp+ax+sh+lb+'</svg>';
+}
+
+function renderResults() {
+  const prof    = getProfile();
+  const ds      = DIM_Q.map(idxs=>idxs.reduce((a,i)=>a+(answers[i]||0),0));
+  const dimPct  = ds.map(s=>Math.round(s/8*100));
+  const pct     = getPct();
+  const fn      = contact.name || 'you';
+  const lvlIdx  = PROFILES.indexOf(prof);
+  const lvlColors = ['#c0533a','#b8892a','var(--gold)','#7eb87e'];
+  const lvlColor  = lvlColors[Math.max(0,lvlIdx)];
+
+  const recServices = SERVICES.filter(sv=>{
+    const i=DIMS.indexOf(sv.dim); return i>=0&&dimPct[i]<60;
+  });
+
+  const dimBarsHtml = DIMS.map((dim,i)=>
+    '<div style="margin-bottom:11px;">' +
+    '<div style="display:flex;justify-content:space-between;margin-bottom:5px;">' +
+    '<span style="font-size:13px;color:var(--cream);">'+dim+'</span>' +
+    '<span style="font-size:13px;color:'+(dimPct[i]<50?'#c0533a':'var(--gold)')+';">'+dimPct[i]+'%</span>' +
+    '</div>' +
+    '<div style="height:3px;background:rgba(138,152,171,0.15);border-radius:2px;">' +
+    '<div style="height:3px;background:'+(dimPct[i]<50?'#c0533a':'var(--gold)')+';border-radius:2px;width:0%;transition:width 1s var(--ease);" data-w="'+dimPct[i]+'%"></div>' +
+    '</div></div>'
+  ).join('');
+
+  const servicesHtml = recServices.length>0 ?
+    '<div style="border:1px solid rgba(201,169,110,0.35);padding:1.5rem;margin-bottom:1.5rem;background:rgba(201,169,110,0.05);">' +
+    '<p style="font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:0.15em;margin:0 0 1rem;font-weight:600;">Recommended based on your results</p>' +
+    '<div style="display:flex;flex-direction:column;gap:12px;">' +
+    recServices.map(sv=>
+      '<div style="border-left:2px solid var(--gold);padding-left:14px;">' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">' +
+      '<p style="font-size:14px;font-weight:500;color:var(--cream);margin:0;">'+sv.name+'</p>' +
+      '<span style="font-size:9px;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-left:12px;flex-shrink:0;">'+sv.tag+'</span>' +
+      '</div>' +
+      '<p style="font-size:12px;color:var(--slate);margin:0;line-height:1.6;">'+sv.desc+'</p>' +
+      '</div>'
+    ).join('')+'</div></div>' : '';
+
+  const insightsHtml = prof.insights.map(t=>
+    '<p style="font-size:14px;color:var(--cream-dim);line-height:1.75;margin:0 0 10px;display:flex;gap:10px;">' +
+    '<span style="color:var(--gold);flex-shrink:0;">&mdash;</span><span>'+t+'</span></p>'
+  ).join('');
+
+  stage.innerHTML =
+    '<div class="qs-step qs-results">' +
+    '<div class="qs-kicker">Your AI Readiness Report</div>' +
+    '<h2 style="font-family:var(--serif);font-size:clamp(22px,3.5vw,32px);font-weight:400;color:var(--cream);margin:0 0 2rem;">Good day, '+fn+'</h2>' +
+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.5rem;">' +
+    '<div style="border:1px solid var(--line-cool);padding:1.5rem;text-align:center;background:var(--surface);">' +
+    '<p style="font-size:10px;color:var(--slate);text-transform:uppercase;letter-spacing:0.12em;margin:0 0 0.75rem;font-weight:600;">Total score</p>' +
+    '<p style="font-family:var(--serif);font-size:52px;font-weight:300;color:'+lvlColor+';margin:0;line-height:1;">'+pct+'</p>' +
+    '<p style="font-size:10px;color:var(--slate-dim);margin:6px 0 0;letter-spacing:0.06em;">OUT OF 100</p></div>' +
+    '<div style="border:1px solid var(--line-cool);padding:1.5rem;text-align:center;background:var(--surface);display:flex;flex-direction:column;justify-content:center;">' +
+    '<p style="font-size:10px;color:var(--slate);text-transform:uppercase;letter-spacing:0.12em;margin:0 0 0.75rem;font-weight:600;">Level</p>' +
+    '<p style="font-family:var(--serif);font-size:26px;font-weight:400;color:'+lvlColor+';margin:0 0 12px;">'+prof.label+'</p>' +
+    '<div style="display:flex;justify-content:center;gap:7px;">' +
+    PROFILES.map((_,i)=>'<div style="width:9px;height:9px;border-radius:50%;background:'+(i<=lvlIdx?'var(--gold)':'rgba(201,169,110,0.18)')+'"></div>').join('') +
+    '</div></div></div>' +
+
+    '<div style="border:1px solid var(--line-cool);padding:1.5rem;margin-bottom:1.5rem;background:var(--surface);">' +
+    '<p style="font-size:10px;color:var(--slate);text-transform:uppercase;letter-spacing:0.12em;margin:0 0 1.25rem;font-weight:600;">Score per dimension</p>' +
+    '<div style="display:flex;justify-content:center;margin-bottom:1.25rem;">'+buildRadar(dimPct)+'</div>' +
+    dimBarsHtml+'</div>' +
+
+    '<div style="border:1px solid var(--line-cool);padding:1.5rem;margin-bottom:1.5rem;background:var(--surface);">' +
+    '<div style="display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;">' +
+    '<div style="width:38px;height:38px;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;">' +
+    '<span style="color:var(--gold);font-size:13px;font-family:var(--serif);">A</span></div>' +
+    '<div><p style="margin:0;font-size:14px;color:var(--cream);">Amir Bercovitz</p>' +
+    '<p style="margin:0;font-size:10px;color:var(--slate);letter-spacing:0.08em;">AI STRATEGY ADVISOR · BY AMIR</p></div></div>' +
+    '<div id="amir-loading" style="display:flex;align-items:center;gap:10px;color:var(--slate);font-size:14px;">' +
+    '<span style="display:inline-block;width:15px;height:15px;border:1.5px solid var(--gold);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;"></span>' +
+    'Your personalised assessment is being prepared...</div>' +
+    '<div id="amir-advice" style="display:none;font-size:14px;color:var(--cream-dim);line-height:1.85;margin:0;white-space:pre-line;"></div>' +
+    '<div style="padding-top:16px;border-top:1px solid var(--line-cool);margin-top:16px;">'+insightsHtml+'</div></div>' +
+
+    servicesHtml +
+
+    '<div style="text-align:center;margin-bottom:16px;">' +
+    '<button onclick="window.print()" class="btn btn-outline" style="font-size:13px;padding:10px 24px;">Save as PDF ↓</button>' +
+    '</div>' +
+
+    '<div class="qs-wp-block"><div class="qs-wp-block-text">' +
+    '<div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-weight:600;">Whitepaper with this report</div>' +
+    '<div style="font-family:var(--serif);font-size:26px;color:var(--cream);line-height:1.2;margin-bottom:8px;">Love or Fear?</div>' +
+    '<p style="font-size:14px;color:var(--slate);line-height:1.6;margin:0;">The two drivers behind AI adoption — in depth with your report.</p></div>' +
+    '<div style="flex-shrink:0;">' +
+    '<a href="whitepaper-ai.html" class="btn btn-gold" target="_blank">Read the whitepaper →</a>' +
+    '</div></div>' +
+
+    '<div class="qs-cta-block">' +
+    '<h3>What does this mean concretely for your organisation?</h3>' +
+    '<p>Book a no-obligation 30-minute conversation with Amir. An honest assessment of where your organisation stands and what the smartest first step is.</p>' +
+    '<div class="qs-cta-actions">' +
+    '<button class="btn btn-gold" onclick="openCal()">Book a conversation <span class="arrow">→</span></button>' +
+    '<a class="btn btn-outline" href="contact.html">Send a message</a>' +
+    '</div></div>' +
+
+    '<div style="margin-top:28px;text-align:center;">' +
+    '<button class="qs-back" onclick="goTo(0)">↺ Start over</button>' +
+    '</div></div>';
+
+  setTimeout(()=>{
+    document.querySelectorAll('[data-w]').forEach(b=>{ b.style.width=b.dataset.w; });
+  }, 120);
+}
+
+function openCal() {
+  if (window.Calendly) Calendly.initPopupWidget({url:'https://calendly.com/byamir'});
+  else window.open('https://calendly.com/byamir','_blank');
+}
+
+goTo(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Onder Potentieel — Whitepaper by AMIR</title>
+<meta name="description" content="Waarom uw salesorganisatie minder presteert dan ze kan — en hoe u dat verandert. Een whitepaper door Amir Bercovitz." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/site.css" />
+<style>
+@media print {
+  .site-header, .mobile-menu, .wp-toolbar, .site-footer { display: none !important; }
+  body { background: #1C2340; }
+  .wp-reader { padding-top: 0 !important; }
+}
+.wp-reader { padding-top: calc(92px + 48px); padding-bottom: 80px; }
+.wp-toolbar { position: sticky; top: 92px; z-index: 50; background: rgba(15,27,45,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201,169,110,0.15); padding: 14px 0; }
+.wp-toolbar .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.wp-toolbar .wp-title { font-size: 13px; color: var(--slate); letter-spacing: 0.04em; }
+.wp-toolbar .wp-title em { color: var(--gold-light); font-style: italic; font-family: var(--serif); }
+.wp-reader-inner { max-width: 680px; margin: 0 auto; padding: 0 28px; }
+
+.wp * { box-sizing: border-box; }
+.wp { font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #EDE8DC; width: 100%; }
+.wp .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+.wp .page { max-width: 640px; margin: 0 auto; padding: 48px 0; border-bottom: 1px solid rgba(201,169,110,0.15); }
+.wp .page:last-child { border-bottom: none; }
+.wp .label { font-size: 10px; letter-spacing: 0.18em; color: #C9A96E; text-transform: uppercase; margin-bottom: 20px; }
+.wp .gold { color: #C9A96E; }
+.wp .muted { color: rgba(237,232,220,0.55); }
+.wp .rule { border: none; border-top: 1px solid rgba(201,169,110,0.25); margin: 28px 0; }
+.wp .pull-quote { border-left: 2px solid #C9A96E; padding: 16px 24px; margin: 32px 0; background: rgba(201,169,110,0.06); }
+.wp .body-text { font-size: 15px; line-height: 1.85; color: rgba(237,232,220,0.85); }
+.wp .chapter-num { font-family: 'Cormorant Garamond', serif; font-size: 64px; font-weight: 300; color: rgba(201,169,110,0.2); line-height: 1; margin-bottom: -8px; }
+.wp .chapter-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; color: #EDE8DC; line-height: 1.3; margin-bottom: 24px; }
+.wp .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
+@media (max-width: 560px) { .wp .two-col { grid-template-columns: 1fr; } }
+.wp .col-card { border: 1px solid rgba(201,169,110,0.2); padding: 20px; }
+.wp .col-card .col-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px; }
+.wp .col-card .col-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; margin-bottom: 12px; }
+.wp .col-card ul { list-style: none; padding: 0; }
+.wp .col-card ul li { font-size: 13px; color: rgba(237,232,220,0.7); line-height: 1.7; padding: 5px 0; border-bottom: 1px solid rgba(201,169,110,0.1); }
+.wp .col-card ul li:last-child { border-bottom: none; }
+.wp .dim-row { padding: 16px 0; border-bottom: 1px solid rgba(201,169,110,0.12); }
+.wp .dim-row:last-child { border-bottom: none; }
+.wp .dim-name { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #C9A96E; margin-bottom: 8px; }
+.wp .dim-body { font-size: 14px; color: rgba(237,232,220,0.8); line-height: 1.75; }
+.wp .scenario-box { background: rgba(255,255,255,0.03); border-left: 2px solid rgba(201,169,110,0.4); padding: 20px 24px; margin: 28px 0; }
+.wp .scenario-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(201,169,110,0.7); margin-bottom: 10px; }
+.wp .ai-box { background: rgba(201,169,110,0.04); border: 1px solid rgba(201,169,110,0.18); padding: 24px; margin: 32px 0; }
+.wp .ai-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #C9A96E; margin-bottom: 12px; }
+.wp .cta-block { background: rgba(201,169,110,0.08); border: 1px solid rgba(201,169,110,0.3); padding: 32px; text-align: center; margin-top: 32px; }
+.wp .cta-btn { display: inline-block; background: #C9A96E; color: #1C2340; font-family: 'Hanken Grotesk', sans-serif; font-size: 14px; font-weight: 500; padding: 14px 32px; text-decoration: none; cursor: pointer; border: none; margin-top: 20px; letter-spacing: 0.03em; }
+.wp .cta-btn:hover { background: #D9BE8A; }
+</style>
+</head>
+<body>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="by AMIR — home">
+      <img src="assets/logo/byAMIR-dark-trim.png" alt="by AMIR" />
+    </a>
+    <nav class="nav-main">
+      <ul class="nav-links">
+        <li><a href="diensten.html">Diensten</a></li>
+        <li><a href="index.html#werkwijze">Werkwijze</a></li>
+        <li><a href="inzichten.html" aria-current="page">Inzichten</a></li>
+        <li><a href="over-amir.html">Over Amir</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-toggle desktop">
+        <button data-lang="nl" class="active">NL</button><span class="sep">·</span><button data-lang="en" onclick="window.location='en/whitepaper-sales.html'">EN</button>
+      </div>
+      <a class="btn btn-gold" href="contact.html">Plan een gesprek</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="diensten.html">Diensten</a>
+  <a href="index.html#werkwijze">Werkwijze</a>
+  <a href="inzichten.html">Inzichten</a>
+  <a href="over-amir.html">Over Amir</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="italic-gold">Plan een gesprek</a>
+  <div class="m-lang"><button data-lang="nl" class="active">NL</button><span>·</span><button data-lang="en" onclick="window.location='en/whitepaper-sales.html'">EN</button></div>
+</div>
+
+<div class="wp-toolbar">
+  <div class="container">
+    <span class="wp-title">Whitepaper — <em>Onder Potentieel</em></span>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button onclick="window.print()" class="btn btn-outline" style="font-size:13px;padding:10px 20px;">Opslaan als PDF ↓</button>
+      <a href="sales-quickscan.html" class="btn btn-gold" style="font-size:13px;padding:10px 20px;">Doe de quickscan →</a>
+    </div>
+  </div>
+</div>
+
+<main class="wp-reader">
+  <div class="wp-reader-inner">
+    <div class="wp">
+
+      <div class="page" style="text-align:center;padding-top:64px;padding-bottom:64px;">
+        <div class="label" style="margin-bottom:40px;">by AMIR · Commercieel Leiderschap</div>
+        <div class="serif" style="font-size:11px;letter-spacing:0.2em;color:#C9A96E;text-transform:uppercase;margin-bottom:16px;">Whitepaper</div>
+        <h1 class="serif" style="font-size:52px;font-weight:300;line-height:1.15;color:#EDE8DC;margin-bottom:8px;">Onder Potentieel</h1>
+        <p class="serif" style="font-size:20px;font-weight:300;font-style:italic;color:rgba(237,232,220,0.6);margin-bottom:48px;">Waarom uw salesorganisatie minder presteert dan ze kan — en hoe u dat verandert</p>
+        <hr class="rule" style="max-width:80px;margin:0 auto 40px;" />
+        <p style="font-size:12px;color:rgba(237,232,220,0.4);letter-spacing:0.08em;">Amir Bercovitz &nbsp;·&nbsp; byamir.ai</p>
+      </div>
+
+      <div class="page">
+        <div class="label">Voorwoord</div>
+        <h2 class="serif chapter-title" style="font-size:24px;">Drie miljoen. Elk jaar. Op tafel.</h2>
+        <p class="body-text" style="margin-bottom:20px;">Bij een organisatie van tien miljoen euro omzet die op zeventig procent van haar salesvermogen presteert, laat de directie structureel drie miljoen per jaar liggen. Dat staat niet in de jaarrekening. Het staat niet in het managementrapport. Maar het is er — in elke deal die niet gewonnen werd, elk account dat niet groeide, elk gesprek dat niet plaatsvond.</p>
+        <p class="body-text" style="margin-bottom:28px;">Ik heb die kloof twintig jaar van dichtbij gezien. Als VP Global Sales bij een internationale organisatie. Als interim-directeur die salesteams overnam die structureel onderpresteerden. Als adviseur die de vraag kreeg die elke directeur stelt maar zelden hardop uitspreekt: waarom presteren ze niet zoals ze kunnen?</p>
+        <div class="scenario-box">
+          <div class="scenario-label">Uit de praktijk</div>
+          <p class="body-text" style="font-size:14px;">In een organisatie die ik overnam als interim-directeur werkte een salesteam van twaalf mensen. Allen gemotiveerd. Allen met sectorervaring. De omzet stagneerde al twee jaar. Binnen zes weken zag ik waarom: er was geen gedeeld beeld van de ideale klant, geen gestructureerde salesaanpak, en de salesmanager coachte niet — die escaleerde. De kloof zat niet in de mensen. Die zat in de structuur die niemand had gebouwd. Acht maanden later had het team zijn beste kwartaal ooit. Niet met andere mensen. Met andere richting.</p>
+        </div>
+        <div class="pull-quote">
+          <p class="serif" style="font-size:18px;font-style:italic;line-height:1.7;color:#EDE8DC;">De commerciële kloof — de afstand tussen wat uw salesorganisatie kán presteren en wat ze feitelijk doet — is zelden zichtbaar aan het oppervlak. Hij zit in de kwaliteit van gesprekken, de discipline van het proces, en de scherpte van de strategie.</p>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="chapter-num">01</div>
+        <h2 class="chapter-title">De kloof die niemand bespreekt</h2>
+        <p class="body-text" style="margin-bottom:28px;">Directies meten omzet. Ze meten targets en klanttevredenheid. Wat ze zelden meten: waarom deals verloren gaan, wat er werkelijk in een klantgesprek gebeurt, en welk percentage van het teampotentieel feitelijk wordt benut.</p>
+        <div class="two-col">
+          <div class="col-card">
+            <div class="col-label muted">Wat de directie ziet</div>
+            <div class="col-title gold">Het boardverhaal</div>
+            <ul>
+              <li>Groeiambities voor komend jaar</li>
+              <li>Nieuwe markten en segmenten</li>
+              <li>Investering in salescapaciteit</li>
+              <li>Stijgende pipeline-waarde</li>
+              <li>Teamuitbreiding gepland</li>
+            </ul>
+          </div>
+          <div class="col-card" style="border-color:rgba(201,169,110,0.45);">
+            <div class="col-label" style="color:#C9A96E;">Wat de werkvloer ervaart</div>
+            <div class="col-title" style="color:#EDE8DC;">De dagelijkse realiteit</div>
+            <ul>
+              <li>Onduidelijk welke klanten prioriteit hebben</li>
+              <li>Pitches die niet consistent landen</li>
+              <li>CRM dat niemand serieus bijhoudt</li>
+              <li>Coaching die niet plaatsvindt</li>
+              <li>Targets zonder context of tooling</li>
+            </ul>
+          </div>
+        </div>
+        <p class="body-text" style="margin-bottom:20px;">Die kloof is niet de schuld van het salesteam. Het is een leiderschapsvraagstuk. De verantwoordelijkheid om strategie te vertalen naar concrete verwachtingen, gedragsstandaarden en meetbare KPI's ligt bij de top.</p>
+        <div class="pull-quote">
+          <p class="serif" style="font-size:18px;font-style:italic;line-height:1.7;color:#EDE8DC;">De kloof sluit niet vanzelf. Hij groeit. Elk kwartaal dat er geen richting wordt gegeven, wordt de afstand tussen strategie en executie groter.</p>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="chapter-num">02</div>
+        <h2 class="chapter-title">Vijf dimensies van commerciële kracht</h2>
+        <p class="body-text" style="margin-bottom:28px;">Saleseffectiviteit is geen enkelvoudig begrip. Het is de optelsom van vijf dimensies die elk hun eigen dynamiek hebben — op strategisch én operationeel niveau.</p>
+        <div class="dim-row">
+          <div class="dim-name">Funnel &amp; ROI</div>
+          <div class="dim-body">De meeste organisaties weten hun omzet. Weinigen weten precies waar en waarom die omzet verloren gaat. Zonder funnelzicht stuurt u op gevoel. Strategisch gaat het om prioritering van markten. Operationeel gaat het om de kwaliteit van elke fase in het verkoopproces.</div>
+        </div>
+        <div class="dim-row">
+          <div class="dim-name">Strategie &amp; ICP</div>
+          <div class="dim-body">Een salesteam zonder gedeeld beeld van de ideale klant verkoopt aan iedereen — en wint daardoor minder. De ICP-definitie is een strategische keuze met directe operationele consequenties: welke leads kwalificeert u, welke deals jaagt u actief na. Scherpte hier vertienvoudigt de winratio.</div>
+        </div>
+        <div class="dim-row">
+          <div class="dim-name">Team &amp; Coaching</div>
+          <div class="dim-body">De prestatie van een salesteam is zelden normaal verdeeld. Er zijn performers, middenmoters en underperformers. De vraag is of u dat weet, of u het onderscheid actief beheert, en of u de middenmoot systematisch naar het niveau van uw performers trekt.</div>
+        </div>
+        <div class="dim-row">
+          <div class="dim-name">Enablement</div>
+          <div class="dim-body">Een salesteam zonder playbook improviseert. Elke dag opnieuw. Een strak sales playbook, gecombineerd met CRM-discipline, maakt de kwaliteit van het commerciële gesprek reproduceerbaar.</div>
+        </div>
+        <div class="dim-row">
+          <div class="dim-name">Leiderschap</div>
+          <div class="dim-body">Commercieel leiderschap is de multiplier op alles wat eronder zit. Een sterke salesmanager compenseert een zwak proces. Een zwakke salesmanager ondermijnt het sterkste team.</div>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="chapter-num">03</div>
+        <h2 class="chapter-title">Wat toporganisaties anders doen</h2>
+        <p class="body-text" style="margin-bottom:20px;">In twintig jaar heb ik commerciële organisaties gezien in alle stadia. Wat de toporganisaties onderscheidt is geen magie. Het zijn keuzes, consequent volgehouden.</p>
+        <p class="body-text" style="margin-bottom:12px;font-weight:500;color:#EDE8DC;">Ze kennen hun funnel dieper dan hun omzet.</p>
+        <p class="body-text" style="margin-bottom:20px;">Ze weten de conversie per fase, per salesperson, per segment. Ze weten welke dealtypen ze structureel winnen — en waarom. Die kennis bepaalt hun prioriteiten, niet intuïtie.</p>
+        <p class="body-text" style="margin-bottom:12px;font-weight:500;color:#EDE8DC;">Ze investeren in de middenmoot, niet alleen in de top.</p>
+        <p class="body-text" style="margin-bottom:20px;">De meeste organisaties focussen coaching op underperformers of laten hun toppers vrij. De organisaties die groeien investeren systematisch in de middengroep. Dat is waar het grootste rendement zit.</p>
+        <p class="body-text" style="margin-bottom:12px;font-weight:500;color:#EDE8DC;">Ze sturen op gedrag, niet op resultaat.</p>
+        <p class="body-text" style="margin-bottom:20px;">Omzet is een uitkomst. Gedrag is de oorzaak. Ze meten het aantal kwalitatieve klantgesprekken, de pipelinekwaliteit per fase, het gebruik van het CRM. Ze sturen bij vóórdat de resultaten afwijken — niet erna.</p>
+        <p class="body-text" style="margin-bottom:12px;font-weight:500;color:#EDE8DC;">Ze selecteren deals, ze jagen ze niet achterna.</p>
+        <p class="body-text">Ze hanteren een helder kwalificatiecriterium en passen dat consistent toe — ook als dat betekent dat een deal gepasseerd wordt. Die selectiviteit verhoogt de winratio en verlaagt de cost of sales.</p>
+        <hr class="rule" />
+        <p class="body-text" style="font-size:14px;color:rgba(237,232,220,0.6);font-style:italic;line-height:1.8;">Vier vragen voor elke commercieel leider:<br />
+        1. Weet ik precies waar mijn organisatie omzet verliest — per fase, per persoon, per segment?<br />
+        2. Heeft elk teamlid een helder beeld van wat er van hen verwacht wordt?<br />
+        3. Vertaalt mijn leiderschap de groeistrategie dagelijks naar concreet gedrag in het veld?<br />
+        4. Wanneer heb ik voor het laatst een klantgesprek van mijn eigen team geobserveerd?</p>
+      </div>
+
+      <div class="page">
+        <div class="chapter-num">04</div>
+        <h2 class="chapter-title">Wat AI verandert — en wat het niet verandert</h2>
+        <div class="ai-box">
+          <div class="ai-label">AI in saleseffectiviteit</div>
+          <p class="body-text" style="margin-bottom:16px;">AI versnelt wat al werkt. Het vergroot wat al niet werkt. Een salesorganisatie zonder helder ICP, zonder pipeline-discipline en zonder coachingsstructuur krijgt met AI meer van hetzelfde: sneller, met minder excuses voor uitval.</p>
+          <p class="body-text" style="margin-bottom:16px;">De organisaties die AI succesvol inzetten in hun salesproces hebben één ding gemeen: ze hadden al structuur. Een scherp klantprofiel wordt met AI scherper — omdat u sneller analyseert welke accounts werkelijk uw beste klanten zijn. Een goed CRM wordt krachtiger — omdat AI patronen signaleert die u zelf mist. Een sterke coach wordt effectiever — omdat hij zijn team op betere data aanspreekt.</p>
+          <p class="body-text">De vraag is niet óf u AI inzet in uw salesproces. De vraag is of uw salesproces klaar is voor AI — of dat u er de bestaande kloof alleen zichtbaarder mee maakt.</p>
+        </div>
+      </div>
+
+      <div class="page" style="padding-bottom:64px;">
+        <div class="chapter-num">05</div>
+        <h2 class="chapter-title">De keuze om de kloof te sluiten</h2>
+        <p class="body-text" style="margin-bottom:20px;">Saleseffectiviteit is geen project. Het is een permanente staat van aandacht — voor strategie, voor mensen, voor het commerciële gesprek dat elke dag in uw naam gevoerd wordt.</p>
+        <p class="body-text" style="margin-bottom:28px;">De kloof is sluitbaar. Systematisch, meetbaar, duurzaam. Maar het vereist leiderschap dat de investering maakt — niet in mensen, maar in richting.</p>
+        <div class="pull-quote">
+          <p class="serif" style="font-size:19px;font-weight:400;font-style:italic;line-height:1.7;color:#EDE8DC;">"Groei, geleid door mensen. De commerciële machine bouwt u met de mensen die u heeft — als u ze de richting, de structuur en het leiderschap geeft dat ze verdienen."</p>
+          <p style="font-size:11px;color:#C9A96E;letter-spacing:0.1em;text-transform:uppercase;margin-top:12px;">— Amir Bercovitz</p>
+        </div>
+        <div class="cta-block">
+          <p style="font-size:10px;letter-spacing:0.18em;color:#C9A96E;text-transform:uppercase;margin-bottom:16px;">Volgende stap</p>
+          <p class="serif" style="font-size:22px;font-weight:400;color:#EDE8DC;line-height:1.4;margin-bottom:12px;">Hoeveel laat uw salesorganisatie structureel liggen?</p>
+          <p style="font-size:14px;color:rgba(237,232,220,0.6);line-height:1.7;max-width:420px;margin:0 auto 4px;">Doe de gratis Sales Effectiveness Quickscan — 10 vragen, 3 minuten, direct uw persoonlijk rapport.</p>
+          <a class="cta-btn" href="sales-quickscan.html">Doe de Sales Effectiveness Quickscan →</a>
+          <p style="margin-top:20px;font-size:13px;color:rgba(237,232,220,0.4);">Of plan direct een gesprek — <a href="contact.html" style="color:#C9A96E;">byamir.ai/contact</a></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p>© 2025 by AMIR — Amir Bercovitz</p>
+      <span class="tag">byamir.ai</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+<script>
+if (new URLSearchParams(window.location.search).get('print') === '1') {
+  window.addEventListener('load', function() { setTimeout(function(){ window.print(); }, 700); });
+}
+</script>
+</body>
+</html>

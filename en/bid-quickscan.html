@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bid Win Rate Quickscan — by AMIR</title>
+<meta name="description" content="Why are you losing tenders you should have won? 10 questions on capture planning, win strategy and team collaboration. Personalised report instantly." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/site.css" />
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+<style>
+.qs-wrap{min-height:calc(100vh - 92px);padding-top:92px;display:flex;align-items:center;justify-content:center;padding-bottom:80px;}
+.qs-stage{width:100%;max-width:700px;margin:0 auto;padding:0 28px;}
+.qs-progress{position:fixed;top:92px;left:0;right:0;height:3px;background:rgba(201,169,110,0.15);z-index:99;}
+.qs-progress-fill{height:100%;background:var(--gold);transition:width 0.5s var(--ease);}
+.qs-step{animation:fadeUp 0.4s var(--ease) forwards;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
+@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.qs-kicker{font-size:11.5px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:26px;display:flex;align-items:center;gap:14px;}
+.qs-kicker::before{content:'';width:32px;height:1px;background:var(--gold);flex-shrink:0;}
+.qs-intro h1{font-family:var(--serif);font-size:clamp(34px,5vw,52px);font-weight:400;line-height:1.12;color:var(--cream);margin-bottom:22px;}
+.qs-intro .sub{font-size:17px;color:var(--cream-dim);line-height:1.65;max-width:520px;margin-bottom:38px;}
+.qs-meta{display:flex;gap:28px;margin-bottom:42px;flex-wrap:wrap;}
+.qs-meta-item{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--slate);}
+.qs-meta-item .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+.qs-dim-label{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:8px;}
+.qs-qnum{font-size:13px;color:var(--slate);margin-bottom:20px;}
+.qs-q{font-family:var(--serif);font-size:clamp(22px,3.2vw,34px);font-weight:400;color:var(--cream);line-height:1.28;margin-bottom:34px;}
+.qs-options{display:flex;flex-direction:column;gap:10px;}
+.qs-opt{display:flex;align-items:flex-start;gap:15px;padding:18px 22px;border:1px solid var(--line-cool);background:var(--surface);cursor:pointer;transition:border-color .25s var(--ease),background .25s var(--ease),transform .25s var(--ease);text-align:left;width:100%;font-family:var(--sans);}
+.qs-opt:hover{border-color:rgba(201,169,110,0.5);background:var(--surface-2);transform:translateX(4px);}
+.qs-opt.selected{border-color:var(--gold);background:rgba(201,169,110,0.1);}
+.qs-opt-letter{width:26px;height:26px;border:1px solid var(--line-cool);display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;color:var(--slate);flex-shrink:0;transition:all .25s;}
+.qs-opt.selected .qs-opt-letter{border-color:var(--gold);background:var(--gold);color:var(--midnight);}
+.qs-opt-text{font-size:15.5px;color:var(--cream-dim);line-height:1.5;padding-top:2px;}
+.qs-back{margin-top:28px;font-size:13px;color:var(--slate);cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:color .3s;background:none;border:none;font-family:var(--sans);padding:0;}
+.qs-back:hover{color:var(--cream);}
+.qs-contact h2{font-family:var(--serif);font-size:clamp(28px,4vw,44px);font-weight:400;color:var(--cream);margin-bottom:12px;}
+.qs-contact .sub{font-size:16px;color:var(--cream-dim);margin-bottom:34px;max-width:460px;line-height:1.6;}
+.qs-form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:540px){.qs-form-row{grid-template-columns:1fr;}}
+.qs-field{margin-bottom:16px;}
+.qs-field label{display:block;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:9px;font-weight:600;}
+.qs-field input{width:100%;background:var(--surface);border:1px solid var(--line-cool);color:var(--cream);font-family:var(--sans);font-size:16px;padding:13px 17px;transition:border-color .3s;border-radius:2px;}
+.qs-field input::placeholder{color:var(--slate-dim);}
+.qs-field input:focus{outline:none;border-color:var(--gold);}
+.qs-err{font-size:13px;color:oklch(0.65 0.18 25);margin-top:10px;display:none;}
+.qs-err.show{display:block;}
+.qs-wp-block{background:var(--surface);border:1px solid rgba(201,169,110,0.45);padding:36px 40px;display:flex;gap:28px;align-items:center;flex-wrap:wrap;}
+.qs-wp-block-text{flex:1;min-width:220px;}
+.qs-cta-block{background:var(--surface);border:1px solid var(--line);padding:40px;text-align:center;margin-top:20px;}
+.qs-cta-block h3{font-family:var(--serif);font-size:28px;font-weight:400;color:var(--cream);margin-bottom:12px;}
+.qs-cta-block p{font-size:15px;color:var(--cream-dim);max-width:400px;margin:0 auto 26px;line-height:1.65;}
+.qs-cta-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+</style>
+</head>
+<body>
+<header class="site-header" id="header">
+  <div class="container">
+    <a class="brand" href="index.html"><img src="../assets/logo/byAMIR-dark-trim.png" alt="by AMIR" /></a>
+    <nav class="nav-main"><ul class="nav-links">
+      <li><a href="diensten.html">Services</a></li>
+      <li><a href="index.html#approach">Approach</a></li>
+      <li><a href="inzichten.html" aria-current="page">Insights</a></li>
+      <li><a href="over-amir.html">About Amir</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul></nav>
+    <div class="nav-right">
+      <div class="lang-toggle desktop">
+        <button data-lang="nl" onclick="window.location='../bid-quickscan.html'">NL</button><span class="sep">·</span><button data-lang="en" class="active">EN</button>
+      </div>
+      <a class="btn btn-gold" href="contact.html">Book a conversation</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="diensten.html">Services</a><a href="index.html#approach">Approach</a><a href="inzichten.html">Insights</a><a href="over-amir.html">About Amir</a><a href="contact.html">Contact</a>
+  <a href="contact.html" class="italic-gold">Book a conversation</a>
+  <div class="m-lang"><button data-lang="nl" onclick="window.location='../bid-quickscan.html'">NL</button><span>·</span><button data-lang="en" class="active">EN</button></div>
+</div>
+<div class="qs-progress"><div class="qs-progress-fill" id="progressFill"></div></div>
+<main class="qs-wrap"><div class="qs-stage" id="qsStage"></div></main>
+<footer class="site-footer"><div class="container"><div class="footer-bottom"><p>© 2025 by AMIR — Amir Bercovitz</p><span class="tag">byamir.ai</span></div></div></footer>
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<script src="../assets/site.js"></script>
+<script>
+const DIMS=['Capture & Positioning','Win Strategy','Team & Leadership','Content & Delivery','Evaluation & Learning'];
+const DIM_Q=[[0,2],[1,4,6],[3,9],[5],[7,8]];
+
+const QUESTIONS=[
+  {dim:'Capture & Positioning',dn:1,q:'How well does your organisation know the client before the tender is formally issued?',
+    opts:['We read the tender for the first time when it arrives','We have some prior knowledge but no structured approach','We invest in client knowledge but not consistently for every tender','We actively position ourselves with the client long before the tender — and influence the playing field']},
+  {dim:'Win Strategy',dn:2,q:'Does your team have an explicit win strategy per tender — not just a plan of approach, but a strategy to win?',
+    opts:['Our approach is primarily procedural — we answer the questions','We think about what the client wants but don\'t translate that into a win strategy','We formulate a strategy but it doesn\'t steer the proposal sufficiently','Every tender has an explicit win strategy that drives the entire document']},
+  {dim:'Capture & Positioning',dn:1,q:'Do you know your competitive position before submitting?',
+    opts:['No, we rarely know who else is bidding','We have a sense but no systematic insight','We analyse the competition but don\'t act on it sufficiently','We have a clear picture of our competitive position and actively play to it']},
+  {dim:'Team & Leadership',dn:3,q:'How well do sales and bid support collaborate in the bid process?',
+    opts:['Sales hands over the tender to bid support and largely disengages','There\'s contact but no structured collaboration','There is collaboration but the division of roles isn\'t clear','Sales and bid support work as one team — shared responsibility, clear roles']},
+  {dim:'Win Strategy',dn:2,q:'Does your proposal have clear, distinctive win themes that run consistently throughout the entire document?',
+    opts:['We describe what we do but don\'t formulate distinctive themes','We have an introduction with themes but they disappear in the rest','Win themes are present but not consistently carried through','Client-specific win themes that thread the entire proposal from cover to appendix']},
+  {dim:'Content & Delivery',dn:4,q:'How structured is your content planning and production within bids?',
+    opts:['We write the proposal in the final phase — structurally under time pressure','There\'s a structure but planning and coordination are weak','We plan content but don\'t always meet internal deadlines','Tight content plan with section ownership, structured reviews and timely delivery']},
+  {dim:'Win Strategy',dn:2,q:'To what extent does your proposal speak the client\'s language and address their specific challenges?',
+    opts:['Our proposal is largely generic — limited client-specific adaptation','We adapt the proposal but it remains product- and service-focused','We address client needs but the client doesn\'t sufficiently recognise their own situation','The client reads their own challenges back in our proposal — at every level']},
+  {dim:'Evaluation & Learning',dn:5,q:'How well prepared is your organisation for the negotiation phase after submission?',
+    opts:['We respond to what the client asks — without a clear strategy','We have positions but no elaborated negotiation approach','We do negotiate strategically but not consistently or in a structured way','We enter the negotiation with a clear strategy, fallback positions and mandate structure']},
+  {dim:'Evaluation & Learning',dn:5,q:'Does your organisation structurally evaluate both won and lost tenders?',
+    opts:['We move directly to the next tender — barely any reflection','We evaluate informally but draw no systematic conclusions','We do evaluate but the insights don\'t consistently reach the team','Every tender is evaluated — we learn from loss and win, structurally']},
+  {dim:'Team & Leadership',dn:3,q:'Is there sufficient commercial and substantive leadership in your organisation to win complex tenders?',
+    opts:['Nobody really takes ownership of the bid process as a whole','There\'s a bid manager but strategic leadership is missing','There\'s leadership but mandate and seniority are insufficient','Strong bid leadership with strategic mandate, deep client insight and team management']}
+];
+
+const PROFILES=[
+  {min:10,max:17,label:'Vulnerable',sub:'Structural foundations are missing in the bid process',
+    desc:'Your bid process lacks structural foundations. The likelihood of winning tenders you should have won is low — structurally. The first step is insight: knowing where the process fails, which opportunities are going untapped and what the highest-impact intervention is.',
+    insights:['Without capture work, you start every tender at a disadvantage. The competitor who already knows the client has an advantage you cannot compensate for in the proposal.','A procedurally correct submission rarely wins. Winning starts with the question: why would they specifically choose us?','The learning process is the fastest route to improvement. One structured debrief after every tender delivers more than a year of writing training.']},
+  {min:18,max:25,label:'Developing',sub:'Foundations present — strategy and coherence still lacking',
+    desc:'You have a basis but lack the sharpness that distinguishes winning tenders. Strategy, collaboration and learning are not yet running in sync. The organisation has the potential — it is now about connecting the pieces into a winning bid machine.',
+    insights:['There are strong elements in your bid process, but they don\'t reinforce each other enough yet. Targeted attention on the weakest dimension has disproportionate effect on your win rate.','The quality of your best tenders is not yet reproducible. Formalise what your strongest bids do well — and make that the standard for every submission.','Win themes are the most powerful instrument in tendering. One day to formulate them before writing begins transforms the quality of the entire proposal.']},
+  {min:26,max:33,label:'Competitive',sub:'Well positioned — the win is in the details',
+    desc:'Your bid organisation functions reasonably well but is consistently leaving points on the table. Targeted interventions on the weakest dimensions can significantly improve your win rate — per tender and annually.',
+    insights:['Your strongest dimensions are a demonstrable advantage. Make sure clients experience that — in every interaction before and during the tender process.','The dimensions with lower scores are precisely where your competitors make the difference. A targeted investment here has the greatest relative effect on your total win rate.','AI accelerates what already works in your bid process. Your capture approach and win strategy are the foundation — they need to be in place before automation adds value.']},
+  {min:34,max:40,label:'Winner',sub:'Winning bid organisation — consistency is the key',
+    desc:'You are in the commercial vanguard of bid organisations. The challenge is consistency and scalability: making the quality of your best tenders reproducible for every submission.',
+    insights:['Your bid process operates at a high level. The question now is how to make this level consistently reproducible during growth, turbulence and team turnover.','Your bid library is your strategic capital. Make sure the best content, win themes and client insights are structurally documented — knowledge that stays in people\'s heads disappears when they leave.','AI offers your organisation the greatest gains in the capture and client analysis phase. You already have the structure — now you can accelerate and deepen it.']}
+];
+
+const SERVICES=[
+  {name:'Bid Win Rate Assessment',tag:'FIXED PRICE',desc:'Full diagnosis of your bid process: capture approach, win strategy, team dynamics and learning programme.',dim:'Capture & Positioning'},
+  {name:'Win Strategy Development',tag:'PROJECT',desc:'Client analysis, competitive positioning, win themes and strategic proposition per tender or tender category.',dim:'Win Strategy'},
+  {name:'Bid Team Coaching & Collaboration',tag:'PROJECT',desc:'Role definition, sales-bid integration, bid leadership and team guidance throughout the process.',dim:'Team & Leadership'},
+  {name:'Bid Writing & Content Coaching',tag:'PROJECT',desc:'Content planning, writing coaching, review structure and proposition improvement for higher-scoring proposals.',dim:'Content & Delivery'},
+  {name:'Post-Bid Review Programme',tag:'PROJECT',desc:'Structured evaluation of won and lost tenders, learning cycles and implementation of improvements.',dim:'Evaluation & Learning'},
+];
+
+const DIM_ADVICE=[
+  {sterk:'Your organisation invests seriously in client knowledge before the tender appears. That is the biggest differentiating advantage in tendering. Formalise this process so capture intelligence is structurally recorded and shared with the bid team.',
+    mid:'You have prior knowledge but no systematic approach. Make capture a fixed part of your account plan — two contact moments per quarter with strategic clients delivers more than having the best writer at the deadline.',
+    zwak:'Without client knowledge before the tender, you are already at a disadvantage. Start with one strategic client: plan three contact moments in the coming six months. That is your capture pilot.'},
+  {sterk:'Your tenders are driven by an explicit win strategy. That distinguishes you from most competitors. Maintain that discipline — and make sure win themes are tested before they land in the proposal.',
+    mid:'You think about what the client wants but don\'t translate this enough into a coherent document. Write three win themes on one page before every tender. That is your strategic compass and your benchmark for every section that follows.',
+    zwak:'A procedural proposal rarely wins. Reserve one day before writing to determine your win strategy. Three questions: What does the client truly need? What makes us the best choice? How do we prove it?'},
+  {sterk:'Sales and bid support work as one team with clear roles and shared responsibility. That is rare and directly visible in the quality of your proposals. Invest in joint debrief sessions to deepen this collaboration.',
+    mid:'There is contact but no structure. Define roles before every tender: who is the account manager, who is the bid lead, who writes, who reviews. A two-hour kick-off per tender prevents most friction.',
+    zwak:'The handover from sales to bid support is the most common cause of lost client intelligence. Make a two-hour kick-off mandatory where sales transfers client context. That conversation is the foundation of every winning proposal.'},
+  {sterk:'Your content planning is tight and your delivery is timely. That is the basis for quality review — something most competitors simply do not have. Use the time gained for an extra strategic review of the executive summary.',
+    mid:'Planning is in place but execution falls behind. Implement backward planning: work from the deadline backwards and reserve the last three days exclusively for review and alignment. Writing stops then.',
+    zwak:'Writing under extreme time pressure is the greatest enemy of quality. Always start with a content plan — who writes what, when is it ready, who reviews. The plan does not have to be perfect. Its existence alone is an improvement.'},
+  {sterk:'You evaluate structurally and draw lessons from every tender. That is the engine behind continuous improvement of your win rate. Make sure lessons reach the bid library — knowledge that lives only in people\'s heads disappears when they leave.',
+    mid:'You evaluate but the lessons do not consistently reach the team. Formalise the retro format: four questions, one page, within two weeks of the outcome. Short, disciplined, consistent.',
+    zwak:'Every tender that is not evaluated is a missed opportunity. Introduce one standard after every outcome: debrief with the client (always) + internal retro (always). Twenty minutes that structurally raise your win rate.'}
+];
+
+let step=0,answers=new Array(10).fill(null),contact={},aiAdvice=null;
+const stage=document.getElementById('qsStage'),pFill=document.getElementById('progressFill');
+function totalScore(){return answers.reduce((a,b)=>a+(b||0),0);}
+function dimScores(){return DIM_Q.map(idxs=>{const s=idxs.reduce((a,i)=>a+(answers[i]||0),0);return Math.round(s/(idxs.length*4)*100);});}
+function getProfile(){const t=totalScore();return PROFILES.find(p=>t>=p.min&&t<=p.max)||PROFILES[0];}
+function getPct(){return Math.round(((totalScore()-10)/30)*100);}
+function updateProgress(){pFill.style.width=step===0?'0%':step>=12?'100%':Math.round((step/12)*100)+'%';}
+function goTo(n){step=n;updateProgress();stage.innerHTML='';
+  if(step===0)renderIntro();else if(step>=1&&step<=10)renderQuestion(step-1);else if(step===11)renderContact();else renderResults();
+  window.scrollTo({top:0});}
+
+function renderIntro(){stage.innerHTML=`<div class="qs-step qs-intro">
+  <div class="qs-kicker">Bid Win Rate Quickscan</div>
+  <h1>Why are you losing tenders<br><em class="italic-gold">you should have won?</em></h1>
+  <p class="sub">10 questions on capture planning, win strategy, team collaboration and your learning process. Personalised report with concrete recommendations — instantly.</p>
+  <div class="qs-meta">
+    <div class="qs-meta-item"><span class="dot"></span>10 questions</div>
+    <div class="qs-meta-item"><span class="dot"></span>± 3 minutes</div>
+    <div class="qs-meta-item"><span class="dot"></span>Instant results</div>
+    <div class="qs-meta-item"><span class="dot"></span>Free</div>
+  </div>
+  <button class="btn btn-gold" onclick="goTo(1)">Start the quickscan <span class="arrow">→</span></button>
+  <p style="margin-top:20px;font-size:13px;color:var(--slate);">Accompanying whitepaper: <em>Winning Starts Before the Tender</em> — <a href="whitepaper-bid.html" style="color:var(--gold-light);">read it here →</a></p>
+</div>`;}
+
+function renderQuestion(idx){const q=QUESTIONS[idx];const L=['A','B','C','D'];
+  const opts=q.opts.map((o,i)=>`<button class="qs-opt${answers[idx]===i+1?' selected':''}" onclick="selectAnswer(${idx},${i+1})"><span class="qs-opt-letter">${L[i]}</span><span class="qs-opt-text">${o}</span></button>`).join('');
+  stage.innerHTML=`<div class="qs-step"><div class="qs-dim-label">Dimension ${q.dn} of 5 — ${q.dim}</div><div class="qs-qnum">Question ${idx+1} of 10</div><div class="qs-q">${q.q}</div><div class="qs-options">${opts}</div>${step>1?`<button class="qs-back" onclick="goTo(${step-1})">← Previous question</button>`:''}</div>`;}
+
+function selectAnswer(idx,score){answers[idx]=score;
+  document.querySelectorAll('.qs-opt').forEach((el,i)=>{const sel=i+1===score;el.classList.toggle('selected',sel);const ltr=el.querySelector('.qs-opt-letter');ltr.style.background=sel?'var(--gold)':'';ltr.style.color=sel?'var(--midnight)':'';ltr.style.borderColor=sel?'var(--gold)':'';});
+  setTimeout(()=>goTo(step+1),380);}
+
+function renderContact(){stage.innerHTML=`<div class="qs-step qs-contact">
+  <div class="qs-kicker">Almost there</div>
+  <h2>Where shall we send your report?</h2>
+  <p class="sub">Enter your details to receive your personalised report — including the free whitepaper <em>Winning Starts Before the Tender</em>.</p>
+  <form id="cForm" onsubmit="submitContact(event)" novalidate>
+    <div class="qs-form-row">
+      <div class="qs-field"><label>First name *</label><input type="text" id="f_name" placeholder="John" required /></div>
+      <div class="qs-field"><label>Last name *</label><input type="text" id="f_last" placeholder="Smith" required /></div>
+    </div>
+    <div class="qs-field"><label>Business email *</label><input type="email" id="f_email" placeholder="john@company.com" required /></div>
+    <div class="qs-form-row">
+      <div class="qs-field"><label>Organisation *</label><input type="text" id="f_org" placeholder="Company name" required /></div>
+      <div class="qs-field"><label>Job title</label><input type="text" id="f_role" placeholder="e.g. CEO, Director" /></div>
+    </div>
+    <div class="qs-err" id="fErr">Please fill in all required fields.</div>
+    <div style="margin-top:28px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
+      <button type="submit" class="btn btn-gold">View my report + whitepaper <span class="arrow">→</span></button>
+      <button type="button" class="qs-back" onclick="goTo(10)">← Back</button>
+    </div>
+    <p style="margin-top:16px;font-size:12.5px;color:var(--slate);">Your details are used only to follow up. You can unsubscribe at any time.</p>
+  </form>
+</div>`;}
+
+async function submitContact(e){e.preventDefault();
+  const name=document.getElementById('f_name').value.trim(),last=document.getElementById('f_last').value.trim(),email=document.getElementById('f_email').value.trim(),org=document.getElementById('f_org').value.trim(),role=document.getElementById('f_role').value.trim(),err=document.getElementById('fErr');
+  if(!name||!last||!email||!org){err.classList.add('show');return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){err.textContent='Please enter a valid email address.';err.classList.add('show');return;}
+  err.classList.remove('show');contact={name,last,email,org,role};
+  aiAdvice=null;goTo(12);
+  const _ds=dimScores(),_pct=getPct(),_prof=getProfile();
+  const _sum=DIMS.map((d,i)=>d+': '+_ds[i]+'%').join(', ');
+  generateAdvice(name+' '+last,org,_pct,_prof.label,_sum).then(adv=>{
+    aiAdvice=adv;
+    const sp=document.getElementById('amir-loading'),ad=document.getElementById('amir-advice');
+    if(sp)sp.style.display='none';if(ad){ad.style.display='block';ad.textContent=adv;}
+    fetch('https://formsubmit.co/ajax/amir@byamir.ai',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Bid Quickscan (EN) — '+name+' '+last+' ('+org+') · '+_prof.label+' · '+_pct+'%',_template:'table',name:name+' '+last,email,organisation:org,job_title:role||'—',total_score:_pct+'/100',level:_prof.label,dimensions:_sum,advice:adv.slice(0,600)})}).catch(()=>{});
+  });}
+
+function generateAdvice(name,company,score,level,dimSummary){
+  const prompt="You are a bid strategy advisor at by AMIR with 20+ years of tendering experience. Write a sharp, personalised bid strategy advice in English for "+name+(company?" at "+company:"")+".\\n\\nScore: "+score+"/100 — Level: "+level+"\\nDimensions: "+dimSummary+"\\n\\nWrite 3 concise paragraphs. Name the strongest and weakest dimension specifically. Give strategic advice on winning tenders. Close with an invitation for a conversation with Amir.";
+  if(window.claude&&window.claude.complete)return window.claude.complete(prompt).catch(()=>getProfile().desc);
+  return Promise.resolve(getProfile().desc);}
+
+function buildRadar(scores){
+  const cx=120,cy=115,r=85,n=scores.length,angle=i=>(Math.PI*2*i/n)-Math.PI/2,pt=(i,pct)=>{const a=angle(i),d=r*(pct/100);return[cx+d*Math.cos(a),cy+d*Math.sin(a)];};
+  const grid=[25,50,75,100].map(p=>scores.map((_,i)=>pt(i,p)).map(([x,y],j)=>(j===0?'M'+x+','+y:'L'+x+','+y)).join(' ')+' Z');
+  const dp=scores.map((_,i)=>pt(i,scores[i]||0)).map(([x,y],j)=>(j===0?'M'+x+','+y:'L'+x+','+y)).join(' ')+' Z';
+  return '<svg viewBox="0 0 240 235" width="220" height="215">'+grid.map(d=>'<path d="'+d+'" fill="none" stroke="rgba(201,169,110,0.2)" stroke-width="0.8"/>').join('')+scores.map((_,i)=>{const[x,y]=pt(i,100);return'<line x1="'+cx+'" y1="'+cy+'" x2="'+x+'" y2="'+y+'" stroke="rgba(201,169,110,0.2)" stroke-width="0.8"/>';}).join('')+'<path d="'+dp+'" fill="rgba(201,169,110,0.14)" stroke="#C9A96E" stroke-width="1.5"/>'+scores.map((_,i)=>{const[x,y]=pt(i,122);return'<text x="'+x+'" y="'+y+'" text-anchor="middle" dominant-baseline="middle" font-size="8.5" fill="#EDE8DC" font-family="Georgia,serif" opacity="0.75">'+DIMS[i]+'</text>';}).join('')+'</svg>';}
+
+function renderResults(){
+  const prof=getProfile(),ds=dimScores(),pct=getPct(),fn=contact.name||'you';
+  const lvlIdx=PROFILES.indexOf(prof),lvlColors=['#c0533a','#b8892a','var(--gold)','#7eb87e'],lvlColor=lvlColors[Math.max(0,lvlIdx)];
+  const recServices=SERVICES.filter(sv=>{const i=DIMS.indexOf(sv.dim);return i>=0&&ds[i]<60;});
+  const dimBarsHtml=DIMS.map((dim,i)=>'<div style="margin-bottom:11px;"><div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span style="font-size:13px;color:var(--cream);">'+dim+'</span><span style="font-size:13px;color:'+(ds[i]<50?'#c0533a':'var(--gold)')+';">'+ds[i]+'%</span></div><div style="height:3px;background:rgba(138,152,171,0.15);border-radius:2px;"><div style="height:3px;background:'+(ds[i]<50?'#c0533a':'var(--gold)')+';border-radius:2px;width:0%;transition:width 1s var(--ease);" data-w="'+ds[i]+'%"></div></div></div>').join('');
+  const svcHtml=recServices.length>0?'<div style="border:1px solid rgba(201,169,110,0.35);padding:1.5rem;margin-bottom:1.5rem;background:rgba(201,169,110,0.05);"><p style="font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:0.15em;margin:0 0 1rem;font-weight:600;">Recommended based on your results</p><div style="display:flex;flex-direction:column;gap:12px;">'+recServices.map(sv=>'<div style="border-left:2px solid var(--gold);padding-left:14px;"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;"><p style="font-size:14px;font-weight:500;color:var(--cream);margin:0;">'+sv.name+'</p><span style="font-size:9px;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-left:12px;flex-shrink:0;">'+sv.tag+'</span></div><p style="font-size:12px;color:var(--slate);margin:0;line-height:1.6;">'+sv.desc+'</p></div>').join('')+'</div></div>':'';
+  const insHtml=prof.insights.map(t=>'<p style="font-size:14px;color:var(--cream-dim);line-height:1.75;margin:0 0 10px;display:flex;gap:10px;"><span style="color:var(--gold);flex-shrink:0;">&mdash;</span><span>'+t+'</span></p>').join('');
+  stage.innerHTML='<div class="qs-step qs-results"><div class="qs-kicker">Your Bid Win Rate Report</div><h2 style="font-family:var(--serif);font-size:clamp(22px,3.5vw,32px);font-weight:400;color:var(--cream);margin:0 0 2rem;">Good day, '+fn+'</h2><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.5rem;"><div style="border:1px solid var(--line-cool);padding:1.5rem;text-align:center;background:var(--surface);"><p style="font-size:10px;color:var(--slate);text-transform:uppercase;letter-spacing:0.12em;margin:0 0 0.75rem;font-weight:600;">Total score</p><p style="font-family:var(--serif);font-size:52px;font-weight:300;color:'+lvlColor+';margin:0;line-height:1;">'+pct+'</p><p style="font-size:10px;color:var(--slate-dim);margin:6px 0 0;letter-spacing:0.06em;">OUT OF 100</p></div><div style="border:1px solid var(--line-cool);padding:1.5rem;text-align:center;background:var(--surface);display:flex;flex-direction:column;justify-content:center;"><p style="font-size:10px;color:var(--slate);text-transform:uppercase;letter-spacing:0.12em;margin:0 0 0.75rem;font-weight:600;">Level</p><p style="font-family:var(--serif);font-size:26px;font-weight:400;color:'+lvlColor+';margin:0 0 12px;">'+prof.label+'</p><div style="display:flex;justify-content:center;gap:7px;">'+PROFILES.map((_,i)=>'<div style="width:9px;height:9px;border-radius:50%;background:'+(i<=lvlIdx?'var(--gold)':'rgba(201,169,110,0.18)')+'"></div>').join('')+'</div></div></div><div style="border:1px solid var(--line-cool);padding:1.5rem;margin-bottom:1.5rem;background:var(--surface);"><p style="font-size:10px;color:var(--slate);text-transform:uppercase;letter-spacing:0.12em;margin:0 0 1.25rem;font-weight:600;">Score per dimension</p><div style="display:flex;justify-content:center;margin-bottom:1.25rem;">'+buildRadar(ds)+'</div>'+dimBarsHtml+'</div><div style="border:1px solid var(--line-cool);padding:1.5rem;margin-bottom:1.5rem;background:var(--surface);"><div style="display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;"><div style="width:38px;height:38px;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="color:var(--gold);font-size:13px;font-family:var(--serif);">A</span></div><div><p style="margin:0;font-size:14px;color:var(--cream);">Amir Bercovitz</p><p style="margin:0;font-size:10px;color:var(--slate);letter-spacing:0.08em;">BID STRATEGY ADVISOR · BY AMIR</p></div></div><div id="amir-loading" style="display:flex;align-items:center;gap:10px;color:var(--slate);font-size:14px;"><span style="display:inline-block;width:15px;height:15px;border:1.5px solid var(--gold);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;"></span>Your personalised assessment is being prepared...</div><div id="amir-advice" style="display:none;font-size:14px;color:var(--cream-dim);line-height:1.85;margin:0;white-space:pre-line;"></div><div style="padding-top:16px;border-top:1px solid var(--line-cool);margin-top:16px;">'+insHtml+'</div></div>'+svcHtml+'<div style="text-align:center;margin-bottom:16px;"><button onclick="window.print()" class="btn btn-outline" style="font-size:13px;padding:10px 24px;">Save as PDF \u2193</button></div><div class="qs-wp-block"><div class="qs-wp-block-text"><div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-weight:600;">Whitepaper with this report</div><div style="font-family:var(--serif);font-size:26px;color:var(--cream);line-height:1.2;margin-bottom:8px;">Winning Starts Before the Tender</div><p style="font-size:14px;color:var(--slate);line-height:1.6;margin:0;">The strategic foundations of a higher bid win rate.</p></div><div style="flex-shrink:0;"><a href="whitepaper-bid.html" class="btn btn-gold" target="_blank">Read the whitepaper \u2192</a></div></div><div class="qs-cta-block"><h3>What does every lost tender you should have won actually cost you?</h3><p>Book a no-obligation 30-minute conversation with Amir. An honest assessment based on your situation and your scan results.</p><div class="qs-cta-actions"><button class="btn btn-gold" onclick="openCal()">Book a conversation <span class="arrow">\u2192</span></button><a class="btn btn-outline" href="contact.html">Send a message</a></div></div><div style="margin-top:28px;text-align:center;"><button class="qs-back" onclick="goTo(0)">\u21ba Start over</button></div></div>';
+  setTimeout(()=>{document.querySelectorAll('[data-w]').forEach(b=>{b.style.width=b.dataset.w;});},120);}
+
+function openCal(){if(window.Calendly)Calendly.initPopupWidget({url:'https://calendly.com/byamir'});else window.open('https://calendly.com/byamir','_blank');}
+goTo(0);
+</script>
+</body>
+</html>

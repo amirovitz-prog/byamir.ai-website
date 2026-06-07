@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sales Effectiveness Quickscan — by AMIR</title>
+<meta name="description" content="How effective is your sales organisation — really? 10 questions on funnel, strategy, team, enablement and leadership. Receive a personalised report instantly." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/site.css" />
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+<style>
+.qs-wrap { min-height: calc(100vh - 92px); padding-top: 92px; display: flex; align-items: center; justify-content: center; padding-bottom: 80px; }
+.qs-stage { width: 100%; max-width: 700px; margin: 0 auto; padding: 0 28px; }
+.qs-progress { position: fixed; top: 92px; left: 0; right: 0; height: 3px; background: rgba(201,169,110,0.15); z-index: 99; }
+.qs-progress-fill { height: 100%; background: var(--gold); transition: width 0.5s var(--ease); }
+.qs-step { animation: fadeUp 0.4s var(--ease) forwards; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.qs-kicker { font-size: 11.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 26px; display: flex; align-items: center; gap: 14px; }
+.qs-kicker::before { content: ''; width: 32px; height: 1px; background: var(--gold); flex-shrink: 0; }
+.qs-intro h1 { font-family: var(--serif); font-size: clamp(34px, 5vw, 56px); font-weight: 400; line-height: 1.12; color: var(--cream); margin-bottom: 22px; }
+.qs-intro .sub { font-size: 17px; color: var(--cream-dim); line-height: 1.65; max-width: 520px; margin-bottom: 38px; }
+.qs-meta { display: flex; gap: 28px; margin-bottom: 42px; flex-wrap: wrap; }
+.qs-meta-item { display: flex; align-items: center; gap: 9px; font-size: 13.5px; color: var(--slate); }
+.qs-meta-item .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+.qs-dim-label { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 8px; }
+.qs-qnum { font-size: 13px; color: var(--slate); margin-bottom: 20px; }
+.qs-q { font-family: var(--serif); font-size: clamp(22px, 3.2vw, 34px); font-weight: 400; color: var(--cream); line-height: 1.28; margin-bottom: 34px; }
+.qs-options { display: flex; flex-direction: column; gap: 10px; }
+.qs-opt { display: flex; align-items: flex-start; gap: 15px; padding: 18px 22px; border: 1px solid var(--line-cool); background: var(--surface); cursor: pointer; transition: border-color .25s var(--ease), background .25s var(--ease), transform .25s var(--ease); text-align: left; width: 100%; font-family: var(--sans); }
+.qs-opt:hover { border-color: rgba(201,169,110,0.5); background: var(--surface-2); transform: translateX(4px); }
+.qs-opt.selected { border-color: var(--gold); background: rgba(201,169,110,0.1); }
+.qs-opt-letter { width: 26px; height: 26px; border: 1px solid var(--line-cool); display: flex; align-items: center; justify-content: center; font-size: 11.5px; font-weight: 600; color: var(--slate); flex-shrink: 0; transition: all .25s; }
+.qs-opt.selected .qs-opt-letter { border-color: var(--gold); background: var(--gold); color: var(--midnight); }
+.qs-opt-text { font-size: 15.5px; color: var(--cream-dim); line-height: 1.5; padding-top: 2px; }
+.qs-back { margin-top: 28px; font-size: 13px; color: var(--slate); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: color .3s; background: none; border: none; font-family: var(--sans); padding: 0; }
+.qs-back:hover { color: var(--cream); }
+.qs-contact h2 { font-family: var(--serif); font-size: clamp(28px, 4vw, 44px); font-weight: 400; color: var(--cream); margin-bottom: 12px; }
+.qs-contact .sub { font-size: 16px; color: var(--cream-dim); margin-bottom: 34px; max-width: 460px; line-height: 1.6; }
+.qs-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 540px) { .qs-form-row { grid-template-columns: 1fr; } }
+.qs-field { margin-bottom: 16px; }
+.qs-field label { display: block; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 9px; font-weight: 600; }
+.qs-field input { width: 100%; background: var(--surface); border: 1px solid var(--line-cool); color: var(--cream); font-family: var(--sans); font-size: 16px; padding: 13px 17px; transition: border-color .3s; border-radius: 2px; }
+.qs-field input::placeholder { color: var(--slate-dim); }
+.qs-field input:focus { outline: none; border-color: var(--gold); }
+.qs-err { font-size: 13px; color: oklch(0.65 0.18 25); margin-top: 10px; display: none; }
+.qs-err.show { display: block; }
+.qs-wp-block { background: var(--surface); border: 1px solid rgba(201,169,110,0.45); padding: 36px 40px; display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+.qs-wp-block-text { flex: 1; min-width: 220px; }
+.qs-cta-block { background: var(--surface); border: 1px solid var(--line); padding: 40px; text-align: center; margin-top: 20px; }
+.qs-cta-block h3 { font-family: var(--serif); font-size: 28px; font-weight: 400; color: var(--cream); margin-bottom: 12px; }
+.qs-cta-block p { font-size: 15px; color: var(--cream-dim); max-width: 400px; margin: 0 auto 26px; line-height: 1.65; }
+.qs-cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="by AMIR — home">
+      <img src="../assets/logo/byAMIR-dark-trim.png" alt="by AMIR" />
+    </a>
+    <nav class="nav-main">
+      <ul class="nav-links">
+        <li><a href="diensten.html">Services</a></li>
+        <li><a href="index.html#approach">Approach</a></li>
+        <li><a href="inzichten.html" aria-current="page">Insights</a></li>
+        <li><a href="over-amir.html">About Amir</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-toggle desktop">
+        <button data-lang="nl" onclick="window.location='../sales-quickscan.html'">NL</button><span class="sep">·</span><button data-lang="en" class="active">EN</button>
+      </div>
+      <a class="btn btn-gold" href="contact.html">Book a conversation</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="diensten.html">Services</a>
+  <a href="index.html#approach">Approach</a>
+  <a href="inzichten.html">Insights</a>
+  <a href="over-amir.html">About Amir</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="italic-gold">Book a conversation</a>
+  <div class="m-lang"><button data-lang="nl" onclick="window.location='../sales-quickscan.html'">NL</button><span>·</span><button data-lang="en" class="active">EN</button></div>
+</div>
+
+<div class="qs-progress"><div class="qs-progress-fill" id="progressFill"></div></div>
+<main class="qs-wrap"><div class="qs-stage" id="qsStage"></div></main>
+<footer class="site-footer"><div class="container"><div class="footer-bottom"><p>© 2025 by AMIR — Amir Bercovitz</p><span class="tag">byamir.ai</span></div></div></footer>
+
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<script src="../assets/site.js"></script>
+<script>
+const DIMS = ['Funnel & ROI','Strategy','Team & Coaching','Enablement','Leadership'];
+const DIM_Q = [[0,2,5],[1,8],[3,4],[6,7],[9]];
+
+const QUESTIONS = [
+  { dim:'Funnel & ROI', dn:1, q:'Do you know where your organisation is losing revenue in the sales funnel?',
+    opts:['No, we have no funnel visibility','We suspect where it\'s going wrong but don\'t measure structurally','We have a rough picture but no figures per stage','Yes, we measure every stage and actively steer based on data'] },
+  { dim:'Strategy', dn:2, q:'Does your sales team have a shared, clear picture of your ideal client and go-to-market approach?',
+    opts:['No, everyone has their own idea of the ideal client','There\'s a general direction but no shared definition','We have an ICP but don\'t apply it consistently','Clear ICP and GTM strategy, embraced by the whole team'] },
+  { dim:'Funnel & ROI', dn:1, q:'How actively do you manage your client portfolio for growth potential and risk?',
+    opts:['Reactively — only when something comes up','We review periodically but without structure','We do segment but don\'t actively steer on it','Active portfolio management with segmentation and growth focus'] },
+  { dim:'Team & Coaching', dn:3, q:'Do you have a clear picture of the individual effectiveness of each salesperson?',
+    opts:['No, we only measure on final results','We have a picture but no systematic baseline assessment','We monitor performance but don\'t coach per individual','Baseline per team member and targeted coaching per person'] },
+  { dim:'Team & Coaching', dn:3, q:'Does each member of your sales team have a personalised coaching plan?',
+    opts:['No, coaching happens ad hoc or not at all','We coach but without structure per individual','There are development conversations but no concrete plans','Every team member has a coaching plan with 30/60/90-day measurement'] },
+  { dim:'Funnel & ROI', dn:1, q:'How reliable and high-quality is your sales pipeline?',
+    opts:['Filled but barely quality-filtered','Quality varies strongly per salesperson','Reasonably reliable but with regular surprises','High pipeline quality — we win what we forecast'] },
+  { dim:'Enablement', dn:4, q:'Does your sales team have a clear playbook covering pitch, proposition and objection handling?',
+    opts:['No, everyone pitches in their own way','There are loose documents but no coherent playbook','We have a playbook but it\'s not consistently used','A tight playbook the team applies consistently'] },
+  { dim:'Enablement', dn:4, q:'How consistently does your sales team use the CRM as a management tool?',
+    opts:['CRM is barely maintained','Basic data is entered but not used as a steering tool','Usage is reasonable but not uniform across the team','CRM is the core of our sales process — complete and up to date'] },
+  { dim:'Strategy', dn:2, q:'Do you steer your sales organisation on clear, shared KPIs?',
+    opts:['No, we measure mainly on revenue after the fact','We have KPIs but they\'re not actively used','KPIs exist but aren\'t applied consistently across the team','Shared KPI framework with active weekly steering'] },
+  { dim:'Leadership', dn:5, q:'Is there sufficient commercial leadership to take the organisation to the next level?',
+    opts:['Leadership is reactive and operationally oriented','There\'s leadership but it lacks commercial sharpness','Good leadership but insufficient strategic board-level presence','Strong commercial leadership with both strategic and operational mandate'] }
+];
+
+const PROFILES = [
+  { min:10, max:17, label:'Critical', sub:'Significant opportunities remain structurally untapped',
+    desc:'Your sales organisation has significant opportunities that are currently going untapped. The first step is insight: knowing where revenue is being lost, who on the team is making a difference, and which processes are missing. That insight is the foundation for any improvement.',
+    insights:['There is potential in your team — but without structure, direction and coaching it remains untapped. The gap lies not in the people but in the frameworks nobody has built.','Start with two questions: where are most deals being lost, and why? The answer determines where the first investment goes. Everything after that becomes clearer.','Organisations that deliberately build their commercial structure consistently perform better after six months — not with different people, but with better direction.'] },
+  { min:18, max:25, label:'Developing', sub:'The foundations are there — coherence is missing',
+    desc:'You have the foundations but lack cohesion. Strategy, team and process are not yet aligned. The organisation has potential — it is now about connecting the loose parts into a coherent commercial machine.',
+    insights:['There are strong elements in your sales organisation, but they don\'t yet reinforce each other enough. Targeted interventions on the weakest dimension have disproportionate impact.','The mid-performers on your sales team are the greatest growth lever. Invest coaching in the people achieving 60–80% of their potential — the return is greatest there.','A shared definition of the ideal client is the most underutilised instrument in most sales organisations. One workshop delivers more than a year of new tools.'] },
+  { min:26, max:33, label:'Growing', sub:'On the right track — targeted improvement pays off structurally',
+    desc:'Your sales organisation functions well but is consistently leaving points on the table. Targeted interventions on the weakest dimensions can have a significant impact on conversion and pipeline quality.',
+    insights:['Your strongest dimensions are a foundation. Make that approach visible to the whole team — successful behaviour spreads when it is shared.','The dimensions with lower scores are not weaknesses but growth opportunities. A targeted investment here has the greatest relative effect on your overall performance.','The next level requires integration: AI not as an experiment but as a reinforcement of your existing structure. Your sales process needs to be ready for it.'] },
+  { min:34, max:40, label:'Frontrunner', sub:'Commercial vanguard — scalability is the challenge',
+    desc:'You are in the commercial vanguard. The challenge is scalability: making the successes of your strongest performers transferable to the entire team, and preparing the organisation for the next growth phase.',
+    insights:['Your sales organisation operates at a high level. The question now is how to make this level consistently reproducible during growth, turbulence and staff turnover.','AI amplifies what already works. Your sales process is ready for the next layer: intelligent pipeline analysis, client insights and automated coaching triggers.','Your approach is exemplary. Invest in documenting what your best performers do — that knowledge is your strategic capital.'] }
+];
+
+const SERVICES = [
+  { name:'Sales ROI Assessment', tag:'FIXED PRICE', desc:'Funnel analysis · team effectiveness diagnostics · client portfolio · quick wins.', dim:'Funnel & ROI' },
+  { name:'Strategic Sales Plan', tag:'PROJECT', desc:'Market analysis · ICP definition · GTM strategy · KPI framework · board presentation.', dim:'Strategy' },
+  { name:'Sales Effectiveness Programme', tag:'PROJECT', desc:'Baseline per team member · personalised coaching plan · pipeline training · 30/60/90-day measurement.', dim:'Team & Coaching' },
+  { name:'Sales Enablement & Coaching', tag:'PROJECT', desc:'Sales playbook · pitch & proposition training · objection handling · CRM discipline.', dim:'Enablement' },
+  { name:'Interim Commercial Leadership', tag:'DAY RATE', desc:'Full leadership coverage at VP level: team, pipeline, board. AI integration embedded.', dim:'Leadership' },
+];
+
+const DIM_ADVICE = [
+  { sterk:'Your funnel visibility is sharp and your portfolio is actively managed. Use this data as the foundation of your growth strategy — and make insights structurally visible to your entire sales team.',
+    mid:'There is insight but no systematic approach. Define what good looks like per funnel stage and measure it weekly. Two data points per stage are enough to steer — more follows naturally.',
+    zwak:'Start with one question: where are most deals being lost? The answer determines where the first investment goes. Without funnel visibility, you are steering on gut feeling — and gut feeling is not a strategy.' },
+  { sterk:'Your ICP and GTM strategy are sharp and owned by the team. Preserve that sharpness as you grow — ICP drift is the silent threat in successful organisations.',
+    mid:'The direction is there but the shared definition is not. An ICP workshop of half a day, followed by a clear one-pager for the team, changes more than a year of CRM investment.',
+    zwak:'Without a shared definition of the ideal client, every team member sells to a different target group. That costs win rate, energy and focus. Start here — everything that follows gets better.' },
+  { sterk:'Your team is being coached at an individual level. That is the strongest lever in sales effectiveness. Make sure mid-performers have access to what your top performers do — behaviour spreads when made visible.',
+    mid:'Coaching is happening but without a systematic approach. One fixed coaching conversation per month with a concrete action plan is the minimum standard. Everything above that is a bonus.',
+    zwak:'Ad-hoc coaching gives no direction. Start with a simple baseline assessment per team member and coach from there. Structure makes the difference, not intensity.' },
+  { sterk:'Your sales team has a playbook and a CRM that is actively maintained. That is your commercial memory. Make sure new team members work within it from day one — onboarding is quality assurance.',
+    mid:'The tools are there but the discipline is lacking. Make it easier to do it right than to cut corners. Small adjustments dramatically increase adoption.',
+    zwak:'Without a playbook, every team member improvises every single day. Start with one document: the five most common objections and the best responses. That is your first playbook.' },
+  { sterk:'Your commercial leadership is the engine behind team performance. Preserve that role — and invest in your own development as a strategist, not just an operational manager.',
+    mid:'There is leadership but commercial sharpness is not yet the distinguishing element. Reserve one day per quarter for strategic reflection: what does the market demand, what does the team offer, where do they not align?',
+    zwak:'Commercial leadership is the multiplier on everything below it. Invest here first — it increases the value of every other intervention you make.' }
+];
+
+let step=0, answers=new Array(10).fill(null), contact={}, aiAdvice=null;
+const stage=document.getElementById('qsStage'), pFill=document.getElementById('progressFill');
+
+function totalScore(){return answers.reduce((a,b)=>a+(b||0),0);}
+function dimScores(){return DIM_Q.map(idxs=>{const s=idxs.reduce((a,i)=>a+(answers[i]||0),0);return Math.round(s/(idxs.length*4)*100);});}
+function getProfile(){const t=totalScore();return PROFILES.find(p=>t>=p.min&&t<=p.max)||PROFILES[0];}
+function getPct(){return Math.round(((totalScore()-10)/30)*100);}
+function getDimAdvice(i,pct){const a=DIM_ADVICE[i];return pct>=70?a.sterk:pct>=40?a.mid:a.zwak;}
+function updateProgress(){pFill.style.width=step===0?'0%':step>=12?'100%':Math.round((step/12)*100)+'%';}
+
+function goTo(n){step=n;updateProgress();stage.innerHTML='';
+  if(step===0)renderIntro();else if(step>=1&&step<=10)renderQuestion(step-1);else if(step===11)renderContact();else renderResults();
+  window.scrollTo({top:0});}
+
+function renderIntro(){stage.innerHTML=`<div class="qs-step qs-intro">
+  <div class="qs-kicker">Sales Effectiveness Quickscan</div>
+  <h1>How effective is your sales organisation<br><em class="italic-gold">— really?</em></h1>
+  <p class="sub">10 questions on sales strategy, team dynamics and pipeline quality. No management speak — just honesty. You will receive a personalised report with concrete recommendations instantly.</p>
+  <div class="qs-meta">
+    <div class="qs-meta-item"><span class="dot"></span>10 questions</div>
+    <div class="qs-meta-item"><span class="dot"></span>± 3 minutes</div>
+    <div class="qs-meta-item"><span class="dot"></span>Instant results</div>
+    <div class="qs-meta-item"><span class="dot"></span>Free</div>
+  </div>
+  <button class="btn btn-gold" onclick="goTo(1)">Start the quickscan <span class="arrow">→</span></button>
+  <p style="margin-top:20px;font-size:13px;color:var(--slate);">Accompanying whitepaper: <em>Below Potential</em> — <a href="whitepaper-sales.html" style="color:var(--gold-light);">read it here →</a></p>
+</div>`;}
+
+function renderQuestion(idx){const q=QUESTIONS[idx];const L=['A','B','C','D'];
+  const opts=q.opts.map((o,i)=>`<button class="qs-opt${answers[idx]===i+1?' selected':''}" onclick="selectAnswer(${idx},${i+1})"><span class="qs-opt-letter">${L[i]}</span><span class="qs-opt-text">${o}</span></button>`).join('');
+  stage.innerHTML=`<div class="qs-step"><div class="qs-dim-label">Dimension ${q.dn} of 5 — ${q.dim}</div><div class="qs-qnum">Question ${idx+1} of 10</div><div class="qs-q">${q.q}</div><div class="qs-options">${opts}</div>${step>1?`<button class="qs-back" onclick="goTo(${step-1})">← Previous question</button>`:''}</div>`;}
+
+function selectAnswer(idx,score){answers[idx]=score;
+  document.querySelectorAll('.qs-opt').forEach((el,i)=>{const sel=i+1===score;el.classList.toggle('selected',sel);const ltr=el.querySelector('.qs-opt-letter');ltr.style.background=sel?'var(--gold)':'';ltr.style.color=sel?'var(--midnight)':'';ltr.style.borderColor=sel?'var(--gold)':'';});
+  setTimeout(()=>goTo(step+1),380);}
+
+function renderContact(){stage.innerHTML=`<div class="qs-step qs-contact">
+  <div class="qs-kicker">Almost there</div>
+  <h2>Where shall we send your report?</h2>
+  <p class="sub">Enter your details to receive your personalised report — including the free whitepaper <em>Below Potential</em>.</p>
+  <form id="cForm" onsubmit="submitContact(event)" novalidate>
+    <div class="qs-form-row">
+      <div class="qs-field"><label>First name *</label><input type="text" id="f_name" placeholder="John" required /></div>
+      <div class="qs-field"><label>Last name *</label><input type="text" id="f_last" placeholder="Smith" required /></div>
+    </div>
+    <div class="qs-field"><label>Business email *</label><input type="email" id="f_email" placeholder="john@company.com" required /></div>
+    <div class="qs-form-row">
+      <div class="qs-field"><label>Organisation *</label><input type="text" id="f_org" placeholder="Company name" required /></div>
+      <div class="qs-field"><label>Job title</label><input type="text" id="f_role" placeholder="e.g. CCO, Director" /></div>
+    </div>
+    <div class="qs-err" id="fErr">Please fill in all required fields.</div>
+    <div style="margin-top:28px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
+      <button type="submit" class="btn btn-gold">View my report + whitepaper <span class="arrow">→</span></button>
+      <button type="button" class="qs-back" onclick="goTo(10)">← Back</button>
+    </div>
+    <p style="margin-top:16px;font-size:12.5px;color:var(--slate);">Your details are used only to follow up. You can unsubscribe at any time.</p>
+  </form>
+</div>`;}
+
+async function submitContact(e){e.preventDefault();
+  const name=document.getElementById('f_name').value.trim(),last=document.getElementById('f_last').value.trim(),email=document.getElementById('f_email').value.trim(),org=document.getElementById('f_org').value.trim(),role=document.getElementById('f_role').value.trim(),err=document.getElementById('fErr');
+  if(!name||!last||!email||!org){err.classList.add('show');return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){err.textContent='Please enter a valid email address.';err.classList.add('show');return;}
+  err.classList.remove('show');contact={name,last,email,org,role};
+  aiAdvice=null;goTo(12);
+  const _ds=dimScores(),_pct=getPct(),_prof=getProfile();
+  const _sum=DIMS.map((d,i)=>d+': '+_ds[i]+'%').join(', ');
+  generateAdvice(name+' '+last,org,_pct,_prof.label,_sum).then(adv=>{
+    aiAdvice=adv;
+    const sp=document.getElementById('amir-loading'),ad=document.getElementById('amir-advice');
+    if(sp)sp.style.display='none';if(ad){ad.style.display='block';ad.textContent=adv;}
+    fetch('https://formsubmit.co/ajax/amir@byamir.ai',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Sales Quickscan (EN) — '+name+' '+last+' ('+org+') · '+_prof.label+' · '+_pct+'%',_template:'table',name:name+' '+last,email,organisation:org,job_title:role||'—',total_score:_pct+'/100',level:_prof.label,dimensions:_sum,advice:adv.slice(0,600)})}).catch(()=>{});
+  });}
+
+function generateAdvice(name,company,score,level,dimSummary){
+  const prompt="You are a commercial strategy advisor at by AMIR with 20+ years of sales leadership experience. Write a warm, direct and inspiring personalised sales effectiveness advice in English for "+name+(company?" at "+company:"")+".\\n\\nScore: "+score+"/100 — Level: "+level+"\\nDimensions: "+dimSummary+"\\n\\nWrite 3 concise paragraphs. Name the strongest and weakest dimension specifically. Give practical advice without filler. Close with an invitation for a conversation with Amir.";
+  if(window.claude&&window.claude.complete)return window.claude.complete(prompt).catch(()=>getProfile().desc);
+  return Promise.resolve(getProfile().desc);}
+
+function buildRadar(scores){
+  const cx=120,cy=115,r=85,n=scores.length,angle=i=>(Math.PI*2*i/n)-Math.PI/2,pt=(i,pct)=>{const a=angle(i),d=r*(pct/100);return[cx+d*Math.cos(a),cy+d*Math.sin(a)];};
+  const grid=[25,50,75,100].map(p=>scores.map((_,i)=>pt(i,p)).map(([x,y],j)=>(j===0?'M'+x+','+y:'L'+x+','+y)).join(' ')+' Z');
+  const dp=scores.map((_,i)=>pt(i,scores[i]||0)).map(([x,y],j)=>(j===0?'M'+x+','+y:'L'+x+','+y)).join(' ')+' Z';
+  return '<svg viewBox="0 0 240 235" width="220" height="215">'+grid.map(d=>'<path d="'+d+'" fill="none" stroke="rgba(201,169,110,0.2)" stroke-width="0.8"/>').join('')+scores.map((_,i)=>{const[x,y]=pt(i,100);return'<line x1="'+cx+'" y1="'+cy+'" x2="'+x+'" y2="'+y+'" stroke="rgba(201,169,110,0.2)" stroke-width="0.8"/>';}).join('')+'<path d="'+dp+'" fill="rgba(201,169,110,0.14)" stroke="#C9A96E" stroke-width="1.5"/>'+scores.map((_,i)=>{const[x,y]=pt(i,122);return'<text x="'+x+'" y="'+y+'" text-anchor="middle" dominant-baseline="middle" font-size="8.5" fill="#EDE8DC" font-family="Georgia,serif" opacity="0.75">'+DIMS[i]+'</text>';}).join('')+'</svg>';}
+
+function renderResults(){
+  const prof=getProfile(),ds=dimScores(),pct=getPct(),fn=contact.name||'you';
+  const lvlIdx=PROFILES.indexOf(prof),lvlColors=['#c0533a','#b8892a','var(--gold)','#7eb87e'],lvlColor=lvlColors[Math.max(0,lvlIdx)];
+  const recServices=SERVICES.filter(sv=>{const i=DIMS.indexOf(sv.dim);return i>=0&&ds[i]<60;});
+  const dimBarsHtml=DIMS.map((dim,i)=>'<div style="margin-bottom:11px;"><div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span style="font-size:13px;color:var(--cream);">'+dim+'</span><span style="font-size:13px;color:'+(ds[i]<50?'#c0533a':'var(--gold)')+';">'+ds[i]+'%</span></div><div style="height:3px;background:rgba(138,152,171,0.15);border-radius:2px;"><div style="height:3px;background:'+(ds[i]<50?'#c0533a':'var(--gold)')+';border-radius:2px;width:0%;transition:width 1s var(--ease);" data-w="'+ds[i]+'%"></div></div></div>').join('');
+  const svcHtml=recServices.length>0?'<div style="border:1px solid rgba(201,169,110,0.35);padding:1.5rem;margin-bottom:1.5rem;background:rgba(201,169,110,0.05);"><p style="font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:0.15em;margin:0 0 1rem;font-weight:600;">Recommended based on your results</p><div style="display:flex;flex-direction:column;gap:12px;">'+recServices.map(sv=>'<div style="border-left:2px solid var(--gold);padding-left:14px;"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;"><p style="font-size:14px;font-weight:500;color:var(--cream);margin:0;">'+sv.name+'</p><span style="font-size:9px;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-left:12px;flex-shrink:0;">'+sv.tag+'</span></div><p style="font-size:12px;color:var(--slate);margin:0;line-height:1.6;">'+sv.desc+'</p></div>').join('')+'</div></div>':'';
+  const insHtml=prof.insights.map(t=>'<p style="font-size:14px;color:var(--cream-dim);line-height:1.75;margin:0 0 10px;display:flex;gap:10px;"><span style="color:var(--gold);flex-shrink:0;">&mdash;</span><span>'+t+'</span></p>').join('');
+  stage.innerHTML='<div class="qs-step qs-results"><div class="qs-kicker">Your Sales Effectiveness Report</div><h2 style="font-family:var(--serif);font-size:clamp(22px,3.5vw,32px);font-weight:400;color:var(--cream);margin:0 0 2rem;">Good day, '+fn+'</h2><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.5rem;"><div style="border:1px solid var(--line-cool);padding:1.5rem;text-align:center;background:var(--surface);"><p style="font-size:10px;color:var(--slate);text-transform:uppercase;letter-spacing:0.12em;margin:0 0 0.75rem;font-weight:600;">Total score</p><p style="font-family:var(--serif);font-size:52px;font-weight:300;color:'+lvlColor+';margin:0;line-height:1;">'+pct+'</p><p style="font-size:10px;color:var(--slate-dim);margin:6px 0 0;letter-spacing:0.06em;">OUT OF 100</p></div><div style="border:1px solid var(--line-cool);padding:1.5rem;text-align:center;background:var(--surface);display:flex;flex-direction:column;justify-content:center;"><p style="font-size:10px;color:var(--slate);text-transform:uppercase;letter-spacing:0.12em;margin:0 0 0.75rem;font-weight:600;">Level</p><p style="font-family:var(--serif);font-size:26px;font-weight:400;color:'+lvlColor+';margin:0 0 12px;">'+prof.label+'</p><div style="display:flex;justify-content:center;gap:7px;">'+PROFILES.map((_,i)=>'<div style="width:9px;height:9px;border-radius:50%;background:'+(i<=lvlIdx?'var(--gold)':'rgba(201,169,110,0.18)')+'"></div>').join('')+'</div></div></div><div style="border:1px solid var(--line-cool);padding:1.5rem;margin-bottom:1.5rem;background:var(--surface);"><p style="font-size:10px;color:var(--slate);text-transform:uppercase;letter-spacing:0.12em;margin:0 0 1.25rem;font-weight:600;">Score per dimension</p><div style="display:flex;justify-content:center;margin-bottom:1.25rem;">'+buildRadar(ds)+'</div>'+dimBarsHtml+'</div><div style="border:1px solid var(--line-cool);padding:1.5rem;margin-bottom:1.5rem;background:var(--surface);"><div style="display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;"><div style="width:38px;height:38px;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="color:var(--gold);font-size:13px;font-family:var(--serif);">A</span></div><div><p style="margin:0;font-size:14px;color:var(--cream);">Amir Bercovitz</p><p style="margin:0;font-size:10px;color:var(--slate);letter-spacing:0.08em;">COMMERCIAL STRATEGY ADVISOR · BY AMIR</p></div></div><div id="amir-loading" style="display:flex;align-items:center;gap:10px;color:var(--slate);font-size:14px;"><span style="display:inline-block;width:15px;height:15px;border:1.5px solid var(--gold);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;"></span>Your personalised assessment is being prepared...</div><div id="amir-advice" style="display:none;font-size:14px;color:var(--cream-dim);line-height:1.85;margin:0;white-space:pre-line;"></div><div style="padding-top:16px;border-top:1px solid var(--line-cool);margin-top:16px;">'+insHtml+'</div></div>'+svcHtml+'<div style="text-align:center;margin-bottom:16px;"><button onclick="window.print()" class="btn btn-outline" style="font-size:13px;padding:10px 24px;">Save as PDF \u2193</button></div><div class="qs-wp-block"><div class="qs-wp-block-text"><div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-weight:600;">Whitepaper with this report</div><div style="font-family:var(--serif);font-size:26px;color:var(--cream);line-height:1.2;margin-bottom:8px;">Below Potential</div><p style="font-size:14px;color:var(--slate);line-height:1.6;margin:0;">Why your sales organisation underperforms — and how to change that.</p></div><div style="flex-shrink:0;"><a href="whitepaper-sales.html" class="btn btn-gold" target="_blank">Read the whitepaper \u2192</a></div></div><div class="qs-cta-block"><h3>What does this mean concretely for your sales organisation?</h3><p>Book a no-obligation 30-minute conversation with Amir. An honest discussion on where the gap lies and what the smartest first step is.</p><div class="qs-cta-actions"><button class="btn btn-gold" onclick="openCal()">Book a conversation <span class="arrow">\u2192</span></button><a class="btn btn-outline" href="contact.html">Send a message</a></div></div><div style="margin-top:28px;text-align:center;"><button class="qs-back" onclick="goTo(0)">\u21ba Start over</button></div></div>';
+  setTimeout(()=>{document.querySelectorAll('[data-w]').forEach(b=>{b.style.width=b.dataset.w;});},120);}
+
+function openCal(){if(window.Calendly)Calendly.initPopupWidget({url:'https://calendly.com/byamir'});else window.open('https://calendly.com/byamir','_blank');}
+goTo(0);
+</script>
+</body>
+</html>

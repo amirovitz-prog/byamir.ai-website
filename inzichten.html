@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Inzichten — by AMIR</title>
+<meta name="description" content="Quickscans, whitepapers en praktische tools voor AI-gereed leiderschap. Gratis beschikbaar." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/site.css" />
+<style>
+.insight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 860px) { .insight-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .insight-grid { grid-template-columns: 1fr; } }
+.insight-card { background: var(--surface); border: 1px solid var(--line-cool); padding: 36px 32px; display: flex; flex-direction: column; transition: transform .35s var(--ease), border-color .35s var(--ease); }
+.insight-card:hover { transform: translateY(-4px); border-color: var(--line); }
+.insight-card.coming { opacity: 0.5; pointer-events: none; }
+.insight-card .ic-type { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+.insight-card .ic-type::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
+.insight-card h3 { font-family: var(--serif); font-size: 26px; font-weight: 400; color: var(--cream); line-height: 1.2; margin-bottom: 14px; }
+.insight-card p { font-size: 14.5px; color: var(--slate); line-height: 1.6; margin-bottom: 28px; flex: 1; }
+.insight-card .ic-meta { font-size: 12px; color: var(--slate-dim); letter-spacing: 0.06em; margin-bottom: 22px; display: flex; gap: 16px; flex-wrap: wrap; }
+.insight-card .ic-meta span::before { content: '· '; color: var(--gold); }
+.insight-card .ic-meta span:first-child::before { content: ''; }
+.soon-badge { display: inline-block; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--slate); border: 1px solid var(--line-cool); padding: 4px 10px; margin-bottom: 18px; }
+</style>
+</head>
+<body>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="by AMIR — home">
+      <img src="assets/logo/byAMIR-dark-trim.png" alt="by AMIR" />
+    </a>
+    <nav class="nav-main">
+      <ul class="nav-links">
+        <li><a href="diensten.html" data-i18n="nav.services">Diensten</a></li>
+        <li><a href="index.html#werkwijze" data-i18n="nav.method">Werkwijze</a></li>
+        <li><a href="inzichten.html" aria-current="page" data-i18n="nav.insights">Inzichten</a></li>
+        <li><a href="over-amir.html" data-i18n="nav.about">Over Amir</a></li>
+        <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-toggle desktop">
+        <button data-lang="nl" class="active">NL</button><span class="sep">·</span><button data-lang="en" onclick="window.location='en/inzichten.html'">EN</button>
+      </div>
+      <a class="btn btn-gold" href="contact.html" data-i18n="nav.cta">Plan een gesprek</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="diensten.html" data-i18n="nav.services">Diensten</a>
+  <a href="index.html#werkwijze" data-i18n="nav.method">Werkwijze</a>
+  <a href="inzichten.html" data-i18n="nav.insights">Inzichten</a>
+  <a href="over-amir.html" data-i18n="nav.about">Over Amir</a>
+  <a href="contact.html" data-i18n="nav.contact">Contact</a>
+  <a href="contact.html" class="italic-gold" data-i18n="nav.cta">Plan een gesprek</a>
+  <div class="m-lang"><button data-lang="nl" class="active">NL</button><span>·</span><button data-lang="en" onclick="window.location='en/inzichten.html'">EN</button></div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Inzichten</span>
+    <h1 class="display d-lg">Kennis die u verder brengt.</h1>
+    <p class="lead">Quickscans, whitepapers en praktische tools voor leiders die AI bewust willen inzetten. Gratis beschikbaar.</p>
+  </div>
+</section>
+
+<!-- QUICKSCANS -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Quickscans</span>
+      <h2 class="display d-md">Waar staat uw organisatie?</h2>
+      <p class="lead">Elke quickscan geeft u in 3 minuten een eerlijk beeld van één dimensie van uw commerciële slagkracht. Gratis, direct resultaat, geen verplichtingen.</p>
+    </div>
+    <div class="insight-grid" style="margin-top:48px;">
+
+      <div class="insight-card reveal">
+        <div class="ic-type">AI Consultancy</div>
+        <h3>AI Readiness Quickscan</h3>
+        <p>Benadert uw organisatie AI vanuit kracht of vanuit angst? 10 vragen over strategie, data, mensen, processen en cultuur. Direct persoonlijk rapport.</p>
+        <div class="ic-meta">
+          <span>10 vragen</span>
+          <span>± 3 minuten</span>
+          <span>Direct resultaat</span>
+        </div>
+        <a href="ai-quickscan.html" class="btn btn-gold">Start de quickscan <span class="arrow">→</span></a>
+      </div>
+
+      <div class="insight-card reveal">
+        <div class="ic-type">Growth Leadership</div>
+        <h3>Sales Effectiveness Quickscan</h3>
+        <p>Hoe effectief is uw commerciële organisatie werkelijk? Scan uw salesstrategie, teamdynamiek en pipelinekwaliteit. Direct een persoonlijk rapport — inclusief whitepaper.</p>
+        <div class="ic-meta">
+          <span>10 vragen</span>
+          <span>± 3 minuten</span>
+          <span>Direct resultaat</span>
+        </div>
+        <a href="sales-quickscan.html" class="btn btn-gold">Start de quickscan <span class="arrow">→</span></a>
+      </div>
+
+      <div class="insight-card reveal">
+        <div class="ic-type">Bid Strategy</div>
+        <h3>Bid Win Rate Quickscan</h3>
+        <p>Waarom verliest u aanbestedingen die u had moeten winnen? Scan uw capture-aanpak, winstrategie en teamsamenwerking. Direct een persoonlijk rapport — inclusief whitepaper.</p>
+        <div class="ic-meta">
+          <span>10 vragen</span>
+          <span>± 3 minuten</span>
+          <span>Direct resultaat</span>
+        </div>
+        <a href="bid-quickscan.html" class="btn btn-gold">Start de quickscan <span class="arrow">→</span></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHITEPAPERS -->
+<section class="section bg-deep">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Whitepapers</span>
+      <h2 class="display d-md">Verdieping voor leiders.</h2>
+      <p class="lead">Geen hype, geen technische handleidingen. Praktische essays over de strategische vraagstukken die er werkelijk toe doen.</p>
+    </div>
+    <div class="insight-grid" style="margin-top:48px;">
+
+      <div class="insight-card reveal">
+        <div class="ic-type">AI Consultancy</div>
+        <h3>Liefde of Angst?</h3>
+        <p>De twee drijfveren achter AI-adoptie. Waarom bewuste organisaties winnen van vroege adopters — en hoe u de omslag maakt van reactief naar strategisch.</p>
+        <div class="ic-meta">
+          <span>5 hoofdstukken</span>
+          <span>± 15 minuten</span>
+          <span>PDF beschikbaar</span>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a href="whitepaper-ai.html" class="btn btn-gold">Lees de whitepaper <span class="arrow">→</span></a>
+          <a href="ai-quickscan.html" class="btn btn-outline" style="font-size:14px;">Doe de quickscan</a>
+        </div>
+      </div>
+
+      <div class="insight-card reveal">
+        <div class="ic-type">Growth Leadership</div>
+        <h3>Onder Potentieel</h3>
+        <p>Waarom uw salesorganisatie minder presteert dan ze kan — en hoe u dat verandert. Van funnelzicht tot commercieel leiderschap.</p>
+        <div class="ic-meta">
+          <span>5 hoofdstukken</span>
+          <span>± 15 minuten</span>
+          <span>PDF beschikbaar</span>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a href="whitepaper-sales.html" class="btn btn-gold">Lees de whitepaper <span class="arrow">→</span></a>
+          <a href="sales-quickscan.html" class="btn btn-outline" style="font-size:14px;">Doe de quickscan</a>
+        </div>
+      </div>
+
+      <div class="insight-card reveal">
+        <div class="ic-type">Bid Strategy</div>
+        <h3>Winnen Begint Vóór de Tender</h3>
+        <p>De strategische fundamenten van een hogere bid win rate. Van capture planning tot het leerproces na elke tender.</p>
+        <div class="ic-meta">
+          <span>7 hoofdstukken</span>
+          <span>± 15 minuten</span>
+          <span>PDF beschikbaar</span>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a href="whitepaper-bid.html" class="btn btn-gold">Lees de whitepaper <span class="arrow">→</span></a>
+          <a href="bid-quickscan.html" class="btn btn-outline" style="font-size:14px;">Doe de quickscan</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logo/byAMIR-dark-trim.png" alt="by AMIR" />
+        <p>Senior commercieel leiderschap, versterkt door AI.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Navigatie</h5>
+        <ul>
+          <li><a href="diensten.html">Diensten</a></li>
+          <li><a href="inzichten.html">Inzichten</a></li>
+          <li><a href="over-amir.html">Over Amir</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Inzichten</h5>
+        <ul>
+          <li><a href="ai-quickscan.html">AI Readiness Quickscan</a></li>
+          <li><a href="sales-quickscan.html">Sales Effectiveness Quickscan</a></li>
+          <li><a href="bid-quickscan.html">Bid Win Rate Quickscan</a></li>
+          <li><a href="whitepaper-ai.html">Whitepaper: Liefde of Angst?</a></li>
+          <li><a href="whitepaper-sales.html">Whitepaper: Onder Potentieel</a></li>
+          <li><a href="whitepaper-bid.html">Whitepaper: Winnen Begint Vóór de Tender</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 by AMIR — Amir Bercovitz</p>
+      <span class="tag">byamir.ai</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sales Effectiveness Quickscan — by AMIR</title>
+<meta name="description" content="Hoe effectief is uw salesorganisatie werkelijk? 10 vragen over funnel, strategie, team, enablement en leiderschap. Direct een persoonlijk rapport." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/site.css" />
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+<style>
+.qs-wrap { min-height: calc(100vh - 92px); padding-top: 92px; display: flex; align-items: center; justify-content: center; padding-bottom: 80px; }
+.qs-stage { width: 100%; max-width: 700px; margin: 0 auto; padding: 0 28px; }
+.qs-progress { position: fixed; top: 92px; left: 0; right: 0; height: 3px; background: rgba(201,169,110,0.15); z-index: 99; }
+.qs-progress-fill { height: 100%; background: var(--gold); transition: width 0.5s var(--ease); }
+.qs-step { animation: fadeUp 0.4s var(--ease) forwards; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.qs-kicker { font-size: 11.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 26px; display: flex; align-items: center; gap: 14px; }
+.qs-kicker::before { content: ''; width: 32px; height: 1px; background: var(--gold); flex-shrink: 0; }
+.qs-intro h1 { font-family: var(--serif); font-size: clamp(34px, 5vw, 56px); font-weight: 400; line-height: 1.12; color: var(--cream); margin-bottom: 22px; }
+.qs-intro .sub { font-size: 17px; color: var(--cream-dim); line-height: 1.65; max-width: 520px; margin-bottom: 38px; }
+.qs-meta { display: flex; gap: 28px; margin-bottom: 42px; flex-wrap: wrap; }
+.qs-meta-item { display: flex; align-items: center; gap: 9px; font-size: 13.5px; color: var(--slate); }
+.qs-meta-item .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+.qs-dim-label { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 8px; }
+.qs-qnum { font-size: 13px; color: var(--slate); margin-bottom: 20px; }
+.qs-q { font-family: var(--serif); font-size: clamp(22px, 3.2vw, 34px); font-weight: 400; color: var(--cream); line-height: 1.28; margin-bottom: 34px; }
+.qs-options { display: flex; flex-direction: column; gap: 10px; }
+.qs-opt { display: flex; align-items: flex-start; gap: 15px; padding: 18px 22px; border: 1px solid var(--line-cool); background: var(--surface); cursor: pointer; transition: border-color .25s var(--ease), background .25s var(--ease), transform .25s var(--ease); text-align: left; width: 100%; font-family: var(--sans); }
+.qs-opt:hover { border-color: rgba(201,169,110,0.5); background: var(--surface-2); transform: translateX(4px); }
+.qs-opt.selected { border-color: var(--gold); background: rgba(201,169,110,0.1); }
+.qs-opt-letter { width: 26px; height: 26px; border: 1px solid var(--line-cool); display: flex; align-items: center; justify-content: center; font-size: 11.5px; font-weight: 600; color: var(--slate); flex-shrink: 0; transition: all .25s; }
+.qs-opt.selected .qs-opt-letter { border-color: var(--gold); background: var(--gold); color: var(--midnight); }
+.qs-opt-text { font-size: 15.5px; color: var(--cream-dim); line-height: 1.5; padding-top: 2px; }
+.qs-back { margin-top: 28px; font-size: 13px; color: var(--slate); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: color .3s; background: none; border: none; font-family: var(--sans); padding: 0; }
+.qs-back:hover { color: var(--cream); }
+.qs-contact h2 { font-family: var(--serif); font-size: clamp(28px, 4vw, 44px); font-weight: 400; color: var(--cream); margin-bottom: 12px; }
+.qs-contact .sub { font-size: 16px; color: var(--cream-dim); margin-bottom: 34px; max-width: 460px; line-height: 1.6; }
+.qs-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 540px) { .qs-form-row { grid-template-columns: 1fr; } }
+.qs-field { margin-bottom: 16px; }
+.qs-field label { display: block; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 9px; font-weight: 600; }
+.qs-field input { width: 100%; background: var(--surface); border: 1px solid var(--line-cool); color: var(--cream); font-family: var(--sans); font-size: 16px; padding: 13px 17px; transition: border-color .3s; border-radius: 2px; }
+.qs-field input::placeholder { color: var(--slate-dim); }
+.qs-field input:focus { outline: none; border-color: var(--gold); }
+.qs-err { font-size: 13px; color: oklch(0.65 0.18 25); margin-top: 10px; display: none; }
+.qs-err.show { display: block; }
+.qs-result-profile { font-family: var(--serif); font-size: clamp(38px, 5.5vw, 58px); font-weight: 400; color: var(--cream); line-height: 1.08; margin-bottom: 6px; }
+.qs-result-sub { font-size: 18px; color: var(--gold-light); font-style: italic; font-family: var(--serif); margin-bottom: 30px; }
+.qs-result-desc { font-size: 16px; color: var(--cream-dim); line-height: 1.68; max-width: 560px; margin-bottom: 6px; }
+.qs-spectrum { margin: 34px 0; }
+.qs-spectrum-labels { display: flex; justify-content: space-between; font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--slate); margin-bottom: 10px; }
+.qs-spectrum-track { height: 7px; background: rgba(138,152,171,0.2); border-radius: 4px; overflow: hidden; }
+.qs-spectrum-fill { height: 100%; background: linear-gradient(90deg, rgba(138,152,171,0.6), var(--gold)); border-radius: 4px; transition: width 1.2s var(--ease); width: 0%; }
+.qs-spectrum-score { margin-top: 10px; font-size: 13px; color: var(--slate); text-align: right; font-family: var(--serif); }
+.qs-insight { display: flex; gap: 18px; padding: 18px 0; border-top: 1px solid var(--line-cool); }
+.qs-insight:first-child { border-top: none; }
+.qs-insight-dash { color: var(--gold); font-size: 16px; flex-shrink: 0; margin-top: 3px; }
+.qs-insight-text { font-size: 15px; color: var(--cream-dim); line-height: 1.65; }
+/* Whitepaper CTA — same visual weight as contact CTA */
+.qs-wp-block { background: var(--surface); border: 1px solid rgba(201,169,110,0.45); padding: 36px 40px; display: flex; gap: 28px; align-items: center; flex-wrap: wrap; margin-top: 44px; }
+.qs-wp-block-text { flex: 1; min-width: 220px; }
+.qs-cta-block { background: var(--surface); border: 1px solid var(--line); padding: 40px; text-align: center; margin-top: 20px; }
+.qs-cta-block h3 { font-family: var(--serif); font-size: 28px; font-weight: 400; color: var(--cream); margin-bottom: 12px; }
+.qs-cta-block p { font-size: 15px; color: var(--cream-dim); max-width: 400px; margin: 0 auto 26px; line-height: 1.65; }
+.qs-cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="by AMIR — home">
+      <img src="assets/logo/byAMIR-dark-trim.png" alt="by AMIR" />
+    </a>
+    <nav class="nav-main">
+      <ul class="nav-links">
+        <li><a href="diensten.html">Diensten</a></li>
+        <li><a href="index.html#werkwijze">Werkwijze</a></li>
+        <li><a href="inzichten.html" aria-current="page">Inzichten</a></li>
+        <li><a href="over-amir.html">Over Amir</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-toggle desktop">
+        <button data-lang="nl" class="active">NL</button><span class="sep">·</span><button data-lang="en" onclick="window.location='en/sales-quickscan.html'">EN</button>
+      </div>
+      <a class="btn btn-gold" href="contact.html">Plan een gesprek</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="diensten.html">Diensten</a>
+  <a href="index.html#werkwijze">Werkwijze</a>
+  <a href="inzichten.html">Inzichten</a>
+  <a href="over-amir.html">Over Amir</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="italic-gold">Plan een gesprek</a>
+  <div class="m-lang"><button data-lang="nl" class="active">NL</button><span>·</span><button data-lang="en" onclick="window.location='en/sales-quickscan.html'">EN</button></div>
+</div>
+
+<div class="qs-progress"><div class="qs-progress-fill" id="progressFill"></div></div>
+
+<main class="qs-wrap">
+  <div class="qs-stage" id="qsStage"></div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p>© 2025 by AMIR — Amir Bercovitz</p>
+      <span class="tag">byamir.ai</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<script src="assets/site.js"></script>
+<script>
+// ─── DATA ────────────────────────────────────────────────────────────────────
+const DIMS = ['Funnel & ROI','Strategie','Team & Coaching','Enablement','Leiderschap'];
+
+// Which question indices (0-based) belong to each dimension
+const DIM_Q = [
+  [0,2,5],   // Funnel & ROI
+  [1,8],     // Strategie
+  [3,4],     // Team & Coaching
+  [6,7],     // Enablement
+  [9]        // Leiderschap
+];
+
+const QUESTIONS = [
+  { dim:'Funnel & ROI', dn:1,
+    q:'Weet u waar uw organisatie omzet verliest in de salesfunnel?',
+    opts:['Nee, we hebben geen funnelzicht','We vermoeden waar het misgaat maar meten niet structureel','We hebben globaal inzicht maar geen cijfers per fase','Ja, we meten elke fase en sturen actief bij'] },
+  { dim:'Strategie', dn:2,
+    q:'Heeft uw salesteam een gedeeld, helder beeld van uw ideale klant en uw go-to-market aanpak?',
+    opts:['Nee, iedereen heeft een eigen beeld van de ideale klant','Er is een globale richting maar geen gedeelde definitie','We hebben een ICP maar passen die niet consistent toe','Heldere ICP en GTM-strategie, gedragen door het hele team'] },
+  { dim:'Funnel & ROI', dn:1,
+    q:'Hoe actief beheert u uw klantportfolio op groeipotentieel en risico?',
+    opts:['Reactief — pas als er iets speelt','We kijken periodiek maar zonder structuur','We segmenteren wel maar sturen er niet actief op','Actief portfoliomanagement met segmentatie en groeifocus'] },
+  { dim:'Team & Coaching', dn:3,
+    q:'Heeft u een helder beeld van de individuele effectiviteit van elke salesperson?',
+    opts:['Nee, we meten alleen op eindresultaat','We hebben een beeld maar geen systematische nulmeting','We monitoren prestaties maar sturen niet per individu bij','Nulmeting per teamlid en gerichte coaching per persoon'] },
+  { dim:'Team & Coaching', dn:3,
+    q:'Heeft elk lid van uw salesteam een gepersonaliseerd coachingplan?',
+    opts:['Nee, coaching gebeurt ad hoc of niet','We coachen wel maar zonder structuur per individu','Er zijn ontwikkelgesprekken maar geen concrete plannen','Elk teamlid heeft een coachingplan met 30/60/90-meting'] },
+  { dim:'Funnel & ROI', dn:1,
+    q:'Hoe betrouwbaar en kwalitatief is uw salespipeline?',
+    opts:['Gevuld maar weinig kwalitatief gefilterd','De kwaliteit varieert sterk per salesperson','Redelijk betrouwbaar maar met regelmatige verrassingen','Hoge pipelinekwaliteit — we winnen wat we voorspellen'] },
+  { dim:'Enablement', dn:4,
+    q:'Heeft uw salesteam een helder playbook met pitch, propositie en bezwaarbehandeling?',
+    opts:['Nee, iedereen pitcht op zijn eigen manier','Er zijn losse documenten maar geen samenhangend playbook','We hebben een playbook maar het wordt niet consistent gebruikt','Strak playbook dat het team consequent toepast'] },
+  { dim:'Enablement', dn:4,
+    q:'Hoe consequent gebruikt uw salesteam het CRM als stuurinstrument?',
+    opts:['CRM wordt nauwelijks bijgehouden','Basisgegevens ingevoerd maar niet als stuurtool gebruikt','Gebruik is redelijk maar niet uniform over het team','CRM is de kern van ons salesproces — volledig en actueel'] },
+  { dim:'Strategie', dn:2,
+    q:'Stuurt u uw salesorganisatie op heldere, gedeelde KPI\'s?',
+    opts:['Nee, we meten voornamelijk op omzet achteraf','We hebben KPI\'s maar ze worden niet actief gebruikt','KPI\'s zijn aanwezig maar niet voor iedereen gelijk','Gedeeld KPI-framework met actieve wekelijkse sturing'] },
+  { dim:'Leiderschap', dn:5,
+    q:'Is er voldoende commercieel leiderschap om de organisatie naar het volgende niveau te tillen?',
+    opts:['Leiderschap is reactief en operationeel ingesteld','Er is leiderschap maar het mist commerciële scherpte','Goed leiderschap maar te weinig strategische boardruimte','Sterk commercieel leiderschap met strategisch en operationeel mandaat'] }
+];
+
+const PROFILES = [
+  { min:10, max:17,
+    label:'Kritisch',
+    sub:'Significante kansen blijven structureel onbenut',
+    desc:'Uw salesorganisatie heeft significante kansen die nu onbenut blijven. De eerste stap is inzicht: weten waar omzet verloren gaat, wie in het team het verschil maakt, en welke processen ontbreken. Dat inzicht is de basis voor elke verbetering.',
+    insights:[
+      'Er is potentieel in uw team — maar zonder structuur, richting en coaching blijft dat potentieel onbenut. De kloof zit niet in de mensen maar in de kaders die niemand heeft gebouwd.',
+      'Begin met twee vragen: waar gaan de meeste deals verloren, en waarom? Het antwoord bepaalt waar de eerste investering zit. Alles daarna wordt helderder.',
+      'Organisaties die bewust bouwen aan hun commerciële structuur presteren na zes maanden structureel beter — niet met andere mensen, maar met betere richting.'
+    ]
+  },
+  { min:18, max:25,
+    label:'Ontwikkelend',
+    sub:'De fundamenten zijn aanwezig — samenhang mist nog',
+    desc:'U heeft de fundamenten maar mist de samenhang. Strategie, team en proces lopen nog niet gelijk. De organisatie heeft potentieel — het gaat nu om het verbinden van de losse onderdelen tot een coherente commerciële machine.',
+    insights:[
+      'Er zijn sterke elementen in uw salesorganisatie, maar ze versterken elkaar nog onvoldoende. Gerichte interventies op de zwakste dimensie hebben disproportioneel veel impact.',
+      'De middengroep in uw salesteam is de grootste groeihefboom. Investeer coaching in de mensen die 60-80% van het potentieel halen — de winst is hier het grootst.',
+      'Een gedeeld beeld van de ideale klant is het meest onderbenutte instrument in de meeste salesorganisaties. Één workshop levert meer op dan een jaar nieuwe tools.'
+    ]
+  },
+  { min:26, max:33,
+    label:'Groeiend',
+    sub:'Goed op weg — gerichte verbetering levert structureel meer op',
+    desc:'Uw salesorganisatie functioneert goed maar laat structureel punten liggen. Gerichte interventies op de zwakste dimensies kunnen een significant effect hebben op conversie en pipelinekwaliteit.',
+    insights:[
+      'Uw sterkste dimensies zijn een fundament. Maak die aanpak zichtbaar voor het hele team — succesvol gedrag verspreidt zich als het gedeeld wordt.',
+      'De dimensies met lagere scores zijn geen zwakke punten maar groeikansen. Een gerichte investering hier heeft het grootste relatieve effect op uw totale salesperformance.',
+      'Het volgende niveau vraagt om integratie: AI niet als experiment maar als versterker van uw bestaande structuur. Uw salesproces moet er klaar voor zijn.'
+    ]
+  },
+  { min:34, max:40,
+    label:'Voorloper',
+    sub:'Commerciële voorhoede — schaalvermogen is de uitdaging',
+    desc:'U bevindt zich in de commerciële voorhoede. De uitdaging is schaalvermogen: de successen van uw sterkste performers overdraagbaar maken naar het hele team, en de organisatie gereed maken voor de volgende groeifase.',
+    insights:[
+      'Uw salesorganisatie functioneert op hoog niveau. De vraag is nu hoe u dit niveau consistent reproducteerbaar maakt bij groei, turbulentie en verloop.',
+      'AI versterkt wat al werkt. Uw salesproces is klaar voor de volgende laag: intelligente pipeline-analyse, klantinsights en geautomatiseerde coaching-triggers.',
+      'Uw aanpak is een voorbeeld. Investeer in het documenteren van wat uw beste performers doen — die kennis is uw strategisch kapitaal.'
+    ]
+  }
+];
+
+const SERVICES = [
+  { name:'Sales ROI Assessment', tag:'VASTE PRIJS', desc:'Funnelanalyse · teameffectiviteitsdiagnostiek · klantportfolio · quick wins.', dim:'Funnel & ROI' },
+  { name:'Strategisch salesplan', tag:'PROJECT', desc:'Marktanalyse · ICP-definitie · GTM-strategie · KPI-framework · boardpresentatie.', dim:'Strategie' },
+  { name:'Sales Effectiveness programma', tag:'PROJECT', desc:'Nulmeting per teamlid · gepersonaliseerd coachingplan · pipeline-training · 30/60/90-meting.', dim:'Team & Coaching' },
+  { name:'Sales Enablement & Coaching', tag:'PROJECT', desc:'Sales playbook · pitch- & propositietraining · objection handling · CRM-discipline.', dim:'Enablement' },
+  { name:'Interim commercieel leiderschap', tag:'DAGTARIEF', desc:'Volledige leiderschapscoverage op VP-niveau: team, pipeline, board. AI-integratie ingebed.', dim:'Leiderschap' },
+];
+
+const DIM_ADVICE = [
+  { // Funnel & ROI
+    sterk: 'Uw funnelzicht is scherp en uw portfolio wordt actief beheerd. Gebruik deze data als fundament voor uw groeistrategie — en maak inzichten structureel zichtbaar voor uw hele salesteam.',
+    mid:   'Er is inzicht maar geen systematiek. Definieer per funnelfase wat een kwalitatieve stap is en meet dat wekelijks. Twee meetpunten per fase zijn genoeg om te sturen — meer volgt vanzelf.',
+    zwak:  'Begin met één vraag: waar gaan de meeste deals verloren? Het antwoord bepaalt waar de eerste investering zit. Zonder funnelzicht stuurt u op gevoel — en gevoel is geen strategie.'
+  },
+  { // Strategie
+    sterk: 'Uw ICP en GTM-strategie zijn scherp en gedragen door het team. Bewaar die scherpte bij groei — ICP-drift is het stille gevaar bij succesvolle organisaties.',
+    mid:   'De richting is er maar de gedeelde definitie ontbreekt. Een ICP-workshop van een halve dag, gevolgd door een heldere one-pager voor het team, verandert meer dan een jaar CRM-investering.',
+    zwak:  'Zonder gedeeld beeld van de ideale klant verkoopt elk teamlid aan een andere doelgroep. Dat kost winratio, energie en focus. Begin hier — alles wat erna komt wordt er beter van.'
+  },
+  { // Team & Coaching
+    sterk: 'Uw team wordt gecoacht op individueel niveau. Dat is de sterkste hefboom in saleseffectiviteit. Zorg dat de middenmoot toegang heeft tot wat uw toppers doen — gedrag verspreidt zich als het zichtbaar is.',
+    mid:   'Coaching vindt plaats maar zonder systematiek. Eén vast coachingsgesprek per maand met een concreet actieplan is de minimale standaard. Alles daarboven is winst.',
+    zwak:  'Ad-hoccoaching geeft geen richting. Begin met een simpele nulmeting per teamlid en ga van daaruit coachen. Structuur maakt het verschil, niet intensiteit.'
+  },
+  { // Enablement
+    sterk: 'Uw salesteam heeft een playbook en een CRM dat actief wordt bijgehouden. Dat is uw commercieel geheugen. Zorg dat nieuwe teamleden er direct in werken — onboarding is kwaliteitsborging.',
+    mid:   'De tools zijn er maar de discipline ontbreekt. Maak het makkelijker om het goed te doen dan om het te omzeilen. Kleine aanpassingen verhogen adoptie drastisch.',
+    zwak:  'Zonder playbook improviseert elk teamlid elke dag opnieuw. Begin met één document: de vijf meest voorkomende bezwaren en de beste antwoorden. Dat is uw eerste playbook.'
+  },
+  { // Leiderschap
+    sterk: 'Uw commercieel leiderschap is de motor achter de teamprestaties. Behoud die rol — en investeer in uw eigen ontwikkeling als strateeg, niet alleen als operationeel manager.',
+    mid:   'Er is leiderschap maar de commerciële scherpte is nog geen onderscheidend element. Reserveer één dag per kwartaal voor strategische reflectie: wat vraagt de markt, wat biedt het team, waar sluit dat niet aan?',
+    zwak:  'Commercieel leiderschap is de multiplier op alles eronder. Investeer hier als eerste — het verhoogt de waarde van elke andere interventie die u doet.'
+  }
+];
+
+function buildRadar(scores) {
+  const cx=120,cy=115,r=85,n=scores.length;
+  const angle=i=>(Math.PI*2*i/n)-Math.PI/2;
+  const pt=(i,pct)=>{const a=angle(i),d=r*(pct/100);return[cx+d*Math.cos(a),cy+d*Math.sin(a)];};
+  const grid=[25,50,75,100].map(p=>scores.map((_,i)=>pt(i,p)).map(([x,y],j)=>(j===0?'M'+x+','+y:'L'+x+','+y)).join(' ')+' Z');
+  const dataPath=scores.map((_,i)=>pt(i,scores[i]||0)).map(([x,y],j)=>(j===0?'M'+x+','+y:'L'+x+','+y)).join(' ')+' Z';
+  const gridPaths=grid.map(d=>'<path d="'+d+'" fill="none" stroke="rgba(201,169,110,0.2)" stroke-width="0.8"/>').join('');
+  const axes=scores.map((_,i)=>{const[x,y]=pt(i,100);return '<line x1="'+cx+'" y1="'+cy+'" x2="'+x+'" y2="'+y+'" stroke="rgba(201,169,110,0.2)" stroke-width="0.8"/>';}).join('');
+  const shape='<path d="'+dataPath+'" fill="rgba(201,169,110,0.14)" stroke="#C9A96E" stroke-width="1.5"/>';
+  const lbls=scores.map((_,i)=>{const[x,y]=pt(i,122);return '<text x="'+x+'" y="'+y+'" text-anchor="middle" dominant-baseline="middle" font-size="8.5" fill="#EDE8DC" font-family="Georgia,serif" opacity="0.75">'+DIMS[i]+'</text>';}).join('');
+  return '<svg viewBox="0 0 240 235" width="220" height="215">'+gridPaths+axes+shape+lbls+'</svg>';
+}
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let step = 0;
+let answers = new Array(10).fill(null);
+let contact = {};
+let aiAdvice = null;
+const stage = document.getElementById('qsStage');
+const pFill = document.getElementById('progressFill');
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+function totalScore() { return answers.reduce((a,b) => a + (b||0), 0); }
+
+function dimScores() {
+  return DIM_Q.map(idxs => {
+    const sum = idxs.reduce((a,i) => a + (answers[i]||0), 0);
+    return Math.round(sum / (idxs.length * 4) * 100);
+  });
+}
+
+function getProfile() {
+  const t = totalScore();
+  return PROFILES.find(p => t >= p.min && t <= p.max) || PROFILES[0];
+}
+
+function getPct() { return Math.round(((totalScore()-10)/30)*100); }
+
+function getDimAdvice(dimIdx, pct) {
+  const a = DIM_ADVICE[dimIdx];
+  return pct >= 70 ? a.sterk : pct >= 40 ? a.mid : a.zwak;
+}
+
+function updateProgress() {
+  if (step === 0) { pFill.style.width = '0%'; return; }
+  if (step >= 12) { pFill.style.width = '100%'; return; }
+  pFill.style.width = Math.round((step / 12) * 100) + '%';
+}
+
+function goTo(n) {
+  step = n;
+  updateProgress();
+  stage.innerHTML = '';
+  if (step === 0) renderIntro();
+  else if (step >= 1 && step <= 10) renderQuestion(step - 1);
+  else if (step === 11) renderContact();
+  else renderResults();
+  window.scrollTo({ top: 0 });
+}
+
+// ─── RENDERS ─────────────────────────────────────────────────────────────────
+function renderIntro() {
+  stage.innerHTML = `<div class="qs-step qs-intro">
+    <div class="qs-kicker">Sales Effectiveness Quickscan</div>
+    <h1>Hoe effectief is uw salesorganisatie<br><em class="italic-gold">werkelijk?</em></h1>
+    <p class="sub">10 vragen over salesstrategie, teamdynamiek en pipelinekwaliteit. Geen managementjargon — alleen eerlijkheid. U ontvangt direct een persoonlijk rapport met concrete aanbevelingen.</p>
+    <div class="qs-meta">
+      <div class="qs-meta-item"><span class="dot"></span>10 vragen</div>
+      <div class="qs-meta-item"><span class="dot"></span>± 3 minuten</div>
+      <div class="qs-meta-item"><span class="dot"></span>Direct resultaat</div>
+      <div class="qs-meta-item"><span class="dot"></span>Gratis</div>
+    </div>
+    <button class="btn btn-gold" onclick="goTo(1)">Start de quickscan <span class="arrow">→</span></button>
+    <p style="margin-top:20px;font-size:13px;color:var(--slate);">Begeleidende whitepaper: <em>Onder Potentieel</em> — <a href="whitepaper-sales.html" style="color:var(--gold-light);">lees hem hier →</a></p>
+  </div>`;
+}
+
+function renderQuestion(idx) {
+  const q = QUESTIONS[idx];
+  const L = ['A','B','C','D'];
+  const opts = q.opts.map((o,i) => `
+    <button class="qs-opt${answers[idx]===i+1?' selected':''}" onclick="selectAnswer(${idx},${i+1})">
+      <span class="qs-opt-letter">${L[i]}</span>
+      <span class="qs-opt-text">${o}</span>
+    </button>`).join('');
+  stage.innerHTML = `<div class="qs-step">
+    <div class="qs-dim-label">Dimensie ${q.dn} van 5 — ${q.dim}</div>
+    <div class="qs-qnum">Vraag ${idx+1} van 10</div>
+    <div class="qs-q">${q.q}</div>
+    <div class="qs-options">${opts}</div>
+    ${step>1?`<button class="qs-back" onclick="goTo(${step-1})">← Vorige vraag</button>`:''}
+  </div>`;
+}
+
+function selectAnswer(idx, score) {
+  answers[idx] = score;
+  document.querySelectorAll('.qs-opt').forEach((el,i) => {
+    const sel = i+1 === score;
+    el.classList.toggle('selected', sel);
+    const ltr = el.querySelector('.qs-opt-letter');
+    ltr.style.background = sel ? 'var(--gold)' : '';
+    ltr.style.color = sel ? 'var(--midnight)' : '';
+    ltr.style.borderColor = sel ? 'var(--gold)' : '';
+  });
+  setTimeout(() => goTo(step + 1), 380);
+}
+
+function renderContact() {
+  stage.innerHTML = `<div class="qs-step qs-contact">
+    <div class="qs-kicker">Bijna klaar</div>
+    <h2>Waar mogen we het rapport naartoe sturen?</h2>
+    <p class="sub">Vul uw gegevens in om uw persoonlijk rapport te ontvangen. Inclusief uw gratis whitepaper <em>Onder Potentieel</em>.</p>
+    <form id="cForm" onsubmit="submitContact(event)" novalidate>
+      <div class="qs-form-row">
+        <div class="qs-field"><label>Voornaam *</label><input type="text" id="f_name" placeholder="Jan" required /></div>
+        <div class="qs-field"><label>Achternaam *</label><input type="text" id="f_last" placeholder="de Vries" required /></div>
+      </div>
+      <div class="qs-field"><label>Zakelijk e-mailadres *</label><input type="email" id="f_email" placeholder="jan@bedrijf.nl" required /></div>
+      <div class="qs-form-row">
+        <div class="qs-field"><label>Organisatie *</label><input type="text" id="f_org" placeholder="Bedrijfsnaam" required /></div>
+        <div class="qs-field"><label>Functie</label><input type="text" id="f_role" placeholder="bijv. CCO, Directeur" /></div>
+      </div>
+      <div class="qs-err" id="fErr">Vul alle verplichte velden in.</div>
+      <div style="margin-top:28px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
+        <button type="submit" class="btn btn-gold">Bekijk mijn rapport + whitepaper <span class="arrow">→</span></button>
+        <button type="button" class="qs-back" onclick="goTo(10)">← Terug</button>
+      </div>
+      <p style="margin-top:16px;font-size:12.5px;color:var(--slate);">Uw gegevens worden alleen gebruikt om contact op te nemen. U kunt zich altijd uitschrijven.</p>
+    </form>
+  </div>`;
+}
+
+async function submitContact(e) {
+  e.preventDefault();
+  const name  = document.getElementById('f_name').value.trim();
+  const last  = document.getElementById('f_last').value.trim();
+  const email = document.getElementById('f_email').value.trim();
+  const org   = document.getElementById('f_org').value.trim();
+  const role  = document.getElementById('f_role').value.trim();
+  const err   = document.getElementById('fErr');
+  if (!name||!last||!email||!org) { err.classList.add('show'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent='Vul een geldig e-mailadres in.'; err.classList.add('show'); return; }
+  err.classList.remove('show');
+  contact = { name, last, email, org, role };
+
+  const prof  = getProfile();
+  const ds    = dimScores();
+  const total = totalScore();
+  const pct   = getPct();
+
+  // Send lead email via FormSubmit.co
+  // ⚠️ Eerste gebruik: klik de bevestigingsmail van FormSubmit.co in uw inbox (amir@byamir.ai)
+  try {
+    await fetch('https://formsubmit.co/ajax/amir@byamir.ai', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: `Sales Quickscan — ${name} ${last} (${org}) · ${prof.label} · ${pct}%`,
+        _template: 'table',
+        naam:            `${name} ${last}`,
+        email:           email,
+        organisatie:     org,
+        functie:         role || '—',
+        totaal_score:    `${total}/40 (${pct}%)`,
+        niveau:          prof.label,
+        profiel:         prof.sub,
+        'Funnel & ROI':  `${ds[0]}%`,
+        'Strategie':     `${ds[1]}%`,
+        'Team & Coaching': `${ds[2]}%`,
+        'Enablement':    `${ds[3]}%`,
+        'Leiderschap':   `${ds[4]}%`,
+        samenvatting:    prof.desc
+      })
+    });
+  } catch(_) { /* Rapport altijd tonen, ook als email mislukt */ }
+
+  // Show results immediately with loading state
+  aiAdvice = null;
+  goTo(12);
+
+  // Build context for AI advice
+  const _ds = typeof dimScores === 'function' ? dimScores() : [0,1,2,3,4].map(d=>(answers[d*2]||0)+(answers[d*2+1]||0));
+  const _pct = typeof getPct === 'function' ? getPct() : Math.round(((answers.reduce((a,b)=>a+(b||0),0)-10)/30)*100);
+  const _prof = typeof getProfile === 'function' ? getProfile() : (PROFILES.find(p=>_pct>=p.range[0]&&_pct<=p.range[1])||PROFILES[0]);
+  const _level = _prof.label;
+  const _dimSum = ["Funnel & ROI","Strategie","Team & Coaching","Enablement","Leiderschap"].map((d,i)=>d+': '+_ds[i]+'%').join(', ');
+
+  generateAdvice(name, org || company || '', _pct, _level, _dimSum).then(adv => {
+    aiAdvice = adv;
+    const spinner = document.getElementById('amir-loading');
+    const advDiv  = document.getElementById('amir-advice');
+    if (spinner) spinner.style.display = 'none';
+    if (advDiv)  { advDiv.style.display = 'block'; advDiv.textContent = adv; }
+    // Send lead email after advice is ready
+    fetch('https://formsubmit.co/ajax/amir@byamir.ai', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify({
+        _subject: 'Sales Quickscan — '+name+' '+(last||'')+' ('+(org||company||'—')+') · '+_level+' · '+_pct+'%',
+        _template:'table',
+        naam: name+' '+(last||''),
+        email: email,
+        organisatie: org||company||'—',
+        functie: role||'—',
+        totaalscore: _pct+'/100',
+        niveau: _level,
+        dimensies: _dimSum,
+        advies: adv.slice(0,600)
+      })
+    }).catch(()=>{});
+  });
+}
+
+function generateAdvice(name, company, score, level, dimSummary) {
+  const prompt = "Je bent commercieel strategieadviseur bij by AMIR met 20+ jaar ervaring. Schrijf een warm en direct gepersonaliseerd sales-advies in het Nederlands voor {name}{company}.\n\nScore: {score}/100 \u2014 Niveau: {level}\nDimensies: {dimSummary}\n\nSchrijf 3 korte alinea's. Benoem de sterkste en zwakste dimensie concreet. Geef praktisch advies. Sluit af met uitnodiging voor een gesprek met Amir. Spreek {name} aan met 'u'. Geen wolligheid.";
+  const filled = prompt
+    .replace('{name}', name)
+    .replace('{company}', company ? ' van ' + company : '')
+    .replace('{score}', score)
+    .replace('{level}', level)
+    .replace('{dimSummary}', dimSummary);
+  if (window.claude && window.claude.complete) {
+    return window.claude.complete(filled)
+      .catch(() => PROFILES.find(p => p.label === level) ? PROFILES.find(p => p.label === level).desc : PROFILES[0].desc);
+  }
+  return Promise.resolve(PROFILES.find(p => p.label === level) ? PROFILES.find(p => p.label === level).desc : PROFILES[0].desc);
+}
+
+
+function renderResults() {
+  const prof   = getProfile();
+  const ds     = dimScores();
+  const pct    = getPct();
+  const fn     = contact.name || 'u';
+  const lvlIdx = PROFILES.indexOf(prof);
+  const lvlColors = ['#c0533a','#b8892a','var(--gold)','#7eb87e'];
+  const lvlColor  = lvlColors[Math.max(0,lvlIdx)];
+
+  const recServices = SERVICES.filter(sv => {
+    const idx = DIMS.indexOf(sv.dim);
+    return idx >= 0 && ds[idx] < 60;
+  });
+
+  const dimBarsHtml = DIMS.map((dim,i) =>
+    '<div style="margin-bottom:11px;">' +
+    '<div style="display:flex;justify-content:space-between;margin-bottom:5px;">' +
+    '<span style="font-size:13px;color:var(--cream);">'+dim+'</span>' +
+    '<span style="font-size:13px;color:'+(ds[i]<50?'#c0533a':'var(--gold)')+';">'+ds[i]+'%</span>' +
+    '</div>' +
+    '<div style="height:3px;background:rgba(138,152,171,0.15);border-radius:2px;">' +
+    '<div style="height:3px;background:'+(ds[i]<50?'#c0533a':'var(--gold)')+';border-radius:2px;width:0%;transition:width 1s var(--ease);" data-w="'+ds[i]+'%"></div>' +
+    '</div></div>'
+  ).join('');
+
+  const servicesHtml = recServices.length > 0 ?
+    '<div style="border:1px solid rgba(201,169,110,0.35);padding:1.5rem;margin-bottom:1.5rem;background:rgba(201,169,110,0.05);">' +
+    '<p style="font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:0.15em;margin:0 0 1rem;font-weight:600;">Aanbevolen op basis van uw scan</p>' +
+    '<div style="display:flex;flex-direction:column;gap:12px;">' +
+    recServices.map(sv =>
+      '<div style="border-left:2px solid var(--gold);padding-left:14px;">' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">' +
+      '<p style="font-size:14px;font-weight:500;color:var(--cream);margin:0;">'+sv.name+'</p>' +
+      '<span style="font-size:9px;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-left:12px;flex-shrink:0;">'+sv.tag+'</span>' +
+      '</div>' +
+      '<p style="font-size:12px;color:var(--slate);margin:0;line-height:1.6;">'+sv.desc+'</p>' +
+      '</div>'
+    ).join('') + '</div></div>' : '';
+
+  const insightsHtml = prof.insights.map(t =>
+    '<p style="font-size:14px;color:var(--cream-dim);line-height:1.75;margin:0 0 10px;display:flex;gap:10px;">' +
+    '<span style="color:var(--gold);flex-shrink:0;">&mdash;</span><span>'+t+'</span></p>'
+  ).join('');
+
+  stage.innerHTML =
+    '<div class="qs-step qs-results">' +
+    '<div class="qs-kicker">Uw Sales Effectiveness Rapport</div>' +
+    '<h2 style="font-family:var(--serif);font-size:clamp(22px,3.5vw,32px);font-weight:400;color:var(--cream);margin:0 0 2rem;">Goedendag, '+fn+'</h2>' +
+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.5rem;">' +
+    '<div style="border:1px solid var(--line-cool);padding:1.5rem;text-align:center;background:var(--surface);">' +
+    '<p style="font-size:10px;color:var(--slate);text-transform:uppercase;letter-spacing:0.12em;margin:0 0 0.75rem;font-weight:600;">Totaalscore</p>' +
+    '<p style="font-family:var(--serif);font-size:52px;font-weight:300;color:'+lvlColor+';margin:0;line-height:1;">'+pct+'</p>' +
+    '<p style="font-size:10px;color:var(--slate-dim);margin:6px 0 0;letter-spacing:0.06em;">VAN DE 100</p></div>' +
+    '<div style="border:1px solid var(--line-cool);padding:1.5rem;text-align:center;background:var(--surface);display:flex;flex-direction:column;justify-content:center;">' +
+    '<p style="font-size:10px;color:var(--slate);text-transform:uppercase;letter-spacing:0.12em;margin:0 0 0.75rem;font-weight:600;">Niveau</p>' +
+    '<p style="font-family:var(--serif);font-size:26px;font-weight:400;color:'+lvlColor+';margin:0 0 12px;">'+prof.label+'</p>' +
+    '<div style="display:flex;justify-content:center;gap:7px;">' +
+    PROFILES.map((_,i)=>'<div style="width:9px;height:9px;border-radius:50%;background:'+(i<=lvlIdx?'var(--gold)':'rgba(201,169,110,0.18)')+'"></div>').join('') +
+    '</div></div></div>' +
+
+    '<div style="border:1px solid var(--line-cool);padding:1.5rem;margin-bottom:1.5rem;background:var(--surface);">' +
+    '<p style="font-size:10px;color:var(--slate);text-transform:uppercase;letter-spacing:0.12em;margin:0 0 1.25rem;font-weight:600;">Score per dimensie</p>' +
+    '<div style="display:flex;justify-content:center;margin-bottom:1.25rem;">'+buildRadar(ds)+'</div>' +
+    dimBarsHtml + '</div>' +
+
+    '<div style="border:1px solid var(--line-cool);padding:1.5rem;margin-bottom:1.5rem;background:var(--surface);">' +
+    '<div style="display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;">' +
+    '<div style="width:38px;height:38px;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;">' +
+    '<span style="color:var(--gold);font-size:13px;font-family:var(--serif);">A</span></div>' +
+    '<div><p style="margin:0;font-size:14px;color:var(--cream);">Amir Bercovitz</p>' +
+    '<p style="margin:0;font-size:10px;color:var(--slate);letter-spacing:0.08em;">COMMERCIEEL STRATEGIEADVISEUR · BY AMIR</p></div></div>' +
+    '<div id="amir-loading" style="display:flex;align-items:center;gap:10px;color:var(--slate);font-size:14px;">' +
+    '<span style="display:inline-block;width:15px;height:15px;border:1.5px solid var(--gold);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;"></span>' +
+    'Uw persoonlijk advies wordt samengesteld...' +
+    '</div>' +
+    '<div id="amir-advice" style="display:none;font-size:14px;color:var(--cream-dim);line-height:1.85;margin:0;white-space:pre-line;"></div>' +
+    '<div style="padding-top:16px;border-top:1px solid var(--line-cool);">'+insightsHtml+'</div></div>' +
+
+    servicesHtml +
+
+    '<div style="text-align:center;margin-bottom:16px;">' +
+    '<button onclick="window.print()" class="btn btn-outline" style="font-size:13px;padding:10px 24px;">Opslaan als PDF \u2193</button>' +
+    '</div>' +
+    '<div class="qs-wp-block"><div class="qs-wp-block-text">' +
+    '<div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-weight:600;">Whitepaper bij dit rapport</div>' +
+    '<div style="font-family:var(--serif);font-size:26px;color:var(--cream);line-height:1.2;margin-bottom:8px;">Onder Potentieel</div>' +
+    '<p style="font-size:14px;color:var(--slate);line-height:1.6;margin:0;">Waarom uw salesorganisatie minder presteert dan ze kan — en hoe u dat verandert.</p></div>' +
+    '<div style="display:flex;flex-direction:column;gap:10px;flex-shrink:0;">' +
+    '<a href="whitepaper-sales.html" class="btn btn-gold" target="_blank">Lees de whitepaper →</a>' +
+    
+    '</div></div>' +
+
+    '<div class="qs-cta-block">' +
+    '<h3>Wat betekent dit concreet voor uw salesorganisatie?</h3>' +
+    '<p>Plan een vrijblijvend gesprek van 30 minuten met Amir. Een eerlijk gesprek over waar de kloof zit en wat de slimste eerste stap is.</p>' +
+    '<div class="qs-cta-actions">' +
+    '<button class="btn btn-gold" onclick="openCal()">Plan een gesprek in <span class="arrow">→</span></button>' +
+    '<a class="btn btn-outline" href="contact.html">Stuur een bericht</a>' +
+    '</div></div>' +
+
+    '<div style="margin-top:28px;text-align:center;">' +
+    '<button class="qs-back" onclick="goTo(0)">↺ Opnieuw beginnen</button>' +
+    '</div>' +
+    '</div>';
+
+  setTimeout(() => {
+    document.querySelectorAll('[data-w]').forEach(b => { b.style.width = b.dataset.w; });
+  }, 120);
+}
+
+function openCal() {
+  if (window.Calendly) Calendly.initPopupWidget({ url: 'https://calendly.com/byamir' });
+  else window.open('https://calendly.com/byamir', '_blank');
+}
+
+goTo(0);
+</script>
+</body>
+</html>
